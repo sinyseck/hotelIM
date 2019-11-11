@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -13,7 +14,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::orderby('id', 'desc')->paginate(50); //show only 5 items at a time in descending order
+
+        return view('clients.index', ['clients' =>  $clients]); //compact('produits')
     }
 
     /**
@@ -23,7 +26,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('clients.add');
     }
 
     /**
@@ -34,7 +37,30 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nom'=>'required',
+            'prenom' =>'required',
+            'adresse' =>'required',
+            'telephone' =>'required',
+            'email' =>'required',
+            'numeroPiece' => 'required',
+            'typePiece' => 'required',
+            'nationalite' => 'required'
+        ]);
+        $client = new Client();
+        $client->nom = $request['nom'];
+        $client->prenom = $request['prenom'];
+        $client->adresse = $request['adresse'];
+        $client->telephone = $request['telephone'];
+        $client->email = $request['email'];
+        $client->numeroPiece = $request['numeroPiece'];
+        $client->typePiece = $request['typePiece'];
+        $client->nationalite = $request['nationalite'];
+        $client->save();
+
+        return redirect()->route('clients.index')
+            ->with('flash_message',
+                'Client  '. $client->nom.' '. $client->prenom.' Enregistré!');
     }
 
     /**

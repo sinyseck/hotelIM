@@ -28,6 +28,7 @@ Route::resource('permissions', 'PermissionController');
 Route::resource('produits', 'ProduitController');
 Route::resource('hotels', 'HotelController');
 Route::resource('chambres', 'ChambreController');
+Route::resource('clients', 'ClientController');
 //Route::get('/create_role_permission', function () {
    // $role = Role::create(['name' => 'Administre']);
   //  $permission = Permission::create(['name' => 'creer role et permission']);

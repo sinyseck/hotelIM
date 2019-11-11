@@ -309,6 +309,31 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+
+                    <p>
+                        Client
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right"></span>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('clients.create')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ajouter</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('clients.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>lister</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
           <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="{{route('permissions.index')}}" class="nav-link">
