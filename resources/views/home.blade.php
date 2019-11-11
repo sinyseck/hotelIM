@@ -91,6 +91,7 @@
           </div>
           <!-- ./col -->
         </div>
+          </div>
 
           </section>
           <!-- /.Left col -->
@@ -162,9 +163,5 @@
           </section>
           <!-- right col -->
         </div>
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+
   @endsection

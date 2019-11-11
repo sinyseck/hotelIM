@@ -3,19 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Produit;
+use Auth;
+use Session;
 
 class ProduitController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth', 'clearance'])->except('index', 'show');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $produits = Produit::all();
-        return view('produits.index', compact('produits'));
+
+
+    public function index() {
+        $produits = Produit::orderby('id', 'desc')->paginate(5); //show only 5 items at a time in descending order
+
+        return view('produits.index', ['produits' =>  $produits]); //compact('produits')
     }
 
     /**
@@ -23,8 +32,7 @@ class ProduitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('produits.create');
     }
 
@@ -34,15 +42,24 @@ class ProduitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        request()->validate([
-            'nom' => 'required',
-            'quantite' => 'required',
-            'pu' => 'required',
+    public function store(Request $request) {
+
+        //Validating nom and quantite field
+        $this->validate($request, [
+            'nom'=>'required|max:100',
+            'quantite' =>'required',
+            'pu' =>'required',
         ]);
-        Produit::create($request->all());
-        return redirect()->route('produits.index')->with('Produit enregistré avec succès !!!');
+
+        $nom = $request['nom'];
+        $quantite = $request['quantite'];
+        $pu = $request['pu'];
+        $produit = Produit::create($request->only('nom', 'quantite','pu'));
+
+        //Display a successful message upon save
+        return redirect()->route('produits.index')
+            ->with('flash_message', 'Article,
+             '. $produit->nom.' created');
     }
 
     /**
