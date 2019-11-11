@@ -12,5 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
+
+Route::get('/client', function () {
+    return view('clients.create');
+});
+
+Route::resource('clients', 'ClientController');
+
+Route::resource('produits', 'ProduitController');
+
+Route::resource('entreeStocks', 'EntreeStockController');
+
+Route::resource('tables', 'TableController');
+
