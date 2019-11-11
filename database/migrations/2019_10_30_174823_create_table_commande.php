@@ -19,7 +19,7 @@ class CreateTableCommande extends Migration
             $table->unsignedBigInteger('id_client');
             $table->foreign('id_client')
             ->references('id')
-            ->on('roles');
+            ->on('clients');
             $table->unsignedBigInteger('id_table');
             $table->foreign('id_table')
             ->references('id')

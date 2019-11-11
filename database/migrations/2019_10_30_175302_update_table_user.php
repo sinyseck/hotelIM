@@ -15,14 +15,14 @@ class UpdateTableUser extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('id_role');
+           /* $table->unsignedBigInteger('id_role');
             $table->foreign('id_role')
             ->references('id')
             ->on('roles');
             $table->unsignedBigInteger('id_hotel');
             $table->foreign('id_hotel')
             ->references('id')
-            ->on('hotels');
+            ->on('hotels');*/
         });
     }
 
