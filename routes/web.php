@@ -14,12 +14,13 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
 
 Route::get('/client', function () {
     return view('clients.create');
 });
 
+Auth::routes();
 
 
 Route::resource('produits', 'ProduitController');
