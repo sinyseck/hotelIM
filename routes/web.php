@@ -27,6 +27,8 @@ Auth::routes();
 Route::get('/test', function () {
     return view('commandes.test');
 });
+Auth::routes();
+
 
 Route::resource('produits', 'ProduitController');
 

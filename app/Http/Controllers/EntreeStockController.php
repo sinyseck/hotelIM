@@ -51,8 +51,6 @@ class EntreeStockController extends Controller
          if ($produit) {
              $produit->increment('quantite', $request->quantite);
          } else {
-
-
             EntreeStock::create($request->all());
          }
 
