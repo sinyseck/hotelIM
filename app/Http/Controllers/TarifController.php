@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tarif;
 use Illuminate\Http\Request;
 
 class TarifController extends Controller
@@ -13,7 +14,8 @@ class TarifController extends Controller
      */
     public function index()
     {
-        //
+        $tarifs= Tarif::all();
+        return view ('tarifs.index', compact('tarifs'));
     }
 
     /**
@@ -23,7 +25,7 @@ class TarifController extends Controller
      */
     public function create()
     {
-        //
+        return view('tarifs.add');
     }
 
     /**
@@ -34,7 +36,14 @@ class TarifController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'prix' => 'required',
+            'nbre_personne' => 'required',
+        ]);
+
+        Tarif::create($request->all());
+        return redirect()->route('tarifs.index')->with('success', 'Tarif enregistré avec succès');
+
     }
 
     /**
@@ -56,7 +65,8 @@ class TarifController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tarif = Tarif::find($id);
+        return view('tarifs.edit', compact('tarif'));
     }
 
     /**
@@ -68,7 +78,12 @@ class TarifController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'prix' => 'required',
+            'nbre_personne' => 'required',
+        ]);
+        Tarif::find($id)->update($request->all());
+        return redirect()->route('tarifs.index')->with('success', 'Modification effectuée avec succès!!!');
     }
 
     /**
@@ -79,6 +94,8 @@ class TarifController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Tarif::find($id)->delete();
+        return redirect()->route('tarifs.index')->with('success', 'tarif supprimé avec succès');
+
     }
 }

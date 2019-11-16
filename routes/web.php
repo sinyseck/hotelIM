@@ -34,10 +34,12 @@ Route::resource('roles', 'RoleController');
 
 Route::resource('permissions', 'PermissionController');
 
+Route::resource('tarifs', 'TarifController');
 
 Route::resource('hotels', 'HotelController');
 Route::resource('chambres', 'ChambreController');
 Route::resource('clients', 'ClientController');
+Route::resource('reservations', 'ReservationController');
 //Route::get('/create_role_permission', function () {
    // $role = Role::create(['name' => 'Administre']);
   //  $permission = Permission::create(['name' => 'creer role et permission']);

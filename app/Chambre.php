@@ -11,4 +11,7 @@ class Chambre extends Model
     public function hotel(){
         return $this->hasMany(Hotel::class);
     }
+    public function Affectes(){
+        return $this->hasMany(Affecte::class);
+    }
 }

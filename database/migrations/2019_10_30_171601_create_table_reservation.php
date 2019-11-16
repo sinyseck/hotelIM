@@ -16,12 +16,12 @@ class CreateTableReservation extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('date_arrivee');
-            $table->dateTime('date_départ');
+            $table->dateTime('date_depart');
             $table->integer('nbre_personne');
             $table->string('statut');
             $table->boolean('etat_paiement');
-            $table->unsignedBigInteger('id_client');
-            $table->foreign('id_client')
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')
             ->references('id')
             ->on('clients');
 

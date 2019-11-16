@@ -8,4 +8,7 @@ class Client extends Model
 {
     protected $table = 'clients';
     protected $fillable = ['nom','prenom','nationalite','typePiece','numeroPiece','adresse','telephone','email'];
+    public function reservations(){
+        return $this->hasMany(Reservation::class);
+    }
 }

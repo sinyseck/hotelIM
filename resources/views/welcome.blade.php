@@ -7,6 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
+
             <link rel="stylesheet" href="{!! asset('assets/plugins/fontawesome-free/css/all.min.css') !!}">
             <!-- Ionicons -->
             <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -26,7 +27,7 @@
             <link rel="stylesheet" href="{!! asset('assets/plugins/summernote/summernote-bs4.css') !!}">
             <!-- Google Font: Source Sans Pro -->
           <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+    @yield('calendar')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -334,6 +335,56 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+
+                    <p>
+                        Gestion Reservations
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right"></span>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('reservations.create')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ajouter</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('reservations.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>lister</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+
+                    <p>
+                        Gestion des tarifs
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right"></span>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('tarifs.create')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ajouter</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('tarifs.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>lister</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
           <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="{{route('permissions.index')}}" class="nav-link">
@@ -428,7 +479,7 @@
         "searching": false,
         "ordering": true,
         "info": true,
-        "autoWidth": false,
+        "autoWidth": false
 
       });
     });
@@ -439,6 +490,6 @@
                 $('#datetimepicker1').datetimepicker();
             });
         </script>
-
+@yield('script')
 </body>
 </html>

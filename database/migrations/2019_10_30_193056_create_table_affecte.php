@@ -15,14 +15,14 @@ class CreateTableAffecte extends Migration
     {
         Schema::create('affectes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_reservation');
+            $table->unsignedBigInteger('reservation_id');
             $table->foreign('id_reservation')
             ->references('id')
             ->on('reservations');
-            $table->unsignedBigInteger('id_chambre');
+            $table->unsignedBigInteger('chambre_id');
             $table->foreign('id_chambre')
             ->references('id')
-            ->on('reservations');
+            ->on('chambres');
             $table->timestamps();
         });
     }
