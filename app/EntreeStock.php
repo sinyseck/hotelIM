@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class EntreeStock extends Model
 {
     protected $table='entreeStocks';
-    protected $fillable= ['date','quantite','id_produit'];
+    protected $fillable= ['quantite','id_produit'];
 
     public function produit()
     {

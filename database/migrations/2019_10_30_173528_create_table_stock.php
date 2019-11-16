@@ -15,7 +15,6 @@ class CreateTableStock extends Migration
     {
         Schema::create('entreeStocks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->dateTime('date');
             $table->integer('quantite');
             $table->unsignedBigInteger('id_produit');
             $table->foreign('id_produit')

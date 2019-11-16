@@ -335,7 +335,7 @@
 
             <li class="nav-item">
                 <a href="" class="nav-link">
-                    <i class="nav-icon fas fa-tags"></i>
+                    <i class="nav-icon fas fa-dolly"></i>
 
                     <p>
                         Stock
@@ -360,7 +360,7 @@
             </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon far fa-dolly"></i>
+              <i class="nav-icon far fa-tags"></i>
               <p>
                 Gestion des entrées
                 <i class="fas fa-angle-left right"></i>

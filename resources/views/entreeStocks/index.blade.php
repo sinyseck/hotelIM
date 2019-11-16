@@ -45,7 +45,7 @@
                             <td>{{ $entreeStock->id }}</td>
                             <td>{{ $entreeStock->quantite }}</td>
                             <td>{{ $entreeStock->produit->nom }}</td>
-                            <td>{{ $entreeStock->updated_at }}</td>
+                            <td>{{ $entreeStock->created_at }}</td>
 
 
 

@@ -41,7 +41,6 @@ class EntreeStockController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'date'=> 'required',
             'quantite' => 'required',
             'id_produit' => 'required',
         ]);
@@ -50,9 +49,9 @@ class EntreeStockController extends Controller
          ])->first();
          if ($produit) {
              $produit->increment('quantite', $request->quantite);
-         } else {
-            EntreeStock::create($request->all());
          }
+            EntreeStock::create($request->all());
+
 
         return redirect()->route('entreeStocks.index')->with('success','Stock enregistré avec succès!!!');
     }
