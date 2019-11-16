@@ -19,8 +19,12 @@ Route::get('/', function () {
 Route::get('/client', function () {
     return view('clients.create');
 });
-
+Route::get('/logout', function () {
+    return view('clients.create');
+});
 Auth::routes();
+
+
 
 
 Route::resource('produits', 'ProduitController');
@@ -48,3 +52,4 @@ Route::resource('reservations', 'ReservationController');
     //return view('welcome');
 //});
 
+Route::resource('commandes', 'CommandeController');

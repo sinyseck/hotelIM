@@ -51,15 +51,14 @@ class ProduitController extends Controller
             'pu' =>'required',
         ]);
 
-        $nom = $request['nom'];
-        $quantite = $request['quantite'];
-        $pu = $request['pu'];
-        $produit = Produit::create($request->only('nom', 'quantite','pu'));
 
-        //Display a successful message upon save
-        return redirect()->route('produits.index')
-            ->with('flash_message', 'Article,
-             '. $produit->nom.' created');
+
+            $produit = Produit::create($request->only('nom', 'quantite','pu'));
+
+
+
+            return redirect()->route('entreeStocks.index')->with('success','Stock enregistré avec succès!!!');
+
     }
 
     /**
