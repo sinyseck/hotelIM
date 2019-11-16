@@ -15,7 +15,6 @@ class CreateTableCommande extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->dateTime('date');
             $table->unsignedBigInteger('id_client');
             $table->foreign('id_client')
             ->references('id')
@@ -24,6 +23,7 @@ class CreateTableCommande extends Migration
             $table->foreign('id_table')
             ->references('id')
             ->on('tables');
+
             $table->timestamps();
         });
     }

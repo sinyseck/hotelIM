@@ -15,8 +15,10 @@ class EntreeStockController extends Controller
      */
     public function index()
     {
+        $produit = Produit::all();
+
         $entreeStocks = EntreeStock::all();
-        return view('entreeStocks.index', compact('entreeStocks'));
+        return view('entreeStocks.index', compact('entreeStocks','produit'));
     }
 
     /**
@@ -43,7 +45,17 @@ class EntreeStockController extends Controller
             'quantite' => 'required',
             'id_produit' => 'required',
         ]);
-        EntreeStock::create($request->all());
+        $produit = Produit::where([
+            ['id', '=', $request->id_produit]
+         ])->first();
+         if ($produit) {
+             $produit->increment('quantite', $request->quantite);
+         } else {
+
+
+            EntreeStock::create($request->all());
+         }
+
         return redirect()->route('entreeStocks.index')->with('success','Stock enregistré avec succès!!!');
     }
 

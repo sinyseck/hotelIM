@@ -128,6 +128,7 @@
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf
           </form>
+
        {{-- <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
           <span class="badge badge-warning navbar-badge">15</span>
@@ -167,7 +168,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-info elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -192,26 +193,189 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+               <li class="nav-item has-treeview menu-open">
+                <a href="#" class="nav-link active">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                      Tableau de bord
+                    </p>
+                  </a>
+
+                </li>
+                <li class="nav-header">HOTEL</li>
+
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="nav-icon fas fa-hotel"></i>
+
+                    <p>
+                        Paramètres de l'hotel
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right"></span>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('hotels.create')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ajouter</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('hotels.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>lister</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="nav-icon fas fa-bed"></i>
+
+                    <p>
+                        Gestion des chambres
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right"></span>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('chambres.create')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ajouter</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('chambres.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>lister</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="nav-icon fas fa-user-alt"></i>
+
+                    <p>
+                        Gestion des clients
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right"></span>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('clients.create')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ajouter</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('clients.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>lister</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-header">RESTAURANT</li>
+
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="nav-icon fas fa-tags"></i>
+
+                    <p>
+                        Stock
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right"></span>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('produits.create')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ajouter</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('produits.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>lister</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-dolly"></i>
               <p>
-                Accueil
-                <i class="right fas fa-angle-left"></i>
+                Gestion des entrées
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="{{route('entreeStocks.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Nouvelle entrée</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('entreeStocks.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Liste des entrées</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chair"></i>
+              <p>
+                Gestion des tables
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/examples/invoice.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Enregistrer une table</p>
                 </a>
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-utensils"></i>
+                  <p>
+                    Gestion des commandes
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('commandes.create')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Enregistrer une commande</p>
+                    </a>
+                  </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                          <a href="{{route('commandes.index')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Liste des commandes</p>
+                          </a>
+                        </li>
+                      </ul>
+              </li>
+          <li class="nav-header">ADMINISTRATION</li>
           <li class="nav-item">
             <a href="" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-users"></i>
 
               <p>
                 Gestion des Utilisateurs
@@ -234,113 +398,12 @@
               </li>
             </ul>
           </li>
-            <li class="nav-item">
-                <a href="" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-
-                    <p>
-                        Gestion des Produits
-                        <i class="fas fa-angle-left right"></i>
-                        <span class="badge badge-info right"></span>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('produits.create')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Ajouter</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('produits.index') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>lister</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-
-                    <p>
-                        Hotel
-                        <i class="fas fa-angle-left right"></i>
-                        <span class="badge badge-info right"></span>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('hotels.create')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Ajouter</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('hotels.index') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>lister</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-
-                    <p>
-                        Chambre
-                        <i class="fas fa-angle-left right"></i>
-                        <span class="badge badge-info right"></span>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('chambres.create')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Ajouter</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('chambres.index') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>lister</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-
-                    <p>
-                        Client
-                        <i class="fas fa-angle-left right"></i>
-                        <span class="badge badge-info right"></span>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('clients.create')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Ajouter</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('clients.index') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>lister</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-          <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="{{route('permissions.index')}}" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
+              <i class="nav-icon far fa-key"></i>
               <p>
                 Gestion des permissions
-                <span class="badge badge-info right">2</span>
+                <span class="badge badge-info right"></span>
               </p>
             </a>
           </li>
@@ -349,7 +412,7 @@
                     <i class="nav-icon far fa-calendar-alt"></i>
                     <p>
                        Gestion des rôles
-                        <span class="badge badge-info right">2</span>
+                        <span class="badge badge-info right"></span>
                     </p>
                 </a>
           </li>

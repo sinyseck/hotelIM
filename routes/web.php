@@ -14,13 +14,19 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
 
 Route::get('/client', function () {
     return view('clients.create');
 });
+Route::get('/logout', function () {
+    return view('clients.create');
+});
+Auth::routes();
 
-
+Route::get('/test', function () {
+    return view('commandes.test');
+});
 
 Route::resource('produits', 'ProduitController');
 
@@ -45,3 +51,4 @@ Route::resource('clients', 'ClientController');
     //return view('welcome');
 //});
 
+Route::resource('commandes', 'CommandeController');

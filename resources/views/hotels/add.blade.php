@@ -6,54 +6,65 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Hotel</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-                            <li class="breadcrumb-item active">Enegister Hotel</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
+        <div class="container">
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-info">GESTION DES HOTELS</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('hotels.index') }}" role="button" class="btn btn-primary">LISTE D'ENREGISTREMENT DES HOTELS</a></li>
+
+                            </ol>
+                        </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
         <!-- /.content-header -->
 
         <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-
-                        <h1>Enrgistrer un Hotel</h1>
-                        <hr>
+        {{ Form::open(array('url' => 'hotels','enctype'=>'multipart/form-data')) }}
+         @csrf
+                 <div class="card border-danger border-0">
+                            <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UN NOUVEAU HOTEL</div>
+                                <div class="card-body">
 
                         {{-- Using the Laravel HTML Form Collective to create our form --}}
-                        {{ Form::open(array('url' => 'hotels','enctype'=>'multipart/form-data')) }}
-
-                        <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
                             {{ Form::label('nom', 'Nom') }}
                             {{ Form::text('nom', null, array('class' => 'form-control','required'=>'true')) }}
-                            <br>
-
+                            </div>
+                            <div class="col-lg-6">
                             {{ Form::label('telephone', 'Téléphone') }}
                             {{ Form::text('telephone', null, array('class' => 'form-control','required'=>'true')) }}
-                            <br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
                             {{ Form::label('email', 'Email') }}
                             {{ Form::email('email', null, array('class' => 'form-control','required'=>'true')) }}
-                            <br>
+                            </div>
+                            <div class="col-lg-6">
                             {{ Form::label('adrese', 'Adresse') }}
-                            {{ Form::email('adresse', null, array('class' => 'form-control','required'=>'true')) }}
-                            <br>
+                            {{ Form::text('adresse', null, array('class' => 'form-control','required'=>'true')) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
                             {{ Form::label('logo', 'Logo') }}
                             {{ Form::file('logo', null, array('class' => 'form-control','required'=>'true')) }}
-                            <br>
-                            {{ Form::submit('Create Post', array('class' => 'btn btn-success btn-lg btn-block')) }}
-                            {{ Form::close() }}
+                            </div>
+                        </div>
+                        <div>
+                            <center>
+                                <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER</button>
+                            </center>
+                        </div>
+
                         </div>
                     </div>
                 </div>

@@ -8,4 +8,9 @@ class Table extends Model
 {
     protected $table = 'tables';
     protected $fillable = ['numero'];
+
+    public function commande()
+    {
+        return $this->hasMany(Commande::class, 'id_table', 'id');
+    }
 }
