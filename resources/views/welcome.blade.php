@@ -280,33 +280,6 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-header">RESTAURANT</li>
-
-            <li class="nav-item">
-                <a href="" class="nav-link">
-                    <i class="nav-icon fas fa-tags"></i>
-
-                    <p>
-                        Stock
-                        <i class="fas fa-angle-left right"></i>
-                        <span class="badge badge-info right"></span>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('produits.create')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Ajouter</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('produits.index') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>lister</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
 
             <li class="nav-item">
                 <a href="" class="nav-link">
@@ -358,7 +331,33 @@
                     </li>
                 </ul>
             </li>
-          <li class="nav-header">EXAMPLES</li>
+            <li class="nav-header">RESTAURANT</li>
+
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="nav-icon fas fa-tags"></i>
+
+                    <p>
+                        Stock
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right"></span>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('produits.create')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ajouter</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('produits.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>lister</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-dolly"></i>
@@ -393,12 +392,20 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/examples/invoice.html" class="nav-link">
+                <a href="{{route('tables.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Enregistrer une table</p>
                 </a>
               </li>
             </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('tables.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Liste des tables</p>
+                  </a>
+                </li>
+              </ul>
           </li>
           <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
