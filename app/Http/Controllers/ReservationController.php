@@ -157,6 +157,30 @@ class ReservationController extends Controller
         return redirect()->route('reservations.index')->with('success', 'tarif supprimé avec succès');
 
     }
+    public function caliendrier(){
+
+        $reservations = Reservation::with(['client','affectes','affectes.chambre'])->orderBy('id','desc')->get();
+        /*foreach($reservers as $reserver){
+            foreach($reserver->affectes as $affecte){
+                $events[] = Calendar::event(
+
+                    $affecte->chambre->numero,
+
+                    true,
+
+                    new \DateTime($reserver->date_arrivee),
+
+                    new \DateTime($reserver->date_depart.' +1 day')
+
+                );
+            }
+
+
+        }
+        $calendar = Calendar::addEvents($events);*/
+        // dd($reservations);
+        return view ('reservations.caliendrier', compact('reservations'));
+    }
 
     public function affecter(){
 

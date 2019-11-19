@@ -1,10 +1,7 @@
 @extends('welcome')
 @section('calendar')
-
-    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
-    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
-    <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
-    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>@endsection
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
+@endsection
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -44,11 +41,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="col-lg-10 offset-lg-1">
-                                    {!! $calendar->calendar() !!}
-
-
-                                  </div>
+                                <div id='calendar'></div>
                             </div>
                             <div class="card-footer">
 
@@ -62,5 +55,34 @@
 
 @endsection
 @section('script')
-    {!! $calendar->script() !!}
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/locale-all.js'></script>
+    <script>
+        $(document).ready(function() {
+            // page is now ready, initialize the calendar...
+
+            $('#calendar').fullCalendar({
+                // put your options and callbacks here
+                locale: 'fr',
+                events : [
+                    @foreach($reservations as $reserver)
+
+                    {
+                        @foreach($reserver->affectes as $affecte)
+                        title : 'chambre N°'+'{{ $affecte->chambre->numero }}' +' {{  $reserver->client->prenom }}' +' {{  $reserver->client->nom }}',
+                        @endforeach
+                        start : '{{ $reserver->date_arrivee }}',
+                        end: '{{$reserver->date_depart }}',
+                        url : '{{ route('reservations.edit', $reserver->id) }}'
+                    },
+
+                    @endforeach
+                ]
+            })
+        });
+
+    </script>
 @endsection

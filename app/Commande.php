@@ -17,6 +17,9 @@ class Commande extends Model
     {
         return $this->belongsTo(Table::class, 'id_table');
     }
+    public function paiements(){
+        return $this->hasMany(Paiement::class);
+    }
 
 
 }

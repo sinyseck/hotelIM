@@ -53,3 +53,6 @@ Route::resource('reservations', 'ReservationController');
 //});
 
 Route::resource('commandes', 'CommandeController');
+
+Route::get('calendrier', 'ReservationController@caliendrier')
+    ->name('calendrier');
