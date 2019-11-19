@@ -29,19 +29,12 @@
 
 
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <label>Date</label>
-                                        <input type="text" name="date" id="datetimepicker1" class="form-control">
-
-                                    </div>
-
-                                    <div class="col-lg-6">
+                                        <div class="col-lg-6">
                                         <label>Quantité</label>
                                         <input type="number" name="quantite" class="form-control">
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
+
+                                    <div class="col-lg-6">
                                         <label>Prix unitaire</label>
                                         <select class="form-control" name="id_produit">
                                             @foreach ($produits as $produit)
