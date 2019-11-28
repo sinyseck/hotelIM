@@ -59,11 +59,11 @@
                                                     <td>
 
                                                         {!! Form::open(['method' => 'DELETE', 'route' => ['chambres.destroy', $chambre->id] ]) !!}
-                                                        <a href="{{ URL::to('hotels/'.$chambre->id.'/edit') }}" class="btn btn-warning pull-left" ><i class="far fa-edit"></i></a>
+                                                        <a href="{{ URL::to('chambres/'.$chambre->id.'/edit') }}" class="btn btn-warning pull-left" ><i class="far fa-edit"></i></a>
                                                         <button class="btn btn-danger border-left-0 border" type="submit">
                                                             <i class="far fa-trash-alt"></i>
                                                         </button>
-                                                        <a href="{{ URL::to('hotels/'.$chambre->id.'/edit') }}" class="btn btn-info pull-left" ><i class="far fa-user"></i></a>
+                                                        <a href="{{ URL::to('chambres/'.$chambre->id.'/edit') }}" class="btn btn-info pull-left" ><i class="far fa-user"></i></a>
                                                         {!! Form::close() !!}
                                                     </td>
                                                 </tr>

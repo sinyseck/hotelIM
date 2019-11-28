@@ -7,11 +7,14 @@ use App\Chambre;
 use App\Client;
 use App\Reservation;
 use App\Tarif;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
 use Calendar;
+use Illuminate\Support\Facades\DB;
+
 class ReservationController extends Controller
 {
     public function __construct(){
@@ -82,11 +85,25 @@ class ReservationController extends Controller
             'id_tarif' => 'required',
             'chambres' => 'required'
         ]);
+        if( $request['date_arrivee'] >= $request['date_depart']){
+            return redirect()->route('reservations.create')->with('error', 'Verifier le date de départ et le date ariv"');
+        }
         $request->merge(['id_user'=> Auth::id()]);
-
-        $reservaion = Reservation::create($request->all());
         $chambres = $request['chambres'];
-
+        foreach ($chambres as $chambre) {
+            $reservations = DB::table('reservations')
+                ->join('affectes', 'reservations.id', '=', 'affectes.reservation_id')
+                ->join('chambres', 'affectes.chambre_id', '=', 'chambres.id')
+                ->select('affectes.*', 'reservations.*', 'chambres.*')
+                ->where([['reservations.date_depart', '>', $request['date_arrivee']],
+                    ['affectes.chambre_id', '=',$chambre]])
+             ->first();
+           // dd($reservations);
+            if($reservations!=null){
+                return redirect()->route('reservations.create')->with('error', 'Chambre '.$chambre.' déjà occupé');
+            }
+        }
+        $reservaion = Reservation::create($request->all());
         //$role->save();
         //Looping thru selected permissions
         foreach ($chambres as $chambre) {
@@ -118,8 +135,11 @@ class ReservationController extends Controller
      */
     public function edit($id)
     {
+        $clients= Client::all();
+        $tarifs= Tarif::all();
+        $chambres = Chambre::all();
         $reservation = Reservation::findOrFail($id);
-        return view('reservations.edit', compact('reservation'));
+        return view('reservations.edit', compact('reservation','clients','tarifs','chambres'));
     }
 
     /**
@@ -138,8 +158,10 @@ class ReservationController extends Controller
             'statut' => 'required' ,
             'etat_paiement' => 'required',
             'id_client' => 'required',
-            'id_user' => 'required'
+            'id_tarif' => 'required',
+            'chambres' => 'required'
         ]);
+        $request->merge(['id_user'=> Auth::id()]);
         Reservation::find($id)->update($request->all());
         return redirect()->route('reservations.index')->with('success', 'Modification effectuée avec succès!!!');
 

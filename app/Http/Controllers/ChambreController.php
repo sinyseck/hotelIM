@@ -74,7 +74,8 @@ class ChambreController extends Controller
      */
     public function edit($id)
     {
-        //
+        $chambre = Chambre::find($id);
+        return view('chambres.edit',compact('chambre'));
     }
 
     /**
@@ -86,7 +87,11 @@ class ChambreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'numero'=>'required|max:40',
+        ]);
+        Chambre::find($id)->update($request->all());
+        return redirect()->route('chambres.index')->with('success','Chambre modifié avec succès');
     }
 
     /**
@@ -97,6 +102,7 @@ class ChambreController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Chambre::find($id)->delete();
+        return redirect()->route('chambres.index')->with('success','chambre supprimé avec succès');
     }
 }

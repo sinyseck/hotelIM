@@ -98,4 +98,10 @@ class TarifController extends Controller
         return redirect()->route('tarifs.index')->with('success', 'tarif supprimé avec succès');
 
     }
+
+    public function AllarifForApi()
+    {
+        $tarifs= Tarif::all();
+        return  response()->json($tarifs);
+    }
 }

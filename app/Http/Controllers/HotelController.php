@@ -83,7 +83,9 @@ class HotelController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $hotel = Hotel::find($id);
+        return view('hotels.edit',compact('hotel'));
     }
 
     /**
@@ -95,7 +97,14 @@ class HotelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nom'=>'required|max:200',
+            'adresse' =>'required',
+            'email' => 'required',
+            'telephone' => 'required'
+        ]);
+        Hotel::find($id)->update($request->all());
+        return redirect()->route('hotels.index')->with('success','hotel modifié avec succès');
     }
 
     /**
@@ -106,6 +115,7 @@ class HotelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Hotel::find($id)->delete();
+        return redirect()->route('hotels.index')->with('success','hotel supprimé avec succès');
     }
 }
