@@ -13,4 +13,9 @@ class Table extends Model
     {
         return $this->hasMany(Commande::class, 'id_table', 'id');
     }
+
+    public function plat()
+    {
+        return $this->hasMany(Plat::class, 'id_table', 'id');
+    }
 }

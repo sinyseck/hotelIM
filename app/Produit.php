@@ -13,4 +13,13 @@ class Produit extends Model
     {
         return $this->hasMany(EntreeStock::class, 'id_produit', 'id');
     }
+
+    public function composes(){
+        return $this->hasMany(Compose::class, 'produit_id', 'id');
+     }
+
+    /* public function plats(){
+        return $this->belongsToMany(Plat::class);
+     }*/
+
 }

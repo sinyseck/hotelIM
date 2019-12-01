@@ -20,6 +20,10 @@ class Commande extends Model
     public function paiements(){
         return $this->hasMany(Paiement::class);
     }
+    public function plat()
+    {
+        return $this->belongsToMany(Plat::class, 'commande_id', 'id');
+    }
 
 
 }

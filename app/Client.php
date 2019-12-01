@@ -19,4 +19,9 @@ class Client extends Model
         return $this->hasMany(Commande::class, 'id_client', 'id');
 
     }
+    public function plat()
+    {
+        return $this->hasMany(Plat::class, 'id_client', 'id');
+
+    }
 }

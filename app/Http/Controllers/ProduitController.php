@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Produit;
 use Auth;
 use Session;
+use PDF;
 
 class ProduitController extends Controller
 {
@@ -114,4 +115,20 @@ class ProduitController extends Controller
         Produit::find($id)->delete();
         return redirect()->route('produits.index')->with('success','Produit supprimé avec succès');
     }
+
+    public function factureRestaurant()
+    {
+
+
+        return view('PDF.factureRestaurant');
+
+    }
+
+    public function pdf($id){
+        $produit = Produit::find($id);
+
+        $pdf = PDF::loadView('PDF.factureRestaurant', compact('produit'));
+        return $pdf->download('demonutslaravel.pdf');
+    }
+
 }

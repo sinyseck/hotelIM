@@ -44,17 +44,23 @@ Route::resource('hotels', 'HotelController');
 Route::resource('chambres', 'ChambreController');
 Route::resource('clients', 'ClientController');
 Route::resource('reservations', 'ReservationController');
-//Route::get('/create_role_permission', function () {
-   // $role = Role::create(['name' => 'Administre']);
-  //  $permission = Permission::create(['name' => 'creer role et permission']);
-  //  auth()->user()->assignRole('Administre');
-   // auth()->user()->givePermissionTo('creer role et permission');
-    //return view('welcome');
-//});
+
 
 Route::resource('commandes', 'CommandeController');
 
 Route::get('calendrier', 'ReservationController@caliendrier')
     ->name('calendrier');
+
 Route::get('facture/{id}', 'ReservationController@facturerReservartion')
     ->name('facturer.voir');
+
+
+Route::resource('plats', 'PlatController');
+
+
+
+
+Route::get('/facturePdf/{id}', 'CommandeController@facturePdf');
+
+
+

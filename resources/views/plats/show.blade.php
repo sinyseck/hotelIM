@@ -26,12 +26,19 @@
                         <div class="card-header bg-info text-center">INFORMATIONS PRODUIT</div>
                             <div class="card-body">
                                 <ul class="list-group">
-                                    <li class="list-group-item">NOM PRODUIT : {{ $produit->nom }}</li>
-                                    <li class="list-group-item">QUANTITE PRODUIT : {{ $produit->quantite }}</li>
-                                    <li class="list-group-item">PRIX UNITAIRE : {{ $produit->quantite }}</li>
+                                    <li class="list-group-item">CLIENT : {{ $plat->commande->client->prenom }} {{ $plat->commande->client->nom }}</li>
+                                    <li class="list-group-item">TABLE : {{ $plat->commande->table->numero }}</li>
+                                    <li class="list-group-item">NOM  : {{ $plat->nom }}</li>
+                                    <li class="list-group-item">PRIX : {{ $plat->prix }}</li>
+                                    <li class="list-group-item">QUANTITE : {{ $plat->quantite }}</li>
+
+
                                 </ul>
                             </div>
                 </div>
+                <li class="breadcrumb-item active"><a href="{{ route('news.create') }}" role="button" class="btn btn-primary">NEW</a></li>
+
+                <a href="{{action('PlatController@facturePdf', $plat->id)}}">PDF</a>
 
                 <form method="GET" action="/pdf" enctype="multipart/form-data">
                     <div class="form-group">

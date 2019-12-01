@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Hotel;
 use Illuminate\Http\Request;
+use App\Client;
+use App\Commande;
+use App\Table;
 
-class HotelController extends Controller
+class GeneralController extends Controller
 {
-
-    public function __construct(){
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +16,7 @@ class HotelController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::orderby('id', 'desc')->paginate(50);
-        return view('hotels.lister',compact('hotels'));
-
+        //
     }
 
     /**
@@ -30,7 +26,9 @@ class HotelController extends Controller
      */
     public function create()
     {
-        return view('hotels.add');
+        $clients = Client::all();
+        $tables = Table::all();
+        return view('general.create', compact('clients','tables'));
     }
 
     /**
@@ -41,27 +39,17 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nom'=>'required|max:200',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'adresse' =>'required',
-            'email' => 'required',
-            'telephone' => 'required'
-        ]);
-        $hotel = new Hotel();
-        if ($files = $request->file('logo')) {
-            $destinationPath = 'public/image/'; // upload path
-            $profileImage =  time(). "." . $files->getClientOriginalExtension();
-            $files->move($destinationPath, $profileImage);
-            $hotel->logo= "$profileImage";
-        }
-        $hotel->nom = $request['nom'];
-        $hotel->adresse = $request['adresse'];
-        $hotel->email = $request['email'];
-        $hotel->telephone = $request['telephone'];
-        $hotel->save();
-        return redirect()->back();
+        $data['id_client'] = $request->get('id_client');
+        $data['id_table'] = $request->get('id_table');
+        Commande::create($data);
 
+        $step1['nom'] = $request->get('nom');
+        $step1['prix'] = $request->get('prix');
+        $step1['commande_id'] = $data->id;
+
+        Plat::create($step1);
+
+        return redirect()->route('plats.add')->with('success', 'Commande enregistré avec succès!!!');
     }
 
     /**
