@@ -56,3 +56,21 @@ Route::resource('commandes', 'CommandeController');
 
 Route::get('calendrier', 'ReservationController@caliendrier')
     ->name('calendrier');
+
+Route::resource('plats', 'PlatController');
+
+//Route::get('factureRestaurant','ProduitController@factureRestaurant');
+//Route::get('pdf','ProduitController@pdf');
+
+Route::resource('restaurants','RestaurantController');
+Route::resource('general', 'GeneralController');
+//Route::get('/pdf/{id}', 'ProduitController@pdf');
+//Route::get('/facturePdf/{id}', 'PlatController@facturePdf');
+
+
+//Route::resource('/newProduit', 'PlatController@newProduit');
+
+
+Route::get('/facturePdf/{id}', 'CommandeController@facturePdf');
+
+

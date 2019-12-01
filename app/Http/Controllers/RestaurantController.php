@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Hotel;
 use Illuminate\Http\Request;
+use App\Client;
+use App\Table;
+use App\Produit;
+use App\Restaurant;
+use App\Compose;
+use App\Restoproduit;
 
-class HotelController extends Controller
+class RestaurantController extends Controller
 {
-
-    public function __construct(){
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +19,7 @@ class HotelController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::orderby('id', 'desc')->paginate(50);
-        return view('hotels.lister',compact('hotels'));
-
+        //
     }
 
     /**
@@ -30,7 +29,10 @@ class HotelController extends Controller
      */
     public function create()
     {
-        return view('hotels.add');
+        $tables = Table::all();
+        $clients = Client::all();
+        $produits = Produit::all();
+        return view('restaurants.create', compact('produits','clients','tables','id_table'));
     }
 
     /**
@@ -41,27 +43,34 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nom'=>'required|max:200',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'adresse' =>'required',
-            'email' => 'required',
-            'telephone' => 'required'
+        request()->validate([
+            'id_client' => 'required',
+            'id_table' => 'required',
+            'nom' => 'required',
+            'prix' => 'required',
+            'quantite' => 'required',
+            'produits' => 'required',
         ]);
-        $hotel = new Hotel();
-        if ($files = $request->file('logo')) {
-            $destinationPath = 'public/image/'; // upload path
-            $profileImage =  time(). "." . $files->getClientOriginalExtension();
-            $files->move($destinationPath, $profileImage);
-            $hotel->logo= "$profileImage";
-        }
-        $hotel->nom = $request['nom'];
-        $hotel->adresse = $request['adresse'];
-        $hotel->email = $request['email'];
-        $hotel->telephone = $request['telephone'];
-        $hotel->save();
-        return redirect()->back();
+        $restaurant = Restaurant::create($request->all());
 
+        $produits = $request['produits'];
+        /*$produit = Produit::where([
+            ['id', '=', $request->produit_id]
+         ])->first();
+         if ($produit) {
+             $produit->decrement('quantite', $request->quantite);
+         }*/
+
+        foreach ($produits as $produit) {
+        $restoproduit = new Restoproduit();
+            //$compose->produit_id = implode(',',$produits);
+            $restoproduit->produit_id = $produit;
+
+            //$compose->produit_id = $produits->id;
+            $restoproduit->restaurant_id = $restaurant->id;
+            $restoproduit->save();
+        }
+        return redirect()->route('restaurants.index')->with('success','Commande enregistré!!!');
     }
 
     /**

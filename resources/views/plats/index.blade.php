@@ -7,12 +7,12 @@
                         <div class="container-fluid">
                             <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-info">GESTION DES PRODUITS</h1>
+                                <h1 class="m-0 text-info">GESTION DU STOCK</h1>
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('produits.create') }}" role="button" class="btn btn-primary">ENREGISTRER PRODUIT</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('entreeStocks.create') }}" role="button" class="btn btn-primary">NOUVELLE ENTREE</a></li>
                                 </ol>
                             </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -27,34 +27,33 @@
 
 <div class="col-12">
     <div class="card border-danger border-0">
-        <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES PRODUITS</div>
+        <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES PRODUITS EN STOCK</div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Nom</th>
-                            <th>Quantité</th>
-                            <th>Prix Unitaire</th>
+                            <th>Prix
+                            <th>Quantite</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($produits as $produit)
+                        @foreach ($commandes as $commande)
                         <tr>
-                            <td>{{ $produit->id }}</td>
-                            <td>{{ $produit->nom }}</td>
-                            <td>{{ $produit->quantite }}</td>
-                            <td>{{ $produit->pu }}</td>
+                            <td>{{ $commande->id }}</td>
+                            <td>{{ $commande->client->telephone }}</td>
+                            <td>{{ $commande->table->numero }}</td>
 
 
                             <td>
-                                <a href="{{ route('produits.edit', $produit->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                <a href="{{ route('produits.show', $produit->id) }}" role="button" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                {!! Form::open(['method' => 'DELETE', 'route'=>['produits.destroy', $produit->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
+                                <a href="{{ route('plats.edit', $plat->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('plats.show', $plat->id) }}" role="button" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                {!! Form::open(['method' => 'DELETE', 'route'=>['plats.destroy', $plat->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
-                                <a href="{{action('ProduitController@pdf', $produit->id)}}">PDF</a>
+                                <a href="{{action('PlatController@facturePdf', $plat->id)}}">PDF</a>
                             </td>
 
                         </tr>

@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Commande;
 use Illuminate\Http\Request;
 use App\Client;
+use App\Commande;
 use App\Table;
-use App\Plat;
-use PDF;
 
-
-class CommandeController extends Controller
+class GeneralController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +16,7 @@ class CommandeController extends Controller
      */
     public function index()
     {
-        $commandes = Commande::all();
-        return view('commandes.index', compact('commandes'));
+        //
     }
 
     /**
@@ -32,7 +28,7 @@ class CommandeController extends Controller
     {
         $clients = Client::all();
         $tables = Table::all();
-        return view('commandes.create', compact('clients','tables'));
+        return view('general.create', compact('clients','tables'));
     }
 
     /**
@@ -43,12 +39,17 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'id_client' => 'required',
-            'id_table' => 'required',
-        ]);
-        Commande::create($request->all());
-        return redirect()->route('plats.create');//->with('success', 'Commande enregistré avec succès!!!');
+        $data['id_client'] = $request->get('id_client');
+        $data['id_table'] = $request->get('id_table');
+        Commande::create($data);
+
+        $step1['nom'] = $request->get('nom');
+        $step1['prix'] = $request->get('prix');
+        $step1['commande_id'] = $data->id;
+
+        Plat::create($step1);
+
+        return redirect()->route('plats.add')->with('success', 'Commande enregistré avec succès!!!');
     }
 
     /**
@@ -59,10 +60,7 @@ class CommandeController extends Controller
      */
     public function show($id)
     {
-        $commandes = Commande::all();
-        $plats = Plat::where('commande_id','=',$id)->get();
-        return view('commandes.show',compact('plats','commandes'));
-
+        //
     }
 
     /**
@@ -98,13 +96,4 @@ class CommandeController extends Controller
     {
         //
     }
-    public function facturePdf($id){
-        //$plat = Plat::find($id);
-        $plats = Plat::where('commande_id','=',$id)->get();
-
-
-        $pdf = PDF::loadView('PDF.factureResto', compact('plats'));
-        return $pdf->download('demonutslaravel.pdf');
-    }
-
 }

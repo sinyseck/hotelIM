@@ -17,8 +17,8 @@ class CreateTablePlat extends Migration
             $table->bigIncrements('id');
             $table->string('nom');
             $table->integer('prix');
-            $table->unsignedBigInteger('id_commande');
-            $table->foreign('id_commande')
+            $table->unsignedBigInteger('commande_id');
+            $table->foreign('commande_id')
             ->references('id')
             ->on('commandes');
             $table->timestamps();

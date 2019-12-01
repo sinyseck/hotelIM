@@ -33,7 +33,9 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Client</th>
+                            <th>Nom Client</th>
+                            <th>Prénom Client </th>
+                            <th> Téléphone Client </th>
                             <th>Table</th>
                             <th>Action</th>
 
@@ -43,7 +45,9 @@
                     @foreach ($commandes as $commande)
                         <tr>
                             <td>{{ $commande->id }}</td>
-                            <td>{{ $commande->client->telephone }}</td>
+                            <td>{{ $commande->client->nom }}
+                            <td>{{ $commande->client->prenom }}
+                            <td>{{ $commande->client->telephone }} </td>
                             <td>{{ $commande->table->numero }}</td>
 
 
@@ -53,6 +57,7 @@
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['commandes.destroy', $commande->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
+                                <a href="{{action('CommandeController@facturePdf', $commande->id)}}">PDF</a>
 
                             </td>
 

@@ -15,11 +15,11 @@ class CreateTableCompose extends Migration
     {
         Schema::create('composes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_produit');
-            $table->foreign('id_produit')
+            $table->unsignedBigInteger('produit_id');
+            $table->foreign('produit_id')
             ->references('id')
             ->on('produits');
-            $table->unsignedBigInteger('id_plat');
+            $table->unsignedBigInteger('plat_id');
             $table->foreign('id_plat')
             ->references('id')
             ->on('plats');
