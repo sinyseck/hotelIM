@@ -76,7 +76,7 @@
                         @endforeach
                         start : '{{ $reserver->date_arrivee }}',
                         end: '{{$reserver->date_depart }}',
-                        url : '{{ route('reservations.edit', $reserver->id) }}'
+                        url : '{{ route('reservations.show', $reserver->id) }}'
                     },
 
                     @endforeach

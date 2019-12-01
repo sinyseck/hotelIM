@@ -23,12 +23,25 @@
             </div>
 
             <div class="card border-danger border-0">
-                <div class="card-header bg-info text-center">INFORMATIONS CLIENT</div>
+                <div class="card-header bg-info text-center">INFORMATIONS Reservation</div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <li class="list-group-item">DATE D'AJOUT : {{ $entreeStock->date }}</li>
-                        <li class="list-group-item">QUANTITE : {{ $entreeStock->quantite }}</li>
-                        <li class="list-group-item">NOM PRODUIT : {{ $entreeStock->produit->nom }}</li>
+                        <li class="list-group-item">NOM : {{ $reservation->client->nom }}</li>
+                        <li class="list-group-item">PRENOM : {{$reservation->client->prenom }}</li>
+                        <li class="list-group-item">Téléphone : {{ $reservation->client->telephone }}</li>
+                        <li class="list-group-item">Date début : {{ $reservation->date_arrivee}}</li>
+                        <li class="list-group-item">Date fin : {{ $reservation->date_depart}}</li>
+                        <li class="list-group-item">Nombre de Personnes : {{ $reservation->nbre_personne}}</li>
+                            @if($reservation->etat_paiement)
+                        <li class="list-group-item text-success"> Paiement  : Payé</li>
+                            @else
+                                <li class="list-group-item text-danger">Paiement  : Non payé</li>
+                            @endif
+                        <li class="list-group-item">Chambre occupé :
+                        @foreach($reservation->affectes as $affecte)
+                             chambre N°{{ $affecte->chambre_id }},
+                        @endforeach
+                        </li>
                     </ul>
                 </div>
             </div>

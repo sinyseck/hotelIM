@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 class ReservationController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth']);
+        $this->middleware(['caissier', 'caissier'])->except( 'show');
     }
     /**
      * Display a listing of the resource.
@@ -82,11 +82,11 @@ class ReservationController extends Controller
              'statut' => 'required' ,
             'etat_paiement' => 'required',
             'client_id' => 'required',
-            'id_tarif' => 'required',
+            'tarif_id' => 'required',
             'chambres' => 'required'
         ]);
         if( $request['date_arrivee'] >= $request['date_depart']){
-            return redirect()->route('reservations.create')->with('error', 'Verifier le date de départ et le date ariv"');
+            return redirect()->route('reservations.create')->with('error', 'Verifier le date de départ et le date arivée');
         }
         $request->merge(['id_user'=> Auth::id()]);
         $chambres = $request['chambres'];
@@ -124,7 +124,10 @@ class ReservationController extends Controller
      */
     public function show($id)
     {
-
+        $reservation = Reservation::with(['affectes','affectes.chambre','client'])
+        ->where('id',$id)
+        ->first();
+        return view('reservations.show', compact('reservation'));
     }
 
     /**
@@ -158,7 +161,7 @@ class ReservationController extends Controller
             'statut' => 'required' ,
             'etat_paiement' => 'required',
             'id_client' => 'required',
-            'id_tarif' => 'required',
+            'tarif_id' => 'required',
             'chambres' => 'required'
         ]);
         $request->merge(['id_user'=> Auth::id()]);
@@ -204,7 +207,25 @@ class ReservationController extends Controller
         return view ('reservations.caliendrier', compact('reservations'));
     }
 
-    public function affecter(){
+    public function dateDifference($date_1 , $date_2 , $differenceFormat = '%d' )
+    {
+        $datetime1 = date_create($date_1);
+        $datetime2 = date_create($date_2);
 
+        $interval = date_diff($datetime1, $datetime2);
+
+        return $interval->format($differenceFormat);
+
+    }
+
+    public function facturerReservartion($id){
+        $reservation = Reservation::with(['affectes','affectes.chambre','client','tarif'])
+            ->where('id',$id)
+            ->first();
+        $jour = $this->dateDifference($reservation->date_arrivee,$reservation->date_depart);
+        $montantNuite =$reservation->tarif->prix*$jour * count($reservation->affectes);
+        $user = $user = DB::table('users')->find(Auth::id());
+        $hotel = DB::table('hotels')->find($user->id_hotel);
+        return view('reservations.facture', compact('reservation','montantNuite','hotel','jour'));
     }
 }

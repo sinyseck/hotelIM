@@ -101,7 +101,7 @@
                             </div>
                             <div class="form-group">
                                 {!! Form::Label('item', 'Item:') !!}
-                                <select class="form-control" name="id_tarif">
+                                <select class="form-control" name="tarif_id">
                                     <option value="">Choisir</option>
                                     @foreach($tarifs as $tarif)
                                         <option value="{{$tarif->id}}">{{$tarif->nbre_personne}} personnes {{$tarif->prix}} cfa</option>

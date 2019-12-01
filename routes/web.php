@@ -56,3 +56,5 @@ Route::resource('commandes', 'CommandeController');
 
 Route::get('calendrier', 'ReservationController@caliendrier')
     ->name('calendrier');
+Route::get('facture/{id}', 'ReservationController@facturerReservartion')
+    ->name('facturer.voir');

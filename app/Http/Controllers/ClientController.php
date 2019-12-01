@@ -9,7 +9,7 @@ class ClientController extends Controller
 {
 
     public function __construct(){
-        $this->middleware(['auth']);
+        $this->middleware(['caissier', 'caissier'])->except( 'show');
     }
     /**
      * Display a listing of the resource.

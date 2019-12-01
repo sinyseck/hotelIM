@@ -12,6 +12,11 @@ class TarifController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        $this->middleware(['caissier', 'caissier'])->except( 'show');
+    }
+
     public function index()
     {
         $tarifs= Tarif::all();

@@ -13,8 +13,8 @@ class ChambreController extends Controller
 {
 
 
-    public function __construct(){
-
+    public function __construct() {
+        $this->middleware(['caissier', 'caissier'])->except('show');
     }
     public function index()
     {

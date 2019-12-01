@@ -55,6 +55,7 @@
                                 <td>{{ $reserver->date_arrivee }}</td>
                                 <td>{{ $reserver->date_depart }}</td>
                                 <td>
+                                    <a href="{{ route('facturer.voir',[$reserver->id]) }}" target="_blank" class="btn btn-default"><i class="fas fa-print"></i></a>
                                     <a href="{{ route('reservations.edit', $reserver->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                     <a href="{{ route('reservations.show', $reserver->id) }}" role="button" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                     {!! Form::open(['method' => 'DELETE', 'route'=>['reservations.destroy', $reserver->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}

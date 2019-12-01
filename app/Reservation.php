@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User;
 class Reservation extends Model
 {
     protected $fillable= ['date_arrivee','date_depart','nbre_personne','statut','etat_paiement',
-                'client_id','id_user','id_tarif'];
+                'client_id','id_user','tarif_id'];
 
     public function affectes(){
         return $this->hasMany(Affecte::class);
