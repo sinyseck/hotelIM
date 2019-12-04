@@ -44,13 +44,18 @@ class EntreeStockController extends Controller
             'quantite' => 'required',
             'id_produit' => 'required',
         ]);
-        $produit = Produit::where([
+     /*   $produit = Produit::where([
             ['id', '=', $request->id_produit]
          ])->first();
          if ($produit) {
-             $produit->increment('quantite', $request->quantite);
-         }
-            EntreeStock::create($request->all());
+             $produit->increment('quantite', $request->quantite + $produit->quantite);
+         }*/
+        //dd($request->id_produit);
+        $produit = Produit::find($request->id_produit);
+        //dd($produit);
+        $produit->quantite = $produit->quantite +  $request->quantite;
+        $produit->save();
+        EntreeStock::create($request->all());
 
 
         return redirect()->route('entreeStocks.index')->with('success','Stock enregistré avec succès!!!');
@@ -91,7 +96,6 @@ class EntreeStockController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-            'date' => 'required',
             'quantite' => 'required',
             'id_produit' => 'required',
         ]);

@@ -20,7 +20,7 @@ class CreateTableCompose extends Migration
             ->references('id')
             ->on('produits');
             $table->unsignedBigInteger('plat_id');
-            $table->foreign('id_plat')
+            $table->foreign('plat_id')
             ->references('id')
             ->on('plats');
             $table->timestamps();
