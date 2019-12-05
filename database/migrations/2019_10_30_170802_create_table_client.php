@@ -20,7 +20,7 @@ class CreateTableClient extends Migration
             $table->string('nationalite');
             $table->string('typePiece');
             $table->integer('numeroPiece')->unique();
-            $table->string('adresse')->unique();
+            $table->string('adresse');
             $table->string('telephone')->unique();
             $table->string('email')->unique();
             $table->timestamps();

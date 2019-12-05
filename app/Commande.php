@@ -22,7 +22,7 @@ class Commande extends Model
     }
     public function plat()
     {
-        return $this->belongsToMany(Plat::class, 'commande_id', 'id');
+        return $this->hasMany(Plat::class);
     }
 
 

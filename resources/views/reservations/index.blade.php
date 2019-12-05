@@ -52,8 +52,8 @@
                                 <td>{{ $reserver->client->telephone }}</td>
                                 <td>{{ $reserver->etat_paiement }}</td>
                                 <td>{{ $reserver->statut }}</td>
-                                <td>{{ $reserver->date_arrivee }}</td>
-                                <td>{{ $reserver->date_depart }}</td>
+                                <td>{{Carbon\Carbon::parse( $reserver->date_arrivee)->format('d-m-Y h:m:s') }}</td>
+                                <td>{{ Carbon\Carbon::parse($reserver->date_depart)->format('d-m-Y h:m:s') }}</td>
                                 <td>
                                     <a href="{{ route('facturer.voir',[$reserver->id]) }}" target="_blank" class="btn btn-default"><i class="fas fa-print"></i></a>
                                     <a href="{{ route('reservations.edit', $reserver->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>

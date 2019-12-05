@@ -24,7 +24,7 @@ class Plat extends Model
 
     public function commande()
     {
-        return $this->belongsToMany(Commande::class, 'commande_id');
+        return $this->belongsToMany(Commande::class);
     }
 
     /*public function produits(){
