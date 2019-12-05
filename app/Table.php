@@ -11,11 +11,11 @@ class Table extends Model
 
     public function commande()
     {
-        return $this->hasMany(Commande::class, 'id_table', 'id');
+        return $this->hasMany(Commande::class, 'table_id', 'id');
     }
 
     public function plat()
     {
-        return $this->hasMany(Plat::class, 'id_table', 'id');
+        return $this->hasMany(Plat::class, 'table_id', 'id');
     }
 }

@@ -7,22 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Commande extends Model
 {
     protected $table='commandes';
-    protected $fillable= ['id_client','id_table'];
+    protected $fillable= ['client_id','table_id'];
 
     public function client()
     {
-        return $this->belongsTo(Client::class, 'id_client');
+        return $this->belongsTo(Client::class, 'client_id');
     }
     public function table()
     {
-        return $this->belongsTo(Table::class, 'id_table');
+        return $this->belongsTo(Table::class, 'table_id');
     }
     public function paiements(){
         return $this->hasMany(Paiement::class);
     }
     public function plat()
     {
-        return $this->belongsToMany(Plat::class, 'commande_id', 'id');
+        return $this->hasMany(Plat::class);
     }
 
 

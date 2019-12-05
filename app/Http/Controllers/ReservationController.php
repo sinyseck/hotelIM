@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Affecte;
 use App\Chambre;
 use App\Client;
+use App\Commande;
 use App\Reservation;
 use App\Tarif;
 use Carbon\Carbon;
@@ -219,13 +220,34 @@ class ReservationController extends Controller
     }
 
     public function facturerReservartion($id){
+
         $reservation = Reservation::with(['affectes','affectes.chambre','client','tarif'])
             ->where('id',$id)
             ->first();
+        // partie Restaurant
+        $totalRestaurant =0;
+        $commandes = Commande::with(['plat'])
+            ->whereBetween('created_at',[$reservation->date_arrivee,$reservation->date_depart])
+            ->get();
+        foreach($commandes as $commande){
+            foreach($commande->plat as $plat){
+                $totalRestaurant = $totalRestaurant + $plat->prix;
+            }
+        }
+        $tvaRestaurant = ($totalRestaurant * 10)/100;
+        //$totalRestaurantTTC = $tvaRestaurant +$totalRestaurant;
+        //dd($commande);
+
+        //partie hotel
         $jour = $this->dateDifference($reservation->date_arrivee,$reservation->date_depart);
         $montantNuite =$reservation->tarif->prix*$jour * count($reservation->affectes);
+        $taxeSejour = 1000 * $jour;
+        $tvaHotel = ($montantNuite* 10)/100;
+       // $montantNuiteTTC = $montantNuite + $taxeSejour +$tvaHotel;
         $user = $user = DB::table('users')->find(Auth::id());
         $hotel = DB::table('hotels')->find($user->id_hotel);
-        return view('reservations.facture', compact('reservation','montantNuite','hotel','jour'));
+        return view('reservations.facture',
+            compact('reservation','montantNuite','hotel','jour','commandes','taxeSejour','tvaHotel',
+            'tvaRestaurant','totalRestaurant'));
     }
 }

@@ -54,7 +54,7 @@
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['produits.destroy', $produit->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
-                                <a href="{{action('ProduitController@pdf', $produit->id)}}">PDF</a>
+                                {{--<a href="{{action('ProduitController@pdf', $produit->id)}}">PDF</a>--}}
                             </td>
 
                         </tr>

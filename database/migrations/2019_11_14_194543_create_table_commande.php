@@ -15,12 +15,13 @@ class CreateTableCommande extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_client');
-            $table->foreign('id_client')
+            $table->unsignedBigInteger('client_id');
+            $table->integer('quantite');
+            $table->foreign('client_id')
             ->references('id')
             ->on('clients');
-            $table->unsignedBigInteger('id_table');
-            $table->foreign('id_table')
+            $table->unsignedBigInteger('table_id');
+            $table->foreign('table_id')
             ->references('id')
             ->on('tables');
 

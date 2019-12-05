@@ -65,6 +65,7 @@
         <!-- Table row -->
         <div class="row">
             <div class="col-12 table-responsive">
+                <h1 class="text-center">Frais Hotel</h1>
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -88,6 +89,39 @@
                     </tbody>
                 </table>
             </div>
+            <div class="col-12">
+            <h1 class="text-center">Frais Restauration</h1>
+            </div>
+            @foreach($commandes as $commande)
+             <div class="col-3">
+                 <h5> {{ Carbon\Carbon::parse($commande->created_at)->format('d-m-Y h:m:s') }}</h5>
+             </div>
+            <div class="col-3">
+                N°Commande: {{ $commande->id }}
+            </div>
+            <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Plat</th>
+                        <th> Quantite</th>
+                        <th>Prix</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($commande->plat as $plat)
+                    <tr>
+                        <td>{{ $plat->nom }}</td>
+                        <td>1</td>
+                        <td>{{ $plat->prix  }}</td>
+
+                    </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @endforeach
             <!-- /.col -->
         </div>
         <!-- /.row -->
@@ -107,13 +141,24 @@
                             <td>{{ $montantNuite }} CFA</td>
                         </tr>
                         <tr>
-                            <th>Montant Restauration</th>
-                            <td>0</td>
+                            <th style="width:50%">Taxe de séjour:</th>
+                            <td>{{ $taxeSejour }} CFA</td>
                         </tr>
-
+                        <tr>
+                            <th style="width:50%">TVA Hotel (10%):</th>
+                            <td>{{ $tvaHotel }} CFA</td>
+                        </tr>
+                        <tr>
+                            <th>Montant Restauration</th>
+                            <td>{{ $totalRestaurant }}</td>
+                        </tr>
+                        <tr>
+                            <th>TVA Restaurant (10%)</th>
+                            <td>{{ $tvaRestaurant }}</td>
+                        </tr>
                         <tr>
                             <th>Total:</th>
-                            <td>{{ $montantNuite }} CFA</td>
+                            <td>{{ $montantNuite + $taxeSejour + $tvaHotel + $totalRestaurant + $tvaRestaurant }} CFA</td>
                         </tr>
                     </table>
                 </div>

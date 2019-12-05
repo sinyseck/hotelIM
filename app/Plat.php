@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Plat extends Model
 {
    protected $table = 'plats';
-   protected $fillable = ['nom','prix','quantite','commande_id'];
+   protected $fillable = ['nom','prix','commande_id'];
 
    public function composes(){
     return $this->hasMany(Compose::class, 'plat_id', 'id');
@@ -19,12 +19,12 @@ class Plat extends Model
     }
     public function table()
     {
-        return $this->belongsTo(Table::class, 'id_table');
+        return $this->belongsTo(Table::class, 'table_id');
     }
 
     public function commande()
     {
-        return $this->belongsToMany(Commande::class, 'commande_id');
+        return $this->belongsToMany(Commande::class);
     }
 
     /*public function produits(){

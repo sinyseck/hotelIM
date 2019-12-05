@@ -16,12 +16,12 @@ class Client extends Model
     }
     public function commande()
     {
-        return $this->hasMany(Commande::class, 'id_client', 'id');
+        return $this->hasMany(Commande::class, 'client_id', 'id');
 
     }
     public function plat()
     {
-        return $this->hasMany(Plat::class, 'id_client', 'id');
+        return $this->hasMany(Plat::class, 'client_id', 'id');
 
     }
 }
