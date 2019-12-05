@@ -57,6 +57,7 @@
                                 <td>{{$plat->prix}} </td>
                                 <td>{{$plat->quantite}} </td>
                                 <td class="total"> {{$plat->quantite*$plat->prix}}</td>
+                                <td class="somme"> sum(total)</td>
 
                             </tr>
                         @endforeach
