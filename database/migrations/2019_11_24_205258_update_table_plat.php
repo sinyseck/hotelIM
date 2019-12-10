@@ -14,7 +14,7 @@ class UpdateTablePlat extends Migration
     public function up()
     {
         Schema::table('plats', function (Blueprint $table) {
-            $table->integer('quantite');
+           // $table->integer('quantite');
         });
     }
 

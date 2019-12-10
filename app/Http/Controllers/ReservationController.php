@@ -161,7 +161,7 @@ class ReservationController extends Controller
             'nbre_personne' => 'required',
             'statut' => 'required' ,
             'etat_paiement' => 'required',
-            'id_client' => 'required',
+            'client_id' => 'required',
             'tarif_id' => 'required',
             'chambres' => 'required'
         ]);
@@ -226,12 +226,13 @@ class ReservationController extends Controller
             ->first();
         // partie Restaurant
         $totalRestaurant =0;
-        $commandes = Commande::with(['plat'])
+        $commandes = Commande::with(['detailCommandes','detailCommandes.plat'])
             ->whereBetween('created_at',[$reservation->date_arrivee,$reservation->date_depart])
+            ->where('client_id',$reservation->client_id)
             ->get();
         foreach($commandes as $commande){
-            foreach($commande->plat as $plat){
-                $totalRestaurant = $totalRestaurant + $plat->prix;
+            foreach($commande->detailCommandes as $detailCommande){
+                $totalRestaurant = $totalRestaurant + ($detailCommande->plat->prix *$detailCommande->quantite);
             }
         }
         $tvaRestaurant = ($totalRestaurant * 10)/100;

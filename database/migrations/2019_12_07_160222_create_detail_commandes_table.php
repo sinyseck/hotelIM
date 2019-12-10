@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePlat extends Migration
+class CreateDetailCommandesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreateTablePlat extends Migration
      */
     public function up()
     {
-        Schema::create('plats', function (Blueprint $table) {
+        Schema::create('detail_commandes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nom');
-            $table->integer('prix');
+            $table->unsignedBigInteger('plat_id');
+            $table->foreign('plat_id')
+                ->references('id')
+                ->on('plats');
             $table->unsignedBigInteger('commande_id');
             $table->foreign('commande_id')
-            ->references('id')
-            ->on('commandes');
+                ->references('id')
+                ->on('commandes');
+            $table->integer('quantite');
             $table->timestamps();
         });
     }
@@ -32,6 +35,6 @@ class CreateTablePlat extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plats');
+        Schema::dropIfExists('detail_commandes');
     }
 }

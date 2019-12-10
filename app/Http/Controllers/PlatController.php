@@ -18,15 +18,14 @@ class PlatController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     **/
     public function index()
     {
-        $produit = Produit::all();
-        $clients = Client::all();
-        $commandes = Commande::all();
-       $plats = Plat::all();
 
-        return view('plats.index', compact('plats','produit','commandes','clients'));
+    $plats = Plat::with(['composes','composes.produit'])->get();
+      //  dd($plats);
+
+    return view('plats.index', compact('plats'));
 
     }
 
@@ -52,49 +51,69 @@ class PlatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-      //  dd($request->all());
-        $produits = $request['produits'];
-        $quantite = $request['quantite'];
-        $arrlength = count($request['produits']);
-        for($x = 0; $x < $arrlength; $x++) {
-            $produit = Produit::find($produits[$x]);
-            if($produit->quantite < $quantite[$x] ){
-                return redirect()->route('plats.create')->with('error',' Stock inssufisant!!!'.$produit->nom);
-            }
+       public function store(Request $request)
+       {
+           $produits = $request['produits'];
+           $arrlength = count($request['produits']);
 
-            }
-        for($x = 0; $x < $arrlength; $x++) {
-            $produit = Produit::find($produits[$x]);
+           $plat=Plat::create($request->all())->id;
+           //  dd($plat);
+           for($x = 0; $x < $arrlength; $x++) {
 
-               $produit->quantite = $produit->quantite - $quantite[$x];
-               $produit->save();
-            }
-
-        $data=$request->all();
-        $lastid=Commande::create($data)->id;
-        $request->merge(['commande_id' => $lastid]);
-       // dd( $request['commande_id' ]);
-        $data = $request->all();
-        $plat=Plat::create($data)->id;
-      //  dd($plat);
-        for($x = 0; $x < $arrlength; $x++) {
-
-        $compose = new Compose();
-            //$compose->produit_id = implode(',',$produits);
-            $compose->produit_id = $produits[$x];
-            $compose->quantite = $quantite[$x];
-            $produit = Produit::find($produits[$x]);
-            //$compose->produit_id = $produits->id;
-            $compose->plat_id =$plat;
-            $compose->save();
-        }
+               $compose = new Compose();
+               $compose->produit_id = $produits[$x];
+               $compose->plat_id =$plat;
+               $compose->save();
+           }
 
 
-        return redirect()->route('commandes.index')->with('success','Commande enregistré!!!');
-    }
+           return redirect()->route('plats.index')->with('success','Plat enregistré!!!');
+       }
+    /*
 
+     public function store(Request $request)
+      {
+        //  dd($request->all());
+          $produits = $request['produits'];
+          $quantite = $request['quantite'];
+          $arrlength = count($request['produits']);
+          for($x = 0; $x < $arrlength; $x++) {
+              $produit = Produit::find($produits[$x]);
+              if($produit->quantite < $quantite[$x] ){
+                  return redirect()->route('plats.create')->with('error',' Stock inssufisant!!!'.$produit->nom);
+              }
+
+              }
+          for($x = 0; $x < $arrlength; $x++) {
+              $produit = Produit::find($produits[$x]);
+
+                 $produit->quantite = $produit->quantite - $quantite[$x];
+                 $produit->save();
+              }
+
+          $data=$request->all();
+          $lastid=Commande::create($data)->id;
+          $request->merge(['commande_id' => $lastid]);
+         // dd( $request['commande_id' ]);
+          $data = $request->all();
+          $plat=Plat::create($data)->id;
+        //  dd($plat);
+          for($x = 0; $x < $arrlength; $x++) {
+
+          $compose = new Compose();
+              //$compose->produit_id = implode(',',$produits);
+              $compose->produit_id = $produits[$x];
+              $compose->quantite = $quantite[$x];
+              $produit = Produit::find($produits[$x]);
+              //$compose->produit_id = $produits->id;
+              $compose->plat_id =$plat;
+              $compose->save();
+          }
+
+
+          return redirect()->route('commandes.index')->with('success','Commande enregistré!!!');
+      }
+  */
     /**
      * Display the specified resource.
      *
@@ -119,12 +138,9 @@ class PlatController extends Controller
     {
         $produits = Produit::get(); //Get all roles
 
-        $compose = Compose::all();
-        $produits = Produit::all();
-        $clients = Client::all();
-        $tables = Table::all();
         $plat = Plat::find($id);
-        return view('plats.edit', compact('produit','plat','clients','tables','produits','compose','produits'));
+
+        return view('plats.edit', compact('produits','plat'));
 
     }
 
@@ -135,37 +151,38 @@ class PlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+   public function update(Request $request, $id)
     {
+        $plat = Plat::findOrFail($id);
         request()->validate([
-            'client_id' => 'required',
-            'table_id' => 'required',
+            'nom' => 'required',
+            'prix' => 'required',
+            'produits' => 'required',
 
         ]);
-        $commande = Commande::find($id)->update($request->all());
-
-
-        $plat['nom'] = $request->get('nom');
-        $plat['prix'] = $request->get('prix');
-        $plat['quantite'] = $request->get('quantite');
-
-        $plat['commande_id'] = $commande->id;
-
-        $plat= Plat::update($plat);
-
         $produits = $request['produits'];
+        $arrlength = count($request['produits']);
+        for($x = 0; $x < $arrlength; $x++) {
+           // $compose = Commande::findOrFail();
+            $compose = DB::table('composes')
+                ->where('plat_id',$plat->id);
+            $compose->delete();
 
-        if(isset($produits)) {
-            // DB::table('produits')->decrement('quantite', $request->quantite);
-         $compose = new Compose();
-             //$compose->produit_id = implode(',',$produits);
-             $compose->produit_id()->sync($produits);
+          /*  $compose = new Compose();
+            $compose->produit_id = $produits[$x];
+            $compose->plat_id =$plat;
+            $compose->save();*/
+        }
+        $plat->fill($request->all())->save();
+        for($x = 0; $x < $arrlength; $x++) {
 
-             //$compose->produit_id = $produits->id;
-             $compose->plat_id = $plat->id;
-             $compose->update();
-            }
-         return redirect()->route('plats.index')->with('success','Plat enregistré!!!');
+            $compose = new Compose();
+            $compose->produit_id = $produits[$x];
+            $compose->plat_id =$plat->id;
+            $compose->save();
+        }
+
+        return redirect()->route('plats.index')->with('success','Plat enregistré!!!');
 
 
     }
@@ -178,7 +195,16 @@ class PlatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $compose = DB::table('composes')
+            ->where('plat_id',$id);
+        $compose->delete();
+
+        $plat = Plat::findOrFail($id);
+        $plat->delete();
+
+        return redirect()->route('plats.index')
+            ->with('flash_message',
+                'Plat Supprimé!');
     }
 
     public function facturePdf($id){
