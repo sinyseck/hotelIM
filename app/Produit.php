@@ -15,7 +15,7 @@ class Produit extends Model
     }
 
     public function composes(){
-        return $this->hasMany(Compose::class, 'produit_id', 'id');
+        return $this->hasMany(Compose::class);
      }
 
     /* public function plats(){

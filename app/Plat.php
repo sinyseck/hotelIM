@@ -1,16 +1,16 @@
 <?php
 
-namespace App;
 
+namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Plat extends Model
 {
    protected $table = 'plats';
-   protected $fillable = ['nom','prix','commande_id'];
+   protected $fillable = ['nom','prix'];
 
    public function composes(){
-    return $this->hasMany(Compose::class, 'plat_id', 'id');
+    return $this->hasMany(Compose::class);
     }
 
     public function client()
@@ -30,4 +30,7 @@ class Plat extends Model
     /*public function produits(){
         return $this->belongsToMany(Produit::class);
      }*/
+    public function detailCommandes(){
+        return $this->hasMany(DetailCommande::class);
+    }
 }

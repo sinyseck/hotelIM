@@ -11,9 +11,9 @@ class Compose extends Model
 
 
     public function plat(){
-        return $this->belongsTo(Plat::class, 'plat_id');
+        return $this->belongsTo(Plat::class);
     }
-    public function produits(){
-        return $this->belongsTo(Produit::class, 'produit_id');
+    public function produit(){
+        return $this->belongsTo(Produit::class);
     }
 }

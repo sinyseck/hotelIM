@@ -110,12 +110,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($commande->plat as $plat)
+                    @foreach($commande->detailCommandes as $detailCommande)
                     <tr>
-                        <td>{{ $plat->nom }}</td>
-                        <td>1</td>
-                        <td>{{ $plat->prix  }}</td>
-
+                        <td>{{ $detailCommande->plat->nom }}</td>
+                        <td>{{ $detailCommande->quantite }}</td>
+                        <td>{{ $detailCommande->plat->prix  }}</td>
+                        <td>{{ $detailCommande->plat->prix *  $detailCommande->quantite }}</td>
                     </tr>
                         @endforeach
                     </tbody>

@@ -21,6 +21,11 @@
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger">
+                    <p>{{ $message }}</p>
+                </div>
+            @endif
         <form action="{{ route('commandes.store') }}" method="POST">
             @csrf
              <div class="card border-danger border-0">
@@ -29,7 +34,7 @@
                             <div class="row">
                                     <div class="col-lg-6">
                                         <label>Client</label>
-                                            <select class="form-control" name="id_client">
+                                            <select class="form-control" name="client_id" required="">
                                                 @foreach ($clients as $client)
                                                 <option value="{{$client->id}}">{{$client->prenom}} {{$client->nom}} {{$client->telephone}}</option>
                                                 @endforeach
@@ -41,13 +46,62 @@
 
                                     <div class="col-lg-6">
                                         <label>Table</label>
-                                        <select class="form-control" name="id_table">
+                                        <select class="form-control" name="table_id">
                                             @foreach ($tables as $table)
                                             <option value="{{$table->id}}">{{$table->numero}}</option>
                                                 @endforeach
 
                                         </select>
                                     </div>
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                    <tr>
+                                        <th>Plat</th>
+                                        <th>Quantite</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+
+
+                                        <td>
+                                            @foreach ($plats as $plat)
+                                                {{ Form::checkbox('plats[]',  $plat->id ) }}
+                                                Produit {{ Form::label($plat->nom, ucfirst($plat->nom)) }}<br>
+                                            @endforeach
+                                        </td>
+                                        <td><input type="text" name="quantite[]" class="form-control"/></td>
+
+                                        <td><button type="button" class="btn btn-success addRow">AJOUTER</button></td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                {{--<button type="submit" class="btn btn-success">Save</button>--}}
+
+
+                                <script type="text/javascript">
+
+                                    $('.addRow').on('click',function(){
+                                        addRow();
+                                    });
+                                    function addRow()
+                                    {
+                                        var tr='<tr>'+
+                                                '<td>@foreach ($plats as $plat){{ Form::checkbox('plats[]',  $plat->id ) }}Produit {{ Form::label($plat->nom, ucfirst($plat->nom)) }}<br> @endforeach</td>'+
+                                                '<td><input type="text" name="quantite[]" class="form-control" required=""></td>'+
+                                                '<td><button type="button" class="btn btn-danger remove-tr">Remove</button></td>'+
+                                                '</tr>';
+                                        $('tbody').append(tr);
+                                    };
+                                    $(document).on('click', '.remove-tr', function(){
+                                        $(this).parents('tr').remove();
+                                    });
+                                </script>
+
 
                             </div>
 
@@ -64,6 +118,6 @@
             </div>
         </div>
 
-    </div>
+
 
 @endsection

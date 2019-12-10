@@ -24,6 +24,9 @@ class Commande extends Model
     {
         return $this->hasMany(Plat::class);
     }
+    public function detailCommandes(){
+        return $this->hasMany(DetailCommande::class);
+    }
 
 
 }
