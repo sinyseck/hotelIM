@@ -60,7 +60,6 @@
                                     <thead>
 
                                     <tr>
-                                        <th>#</th>
                                         <th>Plat</th>
                                         <th>prix</th>
                                         <th>Action</th>
@@ -86,14 +85,15 @@
                                     <tbody>
                                     @foreach($plats as $plat)
                                         <tr>
-                                            <td class="id">{{ $plat->id }}</td>
-                                            <td class="name"> {{ $plat->nom }}</td>
-                                            <td class="prix">{{ $plat->prix }} FCFA</td>
-                                            <td><button type="button"  class="btn btn-success addRow">AJOUTER</button></td>
+                                            <td>{{ $plat->nom }}</td>
+                                            <td>{{ $plat->prix }} FCFA</td>
+                                            <td><button type="button" class="btn btn-success addRow">AJOUTER</button></td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
+                                <div class="col-lg-6">
+                                </div>
                                 {{--<button type="submit" class="btn btn-success">Save</button>--}}
 
                                 {{--
@@ -120,28 +120,12 @@
 
 
                             </div>
-                            <div class="col-lg-6">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Plat</th>
-                                            <th>Quantite</th>
-                                            <th>prix</th>
-                                            <th>action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="conteneur">
 
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-lg-12">
+                            <div>
                                 <center>
-                                    <button type="submit" class="btn btn-success btn btn-lg "> Valider</button>
+                                    <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER</button>
                                 </center>
                             </div>
-
 
 
                         </div>
@@ -150,80 +134,7 @@
             </form>
         </div>
     </div>
-    <script type="text/javascript">
 
 
-
-        $.ajaxSetup({
-
-            headers: {
-
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-            }
-
-        });
-
-
-
-        $(".btn-submit").click(function(e){
-
-
-
-            e.preventDefault();
-
-
-
-            var client_id = $("input[name=client_id]").val();
-
-            var plat_id = $("input[name=password]").val();
-
-            var quantite = $("input[name=quantite]").val();
-
-
-
-            $.ajax({
-
-                type:'POST',
-
-                url:'/ajaxRequest',
-
-                data:{name:name, password:password, email:email},
-
-                success:function(data){
-
-                    alert(data.success);
-
-                }
-
-            });
-
-
-
-        });
-
-    </script>
-    <script>
-        $(document).ready(function () {
-            $(".addRow").click(function() {
-                //find content of different elements inside a row.
-                var nameTxt = $(this).closest('tr').find('.name').text();
-                var id = $(this).closest('tr').find('.id').text();
-                var prix =$(this).closest('tr').find('.prix').text();
-               // var emailTxt = $(this).closest('tr').find('.email').text();
-                //assign above variables text1,text2 values to other elements.
-                /*$("#name").val( nameTxt );
-                $("#email").val( emailTxt );*/
-                $(".conteneur").append("<tr> <td><input type='hidden' value="+id+" name='plats[]' required><input value="+nameTxt+" class='form-control'  readonly></td>"+
-                "<td><input type='number' name='quantite[]' class='form-control' required> </td>"+
-                "<td><input type='text' value="+prix+" class='form-control' readonly> </td><"+
-                "<td><button type='button' class='btn btn-danger remove-tr'>Supprimer</button></td>");
-                //alert(nameTxt);
-            });
-        });
-        $(document).on('click', '.remove-tr', function(){
-            $(this).parents('tr').remove();
-        });
-    </script>
 
 @endsection
