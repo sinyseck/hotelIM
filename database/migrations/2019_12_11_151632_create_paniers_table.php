@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaiementsTable extends Migration
+class CreatePaniersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreatePaiementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('paiements', function (Blueprint $table) {
+        Schema::create('paniers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->float('montant');
-            $table->unsignedBigInteger('commande_id')->nullable();
-            $table->foreign('commande_id')
-                ->references('id')
-                ->on('commandes');
+            $table->integer('client_id');
+            $table->integer('plat_id');
+            $table->integer('quantite');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreatePaiementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paiements');
+        Schema::dropIfExists('paniers');
     }
 }

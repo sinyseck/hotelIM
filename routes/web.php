@@ -12,9 +12,7 @@
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth');
+Route::get('/','HomeController@index' )->middleware('auth');
 
 Route::get('/client', function () {
     return view('clients.create');
@@ -57,7 +55,7 @@ Route::get('facture/{id}', 'ReservationController@facturerReservartion')
 
 Route::resource('plats', 'PlatController');
 
-
+Route::resource('panier', 'PanierController');
 
 
 Route::get('/facturePdf/{id}', 'CommandeController@facturePdf');
