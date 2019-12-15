@@ -35,7 +35,7 @@
                             @if($reservation->etat_paiement)
                         <li class="list-group-item text-success"> Paiement  : Payé</li>
                             @else
-                                <li class="list-group-item text-danger">Paiement  : Non payé</li>
+                                <li class="list-group-item text-danger">Paiement  : Non payé  <a class="btn btn-success" href="{{ route('paiement.valider',[$reservation->id]) }}">Enregistrer Paiement</a></li>
                             @endif
                         <li class="list-group-item">Chambre occupé :
                         @foreach($reservation->affectes as $affecte)

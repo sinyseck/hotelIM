@@ -48,6 +48,8 @@ Route::resource('commandes', 'CommandeController');
 
 Route::get('calendrier', 'ReservationController@caliendrier')
     ->name('calendrier');
+Route::get('/paiement/valider/{id}', 'PaiementController@validerPaiement')
+    ->name('paiement.valider');
 
 Route::get('facture/{id}', 'ReservationController@facturerReservartion')
     ->name('facturer.voir');

@@ -32,7 +32,7 @@
                     <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                         <thead>
                         <tr>
-                            <th>#</th>
+                            {{--<th>#</th>--}}
                             <th>Nom</th>
                             <th>Prenom</th>
                             <th>Téléphone</th>
@@ -46,11 +46,15 @@
                         <tbody>
                         @foreach ($reservations as $reserver)
                             <tr>
-                                <td>{{ $reserver->id }}</td>
+                                {{--<td>{{ $reserver->id }}</td>--}}
                                 <td>{{ $reserver->client->nom }}</td>
                                 <td>{{ $reserver->client->prenom }}</td>
                                 <td>{{ $reserver->client->telephone }}</td>
-                                <td>{{ $reserver->etat_paiement }}</td>
+                                @if($reserver->etat_paiement==false)
+                                <td><span class="badge bg-danger">non payé</span></td>
+                                @else
+                                    <td><span class="badge bg-success">payé</span></td>
+                                @endif
                                 <td>{{ $reserver->statut }}</td>
                                 <td>{{Carbon\Carbon::parse( $reserver->date_arrivee)->format('d-m-Y h:m:s') }}</td>
                                 <td>{{ Carbon\Carbon::parse($reserver->date_depart)->format('d-m-Y h:m:s') }}</td>
