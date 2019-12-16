@@ -22,6 +22,9 @@ class Reservation extends Model
     public function tarif(){
         return $this->belongsTo(Tarif::class);
     }
+    public function paiement(){
+        return $this->belongsTo(Paiement::class);
+    }
 
 
 }
