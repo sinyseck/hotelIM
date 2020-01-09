@@ -50,13 +50,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($plats as $key=>$plat)
+                        @foreach($detailCommandes as $key=>$detailCommande)
                             <tr>
                                 <td>{{++$key}} </td>
-                                <td>{{$plat->nom}} </td>
-                                <td>{{$plat->prix}} </td>
-                                <td>{{$plat->quantite}} </td>
-                                <td class="total"> {{$plat->quantite*$plat->prix}}</td>
+                                <td>{{$detailCommande->plat->nom}} </td>
+                                <td>{{$detailCommande->plat->prix}} </td>
+                                <td>{{ $detailCommande->quantite}} </td>
+                                <td class="total"> {{$detailCommande->quantite*$detailCommande->plat->prix}}</td>
 
                             </tr>
                         @endforeach

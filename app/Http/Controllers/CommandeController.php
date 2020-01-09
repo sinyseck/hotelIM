@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Client;
 use App\Table;
 use App\Plat;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 
@@ -111,9 +113,15 @@ class CommandeController extends Controller
      */
     public function show($id)
     {
-        $commandes = Commande::all();
-        $plats = Plat::where('commande_id','=',$id)->get();
-        return view('commandes.show',compact('plats','commandes'));
+        //$commandes = Commande::all();
+        $commande = Commande::with(['client'])
+            ->where('id',$id)
+            ->first();
+        $detailCommandes = DetailCommande::with(['plat','commande','commande.client'])
+            ->where('commande_id',$id)
+            ->get();
+        //$plats = Plat::where('commande_id','=',$id)->get();
+        return view('commandes.show',compact('commande','detailCommandes'));
 
     }
 
@@ -152,11 +160,28 @@ class CommandeController extends Controller
     }
     public function facturePdf($id){
         //$plat = Plat::find($id);
-        $plats = Plat::where('commande_id','=',$id)->get();
+        //$plats = Plat::where('commande_id','=',$id)->get();
+       /* $commande = Commande::with(['client'])
+            ->where('id',$id)
+            ->first();
+        $detailCommandes = DetailCommande::with(['plat','commande','commande.client'])
+            ->where('commande_id',$id)
+            ->get();
+        $pdf = PDF::loadView('PDF.factureResto', compact('commande','detailCommandes'));
+        return $pdf->download('demonutslaravel.pdf');*/
+        $totalRestaurant =0;
+        $commande = Commande::with(['detailCommandes','detailCommandes.plat','client'])
+            ->where('id',$id)
+            ->first();
 
+            foreach($commande->detailCommandes as $detailCommande){
+                $totalRestaurant = $totalRestaurant + ($detailCommande->plat->prix *$detailCommande->quantite);
+            }
 
-        $pdf = PDF::loadView('PDF.factureResto', compact('plats'));
-        return $pdf->download('demonutslaravel.pdf');
+        $tvaRestaurant = ($totalRestaurant * 10)/100;
+        $user = $user = DB::table('users')->find(Auth::id());
+        $hotel = DB::table('hotels')->find($user->id_hotel);
+        return view('PDF.facture',compact('commande','totalRestaurant','tvaRestaurant','hotel'));
     }
 
 }
