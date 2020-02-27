@@ -32,7 +32,7 @@
         <!-- info row -->
         <div class="row invoice-info">
             <div class="col-sm-4 invoice-col">
-                From
+                De
                 <address>
                     <strong>{{ $hotel->nom }} .</strong><br>
                     {{ $hotel->adresse }}<br>
