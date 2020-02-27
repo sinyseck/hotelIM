@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Produit extends Model
 {
     protected $table='produits';
-    protected $fillable= ['nom','quantite','pu'];
+    protected $fillable= ['nom','quantite','pu','hotel_id'];
 
     public function entreeStock()
     {
@@ -21,5 +21,8 @@ class Produit extends Model
     /* public function plats(){
         return $this->belongsToMany(Plat::class);
      }*/
-
+    public function hotels()
+    {
+        return $this->belongsTo(Hotel::class);
+    }
 }

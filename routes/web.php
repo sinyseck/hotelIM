@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/','HomeController@index' )->middleware('auth');
+Route::get('/','HomeController@index' )->name('home')->middleware('auth');
 
 Route::get('/client', function () {
     return view('clients.create');

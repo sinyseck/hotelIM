@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Commande extends Model
 {
     protected $table='commandes';
-    protected $fillable= ['client_id','table_id'];
+    protected $fillable= ['client_id','table_id','hotel_id'];
 
     public function client()
     {
@@ -27,6 +27,11 @@ class Commande extends Model
     public function detailCommandes(){
         return $this->hasMany(DetailCommande::class);
     }
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class);
+    }
+
 
 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tarif;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TarifController extends Controller
 {
@@ -46,6 +47,8 @@ class TarifController extends Controller
             'nbre_personne' => 'required',
         ]);
 
+        $user = Auth::user();
+        $request->merge(['hotel_id'=>$user->hotel_id]);
         Tarif::create($request->all());
         return redirect()->route('tarifs.index')->with('success', 'Tarif enregistré avec succès');
 
@@ -87,6 +90,8 @@ class TarifController extends Controller
             'prix' => 'required',
             'nbre_personne' => 'required',
         ]);
+        $user = Auth::user();
+        $request->merge(['hotel_id'=>$user->hotel_id]);
         Tarif::find($id)->update($request->all());
         return redirect()->route('tarifs.index')->with('success', 'Modification effectuée avec succès!!!');
     }

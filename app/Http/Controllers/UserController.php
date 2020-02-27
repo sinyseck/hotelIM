@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Hotel;
 use Illuminate\Http\Request;
 
 use App\User;
@@ -39,7 +40,9 @@ class UserController extends Controller {
     public function create() {
         //Get all roles and pass it to the view
         $roles = Role::get();
-        return view('users.create', ['roles'=>$roles]);
+        //$hotels = Hotel::all();
+        $hotels = Hotel::pluck('nom', 'id');
+        return view('users.create', ['roles'=>$roles,'hotels'=>$hotels]);
     }
 
     /**
@@ -53,10 +56,11 @@ class UserController extends Controller {
         $this->validate($request, [
             'name'=>'required|max:120',
             'email'=>'required|email|unique:users',
-            'password'=>'required|min:6|confirmed'
+            'password'=>'required|min:6|confirmed',
+            'hotel_id' =>'required',
         ]);
 
-        $user = User::create($request->only('email', 'name', 'password')); //Retrieving only the email and password data
+        $user = User::create($request->only('email', 'name', 'password','hotel_id')); //Retrieving only the email and password data
 
         $roles = $request['roles']; //Retrieving the roles field
         //Checking if a role was selected
@@ -92,8 +96,9 @@ class UserController extends Controller {
     public function edit($id) {
         $user = User::findOrFail($id); //Get user with specified id
         $roles = Role::get(); //Get all roles
+        $hotels = Hotel::pluck('nom', 'id');
 
-        return view('users.edit', compact('user', 'roles')); //pass user and roles data to view
+        return view('users.edit', compact('user', 'roles','hotels')); //pass user and roles data to view
 
     }
 

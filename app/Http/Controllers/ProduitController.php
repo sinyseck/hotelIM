@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Produit;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use PDF;
 
@@ -51,13 +51,9 @@ class ProduitController extends Controller
             'quantite' =>'required',
             'pu' =>'required',
         ]);
-
-
-
-            $produit = Produit::create($request->only('nom', 'quantite','pu'));
-
-
-
+            $user = Auth::user();
+            $request->merge(['hotel_id'=>$user->hotel_id]);
+            $produit = Produit::create($request->all());
             return redirect()->route('entreeStocks.index')->with('success','Stock enregistré avec succès!!!');
 
     }
@@ -100,6 +96,8 @@ class ProduitController extends Controller
             'quantite' => 'required',
             'pu' => 'required',
         ]);
+        $user = Auth::user();
+        $request->merge(['hotel_id'=>$user->hotel_id]);
         Produit::find($id)->update($request->all());
         return redirect()->route('produits.index')->with('success','Produit modifié avec succès');
     }

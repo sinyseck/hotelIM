@@ -18,7 +18,9 @@ class ChambreController extends Controller
     }
     public function index()
     {
-        $chambres = Chambre::orderby('id', 'desc')->paginate(50); //show only 5 items at a time in descending order
+        $chambres = Chambre::orderby('id', 'desc')
+        ->where('hotel_id',Auth::id())
+        ->paginate(50); //show only 5 items at a time in descending order
 
         return view('chambres.index', ['chambres' =>  $chambres]); //compact('produits')
     }

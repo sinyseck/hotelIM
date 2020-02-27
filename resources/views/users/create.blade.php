@@ -33,6 +33,16 @@
                         <h1><i class='fa fa-user-plus'></i> Add User</h1>
                         <hr>
 
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         {{ Form::open(array('url' => 'users')) }}
 
                         <div class="form-group">
@@ -62,6 +72,11 @@
                         <div class="form-group">
                             {{ Form::label('password', 'Confirm Password') }}<br>
                             {{ Form::password('password_confirmation', array('class' => 'form-control')) }}
+
+                        </div>
+                        <div class='form-group'>
+                            {{ Form::label('hotel_id', 'Hotel') }}<br>
+                                {{--{{ Form::select('hotel_id', $hotels, null, ['class' => 'form-control']) }}--}}
 
                         </div>
 

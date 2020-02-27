@@ -14,4 +14,14 @@ class Hotel extends Model
     public function chambres(){
         return $this->hasMany(Chambre::class);
     }
+    public function tarifs(){
+        return $this->hasMany(Tarif::class);
+    }
+    public function produits(){
+        return $this->hasMany(Produit::class);
+    }
+    public function commandes(){
+        return $this->hasMany(Commande::class);
+    }
+
 }
