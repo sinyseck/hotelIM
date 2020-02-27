@@ -66,6 +66,11 @@
                             {{ Form::password('password_confirmation', array('class' => 'form-control')) }}
 
                         </div>
+                        <div class='form-group'>
+                            {{ Form::label('hotel_id', 'Hotel') }}<br>
+                            {{--{{ Form::select('hotel_id', $hotels, null, ['class' => 'form-control']) }}--}}
+                            {!! Form::select('hotel_id', $hotels, null, ['class' => 'form-control']) !!}
+                        </div>
 
                         {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
 

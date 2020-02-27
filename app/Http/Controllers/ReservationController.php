@@ -246,7 +246,7 @@ class ReservationController extends Controller
         $tvaHotel = ($montantNuite* 10)/100;
        // $montantNuiteTTC = $montantNuite + $taxeSejour +$tvaHotel;
         $user = $user = DB::table('users')->find(Auth::id());
-        $hotel = DB::table('hotels')->find($user->id_hotel);
+        $hotel = DB::table('hotels')->find($user->hotel_id);
         return view('reservations.facture',
             compact('reservation','montantNuite','hotel','jour','commandes','taxeSejour','tvaHotel',
             'tvaRestaurant','totalRestaurant'));

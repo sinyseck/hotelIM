@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Client;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -18,7 +20,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        $clients = DB::table('clients')
+            ->where('hotel_id',Auth::id())
+            ->get();//Client::all();
         return view('clients.index', compact('clients'));
     }
 
@@ -50,7 +54,7 @@ class ClientController extends Controller
            'telephone' => 'required',
            'email' => 'required',
         ]);
-
+        $request->merge(['hotel_id'=>Auth::id()]);
         Client::create($request->all());
         return redirect()->route('clients.index')->with('success','Client enregistré avec succès !!!');
     }

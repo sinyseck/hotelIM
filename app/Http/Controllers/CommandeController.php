@@ -77,7 +77,8 @@ class CommandeController extends Controller
             }
 
         }
-
+        $user = Auth::user();
+        $request->merge(['hotel_id'=>$user->hotel_id]);
         $data=$request->all();
         $lastid=Commande::create($data)->id;
        // $request->merge(['commande_id' => $lastid]);
