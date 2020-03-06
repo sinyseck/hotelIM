@@ -16,11 +16,11 @@ class CreateTableAffecte extends Migration
         Schema::create('affectes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('reservation_id');
-            $table->foreign('id_reservation')
+            $table->foreign('reservation_id')
             ->references('id')
             ->on('reservations');
             $table->unsignedBigInteger('chambre_id');
-            $table->foreign('id_chambre')
+            $table->foreign('chambre_id')
             ->references('id')
             ->on('chambres');
             $table->timestamps();
