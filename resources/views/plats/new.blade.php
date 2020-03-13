@@ -26,6 +26,15 @@
                 <div class="card border-danger border-0">
                     <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES PRODUITS EN STOCK</div>
                         <div class="card-body">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                                 <thead>
 

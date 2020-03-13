@@ -26,6 +26,15 @@
              <div class="card border-danger border-0">
                         <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UNE COMMANDE</div>
                             <div class="card-body">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Client</label>

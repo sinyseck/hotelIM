@@ -47,6 +47,15 @@
                                 <p>{{ $message }}</p>
                             </div>
                         @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                         <div class='col-lg-4 offset-md-4'>
 
                             {{ Form::open(array('url' => 'reservations')) }}
@@ -78,10 +87,12 @@
                                 {{ Form::label('nbre_personne', 'Nom bre de Personne') }}
                                 {{ Form::number('nbre_personne', '', array('class' => 'form-control','required' => 'true')) }}
                             </div>
-                            <div class="form-group">
+                           {{-- <div class="form-group">
                                 {{ Form::label('statut', 'Statut') }}
                                 {{ Form::text('statut', '', array('class' => 'form-control','required' => 'true')) }}
-                            </div>
+
+                            </div>--}}
+                            <input type="hidden" value="neant" name="statut">
                             <div class="form-group">
                                 {!! Form::Label('item', 'Paiement:') !!}
                                 <select class="form-control" name="etat_paiement" required="">
@@ -115,7 +126,7 @@
 
                                 @endforeach
                             </div>
-
+                            <br>
                             {{ Form::submit('Enregitrer', array('class' => 'btn btn-primary')) }}
 
                             {{ Form::close() }}

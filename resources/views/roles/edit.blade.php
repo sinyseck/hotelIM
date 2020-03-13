@@ -29,7 +29,15 @@
     <div class='col-lg-4 col-lg-offset-4'>
         <h1><i class='fa fa-key'></i> Edit Role: {{$role->name}}</h1>
         <hr>
-
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         {{ Form::model($role, array('route' => array('roles.update', $role->id), 'method' => 'PUT')) }}
 
         <div class="form-group">

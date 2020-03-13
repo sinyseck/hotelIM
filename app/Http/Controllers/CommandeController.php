@@ -16,6 +16,9 @@ use PDF;
 
 class CommandeController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth', 'caissier'])->except( 'show');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -61,6 +64,9 @@ class CommandeController extends Controller
             foreach($plat->composes as $compose){
                 if($compose->produit->quantite < $quantite[$x] ){
                     return redirect()->route('commandes.create')->with('error',' Stock inssufisant!!!'.$compose->produit->nom);
+                }
+                if( $quantite[$x] < 0){
+                    return redirect()->route('commandes.create')->with('error',' impossiblle quantite insuffisant!!!'.$compose->produit->nom);
                 }
             }
 
@@ -134,7 +140,14 @@ class CommandeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $clients = Client::all();
+        $tables = Table::all();
+        $plats= Plat::all();
+        $commande = Commande::with(['detailCommandes','detailCommandes.plat','client'])
+        ->where('id',$id)
+        ->first();
+
+        return view('commandes.edit', compact('clients','tables','plats','commande'));
     }
 
     /**
@@ -146,7 +159,54 @@ class CommandeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $plats = $request['plats'];
+        $quantite = $request['quantite'];
+        $arrlength = count($request['plats']);
+        for($x = 0; $x < $arrlength; $x++) {
+            //$plat = Plat::find($plats[$x]);
+            $plat = Plat::with(['composes','composes','composes.produit'])
+                ->where('id',$plats[$x])
+                ->first();
+            foreach($plat->composes as $compose){
+                if($compose->produit->quantite < $quantite[$x] ){
+                    return redirect()->route('commandes.create')->with('error',' Stock inssufisant!!!'.$compose->produit->nom);
+                }
+                if( $quantite[$x] < 0){
+                    return redirect()->route('commandes.create')->with('error',' impossiblle quantite insuffisant!!!'.$compose->produit->nom);
+                }
+            }
+
+        }
+        for($x = 0; $x < $arrlength; $x++) {
+            $plat = Plat::with(['composes','composes','composes.produit'])
+                ->where('id',$plats[$x])
+                ->first();
+            foreach($plat->composes as $compose){
+                $produit = Produit::findOrFail($compose->produit->id);
+                $produit->quantite =  $produit->quantite - $quantite[$x];
+                $produit->save();
+
+            }
+
+        }
+        DetailCommande::where('commande_id',$id)->delete();
+        $user = Auth::user();
+        $request->merge(['hotel_id'=>$user->hotel_id]);
+        $data=$request->all();
+      //  $lastid=Commande::create($data)->id;
+        // $request->merge(['commande_id' => $lastid]);
+        for($x = 0; $x < $arrlength; $x++) {
+
+            $detailCommande = new DetailCommande();
+            //$compose->plat_id = implode(',',$plats);
+            $detailCommande->plat_id = $plats[$x];
+            $detailCommande->quantite = $quantite[$x];
+            $detailCommande->commande_id =$id;
+            $detailCommande->save();
+        }
+
+
+        return redirect()->route('commandes.index')->with('success','Commande Modifié!!!');
     }
 
     /**
@@ -157,7 +217,9 @@ class CommandeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DetailCommande::where('commande_id',$id)->delete();
+        Commande::find($id)->delete();
+        return redirect()->route('commandes.index')->with('success','Commande Supprimé!!!');
     }
     public function facturePdf($id){
         //$plat = Plat::find($id);
@@ -181,7 +243,7 @@ class CommandeController extends Controller
 
         $tvaRestaurant = ($totalRestaurant * 10)/100;
         $user = $user = DB::table('users')->find(Auth::id());
-        $hotel = DB::table('hotels')->find($user->id_hotel);
+        $hotel = DB::table('hotels')->find($user->hotel_id);
         return view('PDF.facture',compact('commande','totalRestaurant','tvaRestaurant','hotel'));
     }
 

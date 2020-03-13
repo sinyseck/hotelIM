@@ -15,7 +15,7 @@ class TarifController extends Controller
      */
 
     public function __construct(){
-        $this->middleware(['caissier', 'caissier'])->except( 'show');
+        $this->middleware(['auth', 'caissier'])->except( 'show');
     }
 
     public function index()

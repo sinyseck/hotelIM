@@ -18,7 +18,14 @@ class ClearanceMiddleware {
         {
             return $next($request);
         }
-
+        if ($request->is('produits')) //If user is editing a post
+        {
+            if (!Auth::user()->hasPermissionTo('Afficher Produit')) {
+                abort('401');
+            } else {
+                return $next($request);
+            }
+        }
         if ($request->is('produits/create'))//If user is creating a post
         {
             if (!Auth::user()->hasPermissionTo('Create Produit'))

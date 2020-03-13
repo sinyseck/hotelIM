@@ -14,7 +14,7 @@ class ChambreController extends Controller
 
 
     public function __construct() {
-        $this->middleware(['caissier', 'caissier'])->except('show');
+        $this->middleware(['auth', 'caissier'])->except('show');
     }
     public function index()
     {
@@ -44,13 +44,17 @@ class ChambreController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'numero'=>'required|max:40',
+            'numero'=>'required|max:40|min:1',
         ]);
-        $user = $user = DB::table('users')->find(Auth::id());
         $numero = $request['numero'];
+        if($numero <0 ){
+            return redirect()->back()->with('error','Numéro de chambre négatif');
+        }
+        $user = $user = DB::table('users')->find(Auth::id());
+
         $chambre = new Chambre();
         $chambre->numero = $numero;
-        $chambre->hotel_id = $user->id_hotel;
+        $chambre->hotel_id = $user->hotel_id;
         $chambre->save();
         return redirect()->route('chambres.index')
             ->with('flash_message',
@@ -89,6 +93,10 @@ class ChambreController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $numero = $request['numero'];
+        if($numero <0 ){
+            return redirect()->back()->with('error','Numéro de chambre négatif');
+        }
         $this->validate($request, [
             'numero'=>'required|max:40',
         ]);

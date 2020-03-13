@@ -26,26 +26,42 @@
              <div class="card border-danger border-0">
                         <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UN PRODUIT</div>
                             <div class="card-body">
-
-
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Nom</label>
-                                        <input type="text" name="nom" class="form-control">
+                                        <input type="text" name="nom" class="form-control" required>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Quantité</label>
-                                        <input type="number" name="quantite" class="form-control">
+                                        <input type="number" min="1" name="quantite" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <label>Prix unitaire</label>
-                                        <input type="number" name="pu" class="form-control">
+                                        <input type="number" name="pu" min="1" class="form-control" required>
                                     </div>
 
                                 </div>
-
+                                    <br>
                                 <div>
                                     <center>
                                         <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER</button>

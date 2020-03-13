@@ -26,8 +26,20 @@
              <div class="card border-danger border-0">
                         <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UN NOUVEAU CLIENT</div>
                             <div class="card-body">
-
-
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                    @if ($message = Session::get('error'))
+                                        <div class="alert alert-danger">
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                    @endif
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Nom</label>
@@ -45,7 +57,12 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Type de Pièce</label>
-                                        <input type="text" name="typePiece" class="form-control">
+                                        <select class="form-control" name="typePiece" required="">
+                                            <option value="">Choisir</option>
+                                            <option value="CNI">CNI</option>
+                                            <option value="Passeport">Passeport</option>
+                                            <option value="Autre">Autres</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -69,6 +86,7 @@
                                     </div>
                                 </div>
                                 <div>
+                                    <br>
                                     <center>
                                         <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER</button>
                                     </center>

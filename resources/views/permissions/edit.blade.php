@@ -29,6 +29,15 @@
     <div class='col-lg-4 col-lg-offset-4'>
 
         <h1><i class='fa fa-key'></i> Edit {{$permission->name}}</h1>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <br>
         {{ Form::model($permission, array('route' => array('permissions.update', $permission->id), 'method' => 'PUT')) }}{{-- Form model binding to automatically populate our fields with permission data --}}
 

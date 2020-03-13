@@ -42,7 +42,20 @@
                         </div>
                     </div>
                     <div class="card-body">
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                            @if ($message = Session::get('error'))
+                                <div class="alert alert-danger">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @endif
                         <div class='col-lg-4 offset-md-4'>
 
                             {{ Form::open(array('url' => 'clients')) }}
@@ -61,7 +74,13 @@
                             </div>
                             <div class="form-group">
                                 {{ Form::label('typePiece', 'Type Pièce') }}
-                                {{ Form::text('typePiece', '', array('class' => 'form-control','required' => 'true')) }}
+                                <select class="form-control" name="typePiece" required="">
+                                    <option value="">Choisir</option>
+                                    <option value="CNI">CNI</option>
+                                    <option value="Passeport">Passeport</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                                {{-- Form::text('typePiece', '', array('class' => 'form-control','required' => 'true')) --}}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('numeroPiece', 'Numéro Piece') }}

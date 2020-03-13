@@ -28,21 +28,29 @@
                         <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION D'ENTREE DE STOCKS</div>
                             <div class="card-body">
 
-
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                 {{--   <div class="col-lg-6">
                                         <label>Date</label>
                                     <input type="text" name="date" class="form-control" value="{{$entreeStock->date}}">
-                                    </div>
+                                    </div>--}}
                                     <div class="col-lg-6">
                                         <label>Quantité</label>
-                                        <input type="text" name="quantite" class="form-control" value="{{$entreeStock->quantite}}">
+                                        <input type="text" name="quantite" class="form-control" value="{{$entreeStock->quantite}}"  min="1" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <label>Nom Produit</label>
-                                        <select class="form-control" name="id_produit">
+                                        <select class="form-control" name="id_produit" required="">
                                             @foreach ($produits as $produit)
                                             <option value="{{$produit->id}}">{{$produit->nom}}</option>
                                             @endforeach

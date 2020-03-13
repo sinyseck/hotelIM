@@ -35,7 +35,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('commandes.store') }}" method="POST">
+            {!! Form::model($commande, ['method'=>'PATCH','route'=>['commandes.update', $commande->id]]) !!}
                 @csrf
                 <div class="card border-danger border-0">
                     <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UNE COMMANDE</div>
@@ -92,15 +92,23 @@
                             <div class="col-lg-6">
                                 <table class="table table-bordered">
                                     <thead>
-                                        <tr>
-                                            <th>Plat</th>
-                                            <th>Quantite</th>
-                                            <th>prix</th>
-                                            <th>action</th>
-                                        </tr>
+                                    <tr>
+                                        <th>Plat</th>
+                                        <th>Quantite</th>
+                                        <th>prix</th>
+                                        <th>action</th>
+                                    </tr>
                                     </thead>
                                     <tbody class="conteneur">
+                                    @foreach($commande->detailCommandes as $key=>$detailCommande)
+                                        <tr>
+                                            <td><input type='hidden' value="{{ $detailCommande->plat->id }}" name='plats[]' required><input value="{{ $detailCommande->plat->nom }}" class='form-control'  readonly></td>
+                                            <td><input type='number' value="{{$detailCommande->quantite}}" name='quantite[]' class='form-control' min='1' required> </td>
+                                            <td><input type='text' value="{{$detailCommande->plat->prix}}" class='form-control' readonly></td>
+                                           <td><button type='button' class='btn btn-danger remove-tr'>Supprimer</button></td>
 
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -115,8 +123,8 @@
 
                         </div>
                     </div>
-                    </div>
-            </form>
+                </div>
+            {!! Form::close() !!}
         </div>
     </div>
     <script type="text/javascript">
@@ -179,10 +187,10 @@
                 var nameTxt = $(this).closest('tr').find('.name').text();
                 var id = $(this).closest('tr').find('.id').text();
                 var prix =$(this).closest('tr').find('.prix').text();
-               // var emailTxt = $(this).closest('tr').find('.email').text();
+                // var emailTxt = $(this).closest('tr').find('.email').text();
                 //assign above variables text1,text2 values to other elements.
                 /*$("#name").val( nameTxt );
-                $("#email").val( emailTxt );*/
+                 $("#email").val( emailTxt );*/
                 $(".conteneur").append("<tr> <td><input type='hidden' value="+id+" name='plats[]' required><input value="+nameTxt+" class='form-control'  readonly></td>"+
                 "<td><input type='number' name='quantite[]' class='form-control' min='1' required> </td>"+
                 "<td><input type='text' value="+prix+" class='form-control' readonly> </td><"+

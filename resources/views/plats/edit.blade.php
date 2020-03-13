@@ -28,6 +28,15 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             {{ Form::model($plat, array('route' => array('plats.update', $plat->id), 'method' => 'PUT')) }}{{-- Form model binding to automatically populate our fields with permission data --}}
                 @csrf
                 <div class="card border-danger border-0">

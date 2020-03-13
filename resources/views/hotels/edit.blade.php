@@ -32,7 +32,15 @@
             <div class="card border-danger border-0">
                 <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION D'UNE HOTEL</div>
                 <div class="card-body">
-
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     {{-- Using the Laravel HTML Form Collective to create our form --}}
                     <div class="row">
                         <div class="col-lg-6">

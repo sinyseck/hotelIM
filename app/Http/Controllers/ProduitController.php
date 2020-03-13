@@ -48,13 +48,13 @@ class ProduitController extends Controller
         //Validating nom and quantite field
         $this->validate($request, [
             'nom'=>'required|max:100',
-            'quantite' =>'required',
-            'pu' =>'required',
+            'quantite' =>'required|min:1',
+            'pu' =>'required|min:1',
         ]);
             $user = Auth::user();
             $request->merge(['hotel_id'=>$user->hotel_id]);
             $produit = Produit::create($request->all());
-            return redirect()->route('entreeStocks.index')->with('success','Stock enregistré avec succès!!!');
+            return redirect()->route('produits.index')->with('success','Stock enregistré avec succès!!!');
 
     }
 

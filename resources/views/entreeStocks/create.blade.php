@@ -27,16 +27,24 @@
                         <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UN PRODUIT</div>
                             <div class="card-body">
 
-
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="row">
                                         <div class="col-lg-6">
                                         <label>Quantité</label>
-                                        <input type="number" name="quantite" class="form-control">
+                                        <input type="number" name="quantite" class="form-control" min="1" required>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <label>Prix unitaire</label>
-                                        <select class="form-control" name="id_produit">
+                                        <select class="form-control" name="id_produit" required="">
                                             @foreach ($produits as $produit)
                                             <option value="{{$produit->id}}">{{$produit->nom}}</option>
                                                 @endforeach

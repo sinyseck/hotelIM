@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Hotel;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
 {
 
-    public function __construct(){
-        $this->middleware('auth');
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin']);
     }
     /**
      * Display a listing of the resource.
@@ -115,7 +118,14 @@ class HotelController extends Controller
      */
     public function destroy($id)
     {
-        Hotel::find($id)->delete();
-        return redirect()->route('hotels.index')->with('success','hotel supprimé avec succès');
+        $user = DB::table('users')->where('hotel_id',$id)->first();
+      //  dd($user);
+        if($user){
+            return redirect()->route('hotels.index')->with('error','Suppresion impossiblle');
+        }else{
+            Hotel::find($id)->delete();
+            return redirect()->route('hotels.index')->with('success','hotel supprimé avec succès');
+        }
+
     }
 }
