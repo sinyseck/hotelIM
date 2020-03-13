@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Hoels</h1>
+                        <h1 class="m-0 text-dark">Chambres</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-                            <li class="breadcrumb-item active">Liste des hotels</li>
+                            <li class="breadcrumb-item active">Liste des Chambres</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -38,6 +38,16 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                @if ($message = Session::get('success'))
+                                    <div class="alert alert-success">
+                                        <p>{{ $message }}</p>
+                                    </div>
+                                @endif
+                                @if ($message = Session::get('error'))
+                                    <div class="alert alert-danger">
+                                        <p>{{ $message }}</p>
+                                    </div>
+                                @endif
                                 <div class="col-lg-10 offset-lg-1">
                                     <div class="panel-heading">Page {{ $chambres->currentPage() }} of {{ $chambres->lastPage() }}
                                         <a href="{{route('chambres.create') }}" class="btn btn-info float-right" style="margin-right: 3px;"><i class="fas fa-plus"></i></a></div>

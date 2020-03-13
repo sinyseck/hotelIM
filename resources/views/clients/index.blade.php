@@ -19,16 +19,22 @@
                         </div><!-- /.container-fluid -->
             </div>
 
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+    @if ($message = Session::get('error'))
+        <div class="alert alert-danger">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
 
 <div class="col-12">
     <div class="card border-danger border-0">
         <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES CLIENTS</div>
             <div class="card-body">
+
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>

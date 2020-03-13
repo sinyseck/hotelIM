@@ -27,12 +27,20 @@
              <div class="card border-danger border-0">
                         <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION D'UN PRODUIT</div>
                             <div class="card-body">
-
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Numero</label>
-                                    <input type="text" name="numero" class="form-control" value="{{$table->numero}}">
+                                    <input type="text" name="numero" class="form-control" value="{{$table->numero}}"  min="1" required>
                                     </div>
                                 </div>
 

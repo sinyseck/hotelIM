@@ -31,7 +31,17 @@
 
 <div class="limiter">
     <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+
         <div class="wrap-login100">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 					<span class="login100-form-logo">

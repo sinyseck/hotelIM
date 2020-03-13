@@ -26,10 +26,18 @@
              <div class="card border-danger border-0">
                         <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UNE TABLE</div>
                             <div class="card-body">
-
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                     <div class="col-lg-12">
                                         <label>Numéro de table</label>
-                                        <input type="number" name="numero" class="form-control">
+                                        <input type="number" name="numero" class="form-control" min="1" required>
                                     </div>
                                 </div>
 

@@ -337,7 +337,7 @@
                     </li>
                     <li class="nav-header">RESTAURANT</li>
 
-                    <li class="nav-item">
+                  {{--  <li class="nav-item">
                         <a href="" class="nav-link">
                             <i class="nav-icon fas fa-dolly"></i>
 
@@ -361,7 +361,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>--}}
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon far fa-tags"></i>

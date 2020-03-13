@@ -42,14 +42,27 @@
                         </div>
                     </div>
                     <div class="card-body">
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                            @if ($message = Session::get('error'))
+                                <div class="alert alert-danger">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @endif
                         <div class='col-lg-4 offset-md-4'>
 
                             {{ Form::open(array('url' => 'chambres')) }}
 
                             <div class="form-group">
                                 {{ Form::label('numero', 'Numéro') }}
-                                {{ Form::text('numero', '', array('class' => 'form-control','required' => 'true')) }}
+                                {{ Form::text('numero', '', array('class' => 'form-control', 'min'=> '1','required')) }}
                             </div>
                             {{ Form::submit('Enregitrer', array('class' => 'btn btn-primary')) }}
 

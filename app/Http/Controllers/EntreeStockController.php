@@ -13,6 +13,9 @@ class EntreeStockController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware(['auth', 'clearance'])->except( 'show');
+    }
     public function index()
     {
         $produit = Produit::all();
@@ -41,7 +44,7 @@ class EntreeStockController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'quantite' => 'required',
+            'quantite' => 'required|min:1',
             'id_produit' => 'required',
         ]);
      /*   $produit = Produit::where([

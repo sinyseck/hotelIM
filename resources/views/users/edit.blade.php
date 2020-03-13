@@ -28,6 +28,15 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class='col-lg-4 col-lg-offset-4'>
 
                         <h1><i class='fa fa-user-plus'></i> Edit {{$user->name}}</h1>

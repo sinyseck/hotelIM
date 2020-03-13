@@ -19,6 +19,15 @@
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="" method="post">
              <div class="card border-danger border-0">
                         <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UNE CHAMBRE</div>

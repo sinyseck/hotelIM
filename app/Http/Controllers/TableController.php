@@ -13,6 +13,9 @@ class TableController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware(['auth', 'clearance'])->except( 'show');
+    }
     public function index()
     {
         $tables = Table::all();
@@ -38,7 +41,7 @@ class TableController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'numero' => 'required',
+            'numero' => 'required|min:1',
         ]);
 
         Table::create($request->all());

@@ -28,21 +28,29 @@
                         <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION D'UN PRODUIT</div>
                             <div class="card-body">
 
-
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Nom</label>
-                                    <input type="text" name="nom" class="form-control" value="{{$produit->nom}}">
+                                    <input type="text" name="nom" class="form-control" value="{{$produit->nom}}" required>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Quantité</label>
-                                        <input type="text" name="quantite" class="form-control" value="{{$produit->quantite}}">
+                                        <input type="text" name="quantite" class="form-control" min="1" value="{{$produit->quantite}}" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <label>Prix Unitaire</label>
-                                        <input type="text" name="pu" class="form-control" value="{{$produit->pu}}">
+                                        <input type="text" name="pu" class="form-control" value="{{$produit->pu}}" required>
                                     </div>
 
                                 </div>

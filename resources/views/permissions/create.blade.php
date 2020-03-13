@@ -35,7 +35,15 @@
                     <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UNE PERMISSION</div>
                         <div class="card-body">
 
-
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                         <div class="form-group">
                             {{ Form::label('name', 'Name') }}
                             {{ Form::text('name', '', array('class' => 'form-control')) }}
