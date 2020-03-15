@@ -13,8 +13,8 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('produits.index') }}" role="button" class="btn btn-primary">LISTE DES PRODUITS</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('commandes.index') }}" role="button" class="btn btn-primary">LISTE D'ENREGISTREMENT DES COMMANDES</a></li>
 
                             </ol>
                         </div><!-- /.col -->
@@ -107,7 +107,7 @@
 
                             <div class="col-lg-12">
                                 <center>
-                                    <button type="submit" class="btn btn-success btn btn-lg "> Valider</button>
+                                    <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER </button>
                                 </center>
                             </div>
 

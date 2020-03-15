@@ -4,52 +4,32 @@
 @section('title', '| Enregistrer chambre')
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+<div class="content-wrapper">
+
+    <div class="container">
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Modifier Reservation</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-                            <li class="breadcrumb-item active">Modifier reservation</li>
-                        </ol>
-                    </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-info">GESTION DES RÉSERVATIONS</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('reservations.index') }}" role="button" class="btn btn-primary">RETOUR</a></li>
+
+                    </ol>
+                </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content-header -->
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
+        @csrf
+         <div class="card border-danger border-0">
+                    <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION RÉSERVATION</div>
+                        <div class="card-body">
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                <!-- Default box -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title"><i class='fa fa-plus'></i> Modifier Reservation</h3>
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                                <i class="fas fa-times"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body">
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -59,7 +39,6 @@
                                 </ul>
                             </div>
                         @endif
-                        <div class='col-lg-4 offset-md-4'>
 
                             {!! Form::model($reservation, ['method'=>'PATCH','route'=>['reservations.update', $reservation->id]]) !!}
 
@@ -67,6 +46,8 @@
                                  {{ Form::label('date_arrivee', 'Date Debut') }}
                                  {{ Form::datetime-local('date_arrivee',\Carbon\Carbon::now(), array('class' => 'form-control','required' => 'true')) }}
                              </div>--}}
+                        <div class="row">
+                            <div class="col-lg-6">
                             <label>Date Début</label>
                             <div class="input-group">
 
@@ -75,6 +56,8 @@
                                 </div>
                                 <input type="datetime-local" value="{{ $reservation->date_arrivee }}" name="date_arrivee" class="form-control" displayFormat="dd-MM-yyyy hh:mm">
                             </div>
+                            </div>
+                            <div class="col-lg-6">
                             <label>Date Fin</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -82,28 +65,33 @@
                                 </div>
                                 <input type="datetime-local" name="date_depart" value="{{ $reservation->date_depart }}" class="form-control" displayFormat="dd-MM-yyyy hh:mm">
                             </div>
+                            </div>
+                        </div>
                             {{-- <div class="form-group">
                                  {{ Form::label('date_depart', 'Date Fin') }}
                                  {{ Form::datetime('date_depart', '', array('class' => 'form-control','required' => 'true')) }}
                              </div>--}}
-                            <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
                                 {{ Form::label('nbre_personne', 'Nombre de Personne') }}
                                 {{ Form::number('nbre_personne', null, array('class' => 'form-control','required' => 'true')) }}
                             </div>
-                            <div class="form-group">
+                            <div class="col-lg-6">
                                 {{ Form::label('statut', 'Statut') }}
                                 {{ Form::text('statut', null, array('class' => 'form-control','required' => 'true')) }}
                             </div>
-                            <div class="form-group">
-                                {!! Form::Label('item', 'Paiement:') !!}
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                {!! Form::Label('item', 'Paiement') !!}
                                 <select class="form-control" name="etat_paiement" required="">
                                     <option value="">Choisir</option>
                                     <option value="1">payé</option>
                                     <option value="0"> non payé</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                {!! Form::Label('item', 'Client:') !!}
+                            <div class="col-lg-6">
+                                {!! Form::Label('item', 'Client') !!}
                                 <select class="form-control" name="client_id">
                                     <option value="">Choisir</option>
                                     @foreach($clients as $client)
@@ -111,8 +99,9 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
                             <div class="form-group">
-                                {!! Form::Label('item', 'Item:') !!}
+                                {!! Form::Label('item', 'Tarif') !!}
                                 <select class="form-control" name="tarif_id">
                                     <option value="">Choisir</option>
                                     @foreach($tarifs as $tarif)
@@ -122,15 +111,18 @@
                             </div>
                             <div class='form-group'>
                                 @foreach ($chambres as $chambre)
-                                    {{ Form::checkbox('chambres[]',  $chambre->id ) }}
+                                    {{ Form::checkbox('chambres[]',  $chambre->id, $reservation->chambres) }}
                                     Chambre {{ Form::label($chambre->numero, ucfirst($chambre->numero)) }}<br>
 
                                 @endforeach
                             </div>
 
-                            {{ Form::submit('Enregitrer', array('class' => 'btn btn-primary')) }}
-
-                            {{ Form::close() }}
+                            <div>
+                                <br>
+                                <center>
+                                    <button type="submit" class="btn btn-success btn btn-lg "> MODIFIER </button>
+                                </center>
+                            </div>
                         </div>
                     </div>
                     <!-- /.card-body -->

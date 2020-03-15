@@ -34,9 +34,9 @@
                         <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                             <thead>
                                 <tr>
-                                    <th>Role</th>
+                                    <th>Rôles</th>
                                     <th>Permissions</th>
-                                    <th>Operation</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
 
@@ -54,6 +54,7 @@
                                 {!! Form::close() !!}
 
                         </td>
+
                     </tr>
                 @endforeach
                 </tbody>

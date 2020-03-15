@@ -13,8 +13,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('clients.index') }}" role="button" class="btn btn-primary">LISTE D'ENREGISTREMENT DES CLIENTS</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('clients.index') }}" role="button" class="btn btn-primary">RETOUR</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -78,11 +78,12 @@
                                     </div>
                                 </div>
                                 <div>
+                                    <br>
                                     <center>
                                         <button type="submit" class="btn btn-success btn btn-lg "> MODIFIER</button>
                                     </center>
                                 </div>
-
+                            </div>
 
                             </div>
                         </div>

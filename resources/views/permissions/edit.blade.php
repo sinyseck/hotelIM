@@ -1,57 +1,60 @@
-@extends('welcome')
-
-@section('title', '| Edit Permission')
+@extends ('welcome')
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
+
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
+
+        <div class="container">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">ACCUEIL</h1>
+                        <h1 class="m-0 text-info">GESTION DES PERMISSIONS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-                            <li class="breadcrumb-item active">BIENVENU</li>
+                        <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('permissions.index') }}" role="button" class="btn btn-primary">RETOUR</a></li>
+
                         </ol>
                     </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-    <div class='col-lg-4 col-lg-offset-4'>
-
-        <h1><i class='fa fa-key'></i> Edit {{$permission->name}}</h1>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
             </div>
-        @endif
-        <br>
+
         {{ Form::model($permission, array('route' => array('permissions.update', $permission->id), 'method' => 'PUT')) }}{{-- Form model binding to automatically populate our fields with permission data --}}
+            @csrf
+             <div class="card border-danger border-0">
+                        <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION PERMISSION</div>
+                            <div class="card-body">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 
-        <div class="form-group">
-            {{ Form::label('name', 'Permission Name') }}
-            {{ Form::text('name', null, array('class' => 'form-control')) }}
-        </div>
-        <br>
-        {{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}
+                                <div class="form-group">
+                                    {{ Form::label('name', 'Nom de la Permission') }}
+                                    {{ Form::text('name', null, array('class' => 'form-control')) }}
+                                </div>
 
-        {{ Form::close() }}
+                                <div>
+                                    <center>
+                                        <button type="submit" class="btn btn-success btn btn-lg "> MODIFIER </button>
+                                    </center>
+                                </div>
 
-    </div>
+                            </div>
+                        </div>
+    {!! Form::close() !!}
                 </div>
-        </section>
+        </div>
+
     </div>
+
 @endsection
+

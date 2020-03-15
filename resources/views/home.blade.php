@@ -11,12 +11,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">ACCUEIL</h1>
+                        <h1 class="m-0 text-dark">TABLEAU DE BORD</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-                            <li class="breadcrumb-item active">BIENVENU</li>
+                            <!-- <li class="breadcrumb-item"><a href="#">Accueil</a></li> -->
+                            <li class="breadcrumb-item active">Logiciel de gestion hotelière et de restauration</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -50,7 +50,7 @@
                             <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Chiffre d'affaires du semaine</span>
+                                <span class="info-box-text">Chiffre d'affaires de la semaine</span>
                                 <span class="info-box-number">{{$chiffreAffaireDuSemaine}}<small>CFA</small></span>
                             </div>
                             <!-- /.info-box-content -->

@@ -113,6 +113,6 @@ class ChambreController extends Controller
     public function destroy($id)
     {
         Chambre::find($id)->delete();
-        return redirect()->route('chambres.index')->with('success','chambre supprimé avec succès');
+        return redirect()->route('chambres.index')->with('success','Chambre supprimé avec succès');
     }
 }

@@ -105,7 +105,7 @@ class TarifController extends Controller
     public function destroy($id)
     {
         Tarif::find($id)->delete();
-        return redirect()->route('tarifs.index')->with('success', 'tarif supprimé avec succès');
+        return redirect()->route('tarifs.index')->with('success', 'Tarif supprimé avec succès');
 
     }
 

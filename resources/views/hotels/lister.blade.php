@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-info">GESTION DES HOTELS</h1>
+                        <h1 class="m-0 text-info">GESTION DES HÔTELS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('hotels.create') }}" role="button" class="btn btn-primary">AJOUTER UN HÔTEL</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('hotels.create') }}" role="button" class="btn btn-primary">ENREGISTRER UN NOUVEAU HÔTEL</a></li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -24,7 +24,7 @@
         <!-- Main content -->
         <div class="col-12">
             <div class="card border-danger border-0">
-                <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES CLIENTS</div>
+                <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES HÔTELS</div>
                 <div class="card-body">
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
@@ -55,15 +55,25 @@
                                 <td>{{$hotel->adresse}}</td>
                                 <td>{{$hotel->telephone}}</td>
                                 <td>{{$hotel->email}}</td>
-                                <td>
+
+                                {{-- <td>
 
                                     {!! Form::open(['method' => 'DELETE', 'route' => ['hotels.destroy', $hotel->id], 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }" ]) !!}
-                                    <a href="{{ URL::to('hotels/'.$hotel->id.'/edit') }}" class="btn btn-warning pull-left" ><i class="far fa-edit"></i></a>
+                                    <a href="{{ URL::to('hotels/'.$hotel->id.'/edit') }}" class="btn btn-primary" ><i class="far fa-edit"></i></a>
                                     <button class="btn btn-danger border-left-0 border" type="submit">
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                     {!! Form::close() !!}
+                                </td> --}}
+
+                                <td>
+                                    <a href="{{ route('hotels.edit', $hotel->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                    {!! Form::open(['method' => 'DELETE', 'route'=>['hotels.destroy', $hotel->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
+                                    <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                    {!! Form::close() !!}
+
                                 </td>
+
                             </tr>
                         @endforeach
                         </tbody>

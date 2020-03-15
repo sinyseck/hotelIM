@@ -45,11 +45,11 @@
                                 </div>
                             @endif
                         <div class="form-group">
-                            {{ Form::label('name', 'Name') }}
+                            {{ Form::label('name', 'Nom de la permission') }}
                             {{ Form::text('name', '', array('class' => 'form-control')) }}
                         </div><br>
-                        @if(!$roles->isEmpty()) //If no roles exist yet
-                        <h4>Assign Permission to Roles</h4>
+                        @if(!$roles->isEmpty()) <!-- //If no roles exist yet-->
+                        <h4>Attribuer des rôles</h4>
 
                         @foreach ($roles as $role)
                             {{ Form::checkbox('roles[]',  $role->id ) }}

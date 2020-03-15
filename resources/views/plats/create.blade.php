@@ -15,7 +15,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
                                 <li class="breadcrumb-item active"><a href="{{ route('plats.index') }}" role="button" class="btn btn-primary">LISTE D'ENREGISTREMENT DES PLATS</a></li>
 
                             </ol>
@@ -67,10 +67,11 @@
                                         Produit {{ Form::label($produit->nom, ucfirst($produit->nom)) }}<br>
                                     @endforeach
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
+                                    <center>
+                                        <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER </button>
+                                    </center>
                                 </div>
-                                <button type="submit" class="btn btn-success">Enregisrer</button>
-
                             </div>
                             {{--    <script type="text/javascript">
 

@@ -9,12 +9,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-info">GESTION DU STOCK</h1>
+                        <h1 class="m-0 text-info">GESTION DES ENTRÉES</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('entreeStocks.index') }}" role="button" class="btn btn-primary">LISTE DES PRODUITS</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('entreeStocks.index') }}" role="button" class="btn btn-primary">RETOUR</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -25,7 +25,7 @@
         {!! Form::model($entreeStock, ['method'=>'PATCH','route'=>['entreeStocks.update', $entreeStock->id]]) !!}
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION D'ENTREE DE STOCKS</div>
+                        <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION D'UNE ENTRÉE</div>
                             <div class="card-body">
 
                                 @if ($errors->any())
@@ -61,6 +61,7 @@
                                 </div>
 
                                 <div>
+                                    <br>
                                     <center>
                                         <button type="submit" class="btn btn-success btn btn-lg "> MODIFIER</button>
                                     </center>

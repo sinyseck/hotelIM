@@ -11,12 +11,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-info">GESTION DES HOTELS</h1>
+                            <h1 class="m-0 text-info">GESTION DES HÔTELS</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('hotels.index') }}" role="button" class="btn btn-primary"> Liste Hotel</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('hotels.index') }}" role="button" class="btn btn-primary"> RETOUR </a></li>
 
                             </ol>
                         </div><!-- /.col -->
@@ -30,7 +30,7 @@
             {!! Form::model($hotel, ['method'=>'PATCH','route'=>['hotels.update', $hotel->id],'enctype'=>'multipart/form-data']) !!}
             @csrf
             <div class="card border-danger border-0">
-                <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION D'UNE HOTEL</div>
+                <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION D'UN HÔTEL</div>
                 <div class="card-body">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -69,8 +69,9 @@
                         </div>
                     </div>--}}
                     <div>
+                        <br>
                         <center>
-                            <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER</button>
+                            <button type="submit" class="btn btn-success btn btn-lg "> MODIFIER </button>
                         </center>
                     </div>
 

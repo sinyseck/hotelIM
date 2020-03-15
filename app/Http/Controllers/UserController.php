@@ -123,7 +123,7 @@ class UserController extends Controller {
         $user->fill($input)->save();
 
         if (isset($roles)) {
-            $user->roles()->sync($roles);  //If one or more role is selected associate user to roles          
+            $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
         }
         else {
             $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user

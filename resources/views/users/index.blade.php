@@ -32,11 +32,11 @@
                         <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Nom</th>
                                     <th>Email</th>
-                                    <th>Date/Time Added</th>
-                                    <th>User Roles</th>
-                                    <th>Operations</th>
+                                    <th>Date et Heure d'Ajout </th>
+                                    <th>Rôles</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
 

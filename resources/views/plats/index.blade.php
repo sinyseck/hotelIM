@@ -7,12 +7,12 @@
                         <div class="container-fluid">
                             <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-info">Plats</h1>
+                                <h1 class="m-0 text-info">GESTION DES PLATS</h1>
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('plats.create') }}" role="button" class="btn btn-primary">NOUVEAU PLAT</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('plats.create') }}" role="button" class="btn btn-primary">ENREGISTRER PLAT</a></li>
                                 </ol>
                             </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -35,7 +35,7 @@
                             <th>#</th>
                             <th>Nom</th>
                             <th>Prix
-                            <th>Composition</th>
+                            <th>Compositions</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

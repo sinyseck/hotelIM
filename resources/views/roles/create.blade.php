@@ -41,11 +41,11 @@
                                 </div>
                             @endif
                             <div class="form-group">
-                                {{ Form::label('name', 'Name') }}
+                                {{ Form::label('name', 'Nom du rôle') }}
                                 {{ Form::text('name', null, array('class' => 'form-control')) }}
                             </div>
 
-                            <h5><b>Assign Permissions</b></h5>
+                            <h5><b>Attribuer des autorisations</b></h5>
 
                             <div class='form-group'>
                                 @foreach ($permissions as $permission)
@@ -57,7 +57,7 @@
 
                             <div>
                                 <center>
-                                    <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER</button>
+                                    <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER </button>
                                 </center>
                             </div>
                         </div>

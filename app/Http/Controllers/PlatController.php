@@ -139,11 +139,13 @@ class PlatController extends Controller
      */
     public function edit($id)
     {
-        $produits = Produit::get(); //Get all roles
+        $produits = Produit::all(); //Get all roles
 
-        $plat = Plat::find($id);
+        $plat = Plat::findOrFail($id);
 
         return view('plats.edit', compact('produits','plat'));
+
+       
 
     }
 

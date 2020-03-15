@@ -11,8 +11,8 @@
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('commandes.create') }}" role="button" class="btn btn-primary">AJOUTER COMMANDE</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('commandes.create') }}" role="button" class="btn btn-primary">ENREGISTRER COMMANDE</a></li>
                                 </ol>
                             </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -32,7 +32,7 @@
 
 <div class="col-12">
     <div class="card border-danger border-0">
-        <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES CLIENTS</div>
+        <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES COMMANDES</div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
@@ -42,7 +42,7 @@
                             <th>Prénom Client </th>
                             <th> Téléphone Client </th>
                             <th>Table</th>
-                            <th>Action</th>
+                            <th>Actions</th>
 
                         </tr>
                     </thead>

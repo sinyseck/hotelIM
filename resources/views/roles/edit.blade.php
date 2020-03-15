@@ -3,32 +3,32 @@
 @section('title', '| Edit Role')
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+<div class="content-wrapper">
+
+    <div class="container">
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">ACCUEIL</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-                            <li class="breadcrumb-item active">BIENVENU</li>
-                        </ol>
-                    </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-info">GESTION DES RÔLES</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('roles.index') }}" role="button" class="btn btn-primary">RETOUR</a></li>
+
+                    </ol>
+                </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content-header -->
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-    <div class='col-lg-4 col-lg-offset-4'>
-        <h1><i class='fa fa-key'></i> Edit Role: {{$role->name}}</h1>
-        <hr>
+        {{ Form::model($role, array('route' => array('roles.update', $role->id), 'method' => 'PUT')) }}
+
+        @csrf
+        <div class="card border-danger border-0">
+                   <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION RÔLE</div>
+                       <div class="card-body">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -38,28 +38,30 @@
                 </ul>
             </div>
         @endif
-        {{ Form::model($role, array('route' => array('roles.update', $role->id), 'method' => 'PUT')) }}
 
         <div class="form-group">
-            {{ Form::label('name', 'Role Name') }}
+            {{ Form::label('name', 'Nom du rôle') }}
             {{ Form::text('name', null, array('class' => 'form-control')) }}
         </div>
 
-        <h5><b>Assign Permissions</b></h5>
+        <h5><b>Attribuer des autorisations</b></h5>
         @foreach ($permissions as $permission)
 
             {{Form::checkbox('permissions[]',  $permission->id, $role->permissions ) }}
             {{Form::label($permission->name, ucfirst($permission->name)) }}<br>
 
         @endforeach
-        <br>
-        {{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}
+        <div>
+            <center>
+                <button type="submit" class="btn btn-success btn btn-lg "> MODIFIER </button>
+            </center>
+        </div>
+    </div>
+</div>
+{!! Form::close() !!}
+</div>
+</div>
 
-        {{ Form::close() }}
-    </div>
-
-    </div>
-    </section>
-    </div>
+</div>
 
 @endsection

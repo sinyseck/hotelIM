@@ -44,15 +44,17 @@
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('home') }}" class="nav-link">Home</a>
+                <a href="{{ route('home') }}" class="nav-link">TABLEAU DE BORD</a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
+
+
+            {{-- <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Contact</a>
-            </li>
+            </li> --}}
         </ul>
 
         <!-- SEARCH FORM -->
-        <form class="form-inline ml-3">
+        {{-- <form class="form-inline ml-3">
             <div class="input-group input-group-sm">
                 <input class="form-control form-control-navbar" type="search" placeholder="rechercher" aria-label="Search">
                 <div class="input-group-append">
@@ -61,12 +63,12 @@
                     </button>
                 </div>
             </div>
-        </form>
+        </form> --}}
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <!-- Messages Dropdown Menu -->
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-comments"></i>
                     <span class="badge badge-danger navbar-badge">3</span>
@@ -122,13 +124,15 @@
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                 </div>
-            </li>
+            </li> --}}
+
+
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
+                    {{ __('QUITTER') }}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
@@ -163,11 +167,11 @@
                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                  </div>--}}
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
                     <i class="fas fa-th-large"></i>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -214,7 +218,7 @@
                             <i class="nav-icon fas fa-hotel"></i>
 
                             <p>
-                                Paramètres de l'hotel
+                                Paramètres de l'hôtel
                                 <i class="fas fa-angle-left right"></i>
                                 <span class="badge badge-info right"></span>
                             </p>
@@ -223,13 +227,13 @@
                             <li class="nav-item">
                                 <a href="{{route('hotels.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Ajouter</p>
+                                    <p>Ajouter hôtel</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('hotels.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>lister</p>
+                                    <p>Liste des hôtels</p>
                                 </a>
                             </li>
                         </ul>
@@ -248,13 +252,13 @@
                             <li class="nav-item">
                                 <a href="{{route('chambres.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Ajouter</p>
+                                    <p>Ajouter chambre</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('chambres.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>lister</p>
+                                    <p>Liste des chambres</p>
                                 </a>
                             </li>
                         </ul>
@@ -273,13 +277,13 @@
                             <li class="nav-item">
                                 <a href="{{route('clients.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Ajouter</p>
+                                    <p>Ajouter client</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('clients.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>lister</p>
+                                    <p>Liste des clients</p>
                                 </a>
                             </li>
                         </ul>
@@ -287,10 +291,10 @@
 
                     <li class="nav-item">
                         <a href="" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
+                            <i class="nav-icon fas fa-book"></i>
 
                             <p>
-                                Gestion Reservations
+                                Gestion des réservations
                                 <i class="fas fa-angle-left right"></i>
                                 <span class="badge badge-info right"></span>
                             </p>
@@ -299,20 +303,20 @@
                             <li class="nav-item">
                                 <a href="{{route('reservations.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Ajouter</p>
+                                    <p>Ajouter réservation</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('reservations.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>lister</p>
+                                    <p>Liste des réservations</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
+                            <i class="nav-icon fas fa-donate"></i>
 
                             <p>
                                 Gestion des tarifs
@@ -324,13 +328,13 @@
                             <li class="nav-item">
                                 <a href="{{route('tarifs.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Ajouter</p>
+                                    <p>Ajouter tarif</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('tarifs.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>lister</p>
+                                    <p>Liste des tarifs</p>
                                 </a>
                             </li>
                         </ul>
@@ -364,7 +368,7 @@
                     </li>--}}
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-tags"></i>
+                            <i class="nav-icon far fa-dolly"></i>
                             <p>
                                 Gestion des entrées
                                 <i class="fas fa-angle-left right"></i>
@@ -413,7 +417,7 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-utensils"></i>
+                            <i class="nav-icon fas fa-book"></i>
                             <p>
                                 Gestion des commandes
                                 <i class="fas fa-angle-left right"></i>
@@ -440,7 +444,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-utensils"></i>
                             <p>
-                                Gestion des Plats
+                                Gestion des plats
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
@@ -448,7 +452,7 @@
                             <li class="nav-item">
                                 <a href="{{route('plats.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Enregistrer une plat</p>
+                                    <p>Enregistrer un plat</p>
                                 </a>
                             </li>
                         </ul>
@@ -463,9 +467,9 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-utensils"></i>
+                            <i class="nav-icon fas fa-tags"></i>
                             <p>
-                                Gestion des Produits
+                                Gestion des produits
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
@@ -488,29 +492,13 @@
                     </li>
                     <li class="nav-header">ADMINISTRATION</li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
-
+                        <a href="{{route('users.index')}}" class="nav-link">
+                            <i class="nav-icon far fa-users"></i>
                             <p>
-                                Gestion des Utilisateurs
-                                <i class="fas fa-angle-left right"></i>
+                                Gestion des utilisateurs
                                 <span class="badge badge-info right"></span>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{route('users.create')}}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Ajouter</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('users.index') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>lister</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('permissions.index')}}" class="nav-link">
@@ -523,7 +511,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('roles.index') }}" class="nav-link">
-                            <i class="nav-icon far fa-calendar-alt"></i>
+                            <i class="nav-icon far fa-key"></i>
                             <p>
                                 Gestion des rôles
                                 <span class="badge badge-info right"></span>
@@ -542,10 +530,12 @@
     <!-- Content Wrapper. Contains page content -->
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-        All rights reserved.
+        <!-- <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> -->
+        <strong>Copyright &copy; 2019-2020 | <a href="">Logiciel de gestion hotelière et de restauration</a> | </strong>
+
+        Tous droits réservés.
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.0.0-rc.3
+            <b>Version</b> 00.0.2020
         </div>
     </footer>
 

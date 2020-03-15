@@ -11,11 +11,11 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-info">Modifier Plat</h1>
+                            <h1 class="m-0 text-info">GESTION DES PLATS</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
                                 <li class="breadcrumb-item active"><a href="{{ route('plats.index') }}" role="button" class="btn btn-primary">LISTE D'ENREGISTREMENT DES PLATS</a></li>
 
                             </ol>
@@ -64,17 +64,31 @@
 
                                 <div class="col-lg-6">
                                     <br>
-                                    <h4>Affecter Produit</h4>
+                                    <h4>Compositions</h4>
                                     @foreach ($produits as $produit)
-                                        {{ Form::checkbox('produits[]',  $produit->id ) }}
-                                        Produit {{ Form::label($produit->nom, ucfirst($produit->nom)) }}<br>
+                                        {{ Form::checkbox('produits[]',  $produit->id, $plat->produits ) }}
+                                        {{ Form::label($produit->nom, ucfirst($produit->nom)) }}<br>
                                     @endforeach
-                                </div>
-                                <div class="col-lg-6">
-                                </div>
-                                <button type="submit" class="btn btn-success">Enregisrer</button>
 
+
+
+                                </div>
+                                </div>
+                                <div>
+                                    <br>
+                                    <center>
+                                        <button type="submit" class="btn btn-success btn btn-lg "> MODIFIER </button>
+                                    </center>
+                                </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+                    </table>
                             </div>
+                            </div>
+                        </div>
+                    </div>
                             {{--    <script type="text/javascript">
 
                                     $('.addRow').on('click',function(){
