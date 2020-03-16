@@ -216,8 +216,8 @@
                     @foreach($reservations as $reserver)
 
                     {
-                        @foreach($reserver->affectes as $affecte)
-                        title : 'chambre N°'+'{{ $affecte->chambre->numero }}' +' {{  $reserver->client->prenom }}' +' {{  $reserver->client->nom }}',
+                        @foreach($reserver->chambres as $chambre)
+                        title : 'chambre N°'+'{{ $chambre->numero }}' +' {{  $reserver->client->prenom }}' +' {{  $reserver->client->nom }}',
                         @endforeach
                         start : '{{ $reserver->date_arrivee }}',
                         end: '{{$reserver->date_depart }}',

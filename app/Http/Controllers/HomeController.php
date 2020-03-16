@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::with(['client','affectes','affectes.chambre'])->orderBy('id','desc')->get();
+        $reservations = Reservation::with(['client','chambres',])->orderBy('id','desc')->get();
        $chiffreAffaireDuJour =  DB::table('paiements')
            ->whereDate('created_at', '=', Carbon::now()->toDateString())
            ->max('montant');

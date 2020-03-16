@@ -9,9 +9,7 @@ class Plat extends Model
    protected $table = 'plats';
    protected $fillable = ['nom','prix'];
 
-   public function composes(){
-    return $this->hasMany(Compose::class);
-    }
+
 
     public function client()
     {
@@ -27,10 +25,10 @@ class Plat extends Model
         return $this->belongsToMany(Commande::class);
     }
 
-    /*public function produits(){
+    public function produits(){
         return $this->belongsToMany(Produit::class);
-     }*/
-    public function detailCommandes(){
-        return $this->hasMany(DetailCommande::class);
+    }
+    public function plat_produits(){
+        return $this->hasMany(Compose::class);
     }
 }

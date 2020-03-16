@@ -44,7 +44,6 @@
 
                             {{--<div class="form-group">
                                  {{ Form::label('date_arrivee', 'Date Debut') }}
-                                 {{ Form::datetime-local('date_arrivee',\Carbon\Carbon::now(), array('class' => 'form-control','required' => 'true')) }}
                              </div>--}}
                         <div class="row">
                             <div class="col-lg-6">
@@ -54,7 +53,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                 </div>
-                                <input type="datetime-local" value="{{ $reservation->date_arrivee }}" name="date_arrivee" class="form-control" displayFormat="dd-MM-yyyy hh:mm">
+                                <input type="datetime-local" autocomplete="on" value="{{Carbon\Carbon::parse( $reservation->date_arrivee )->format('Y-m-d\TH:i') }}" name="date_arrivee" class="form-control" required autofocus>
                             </div>
                             </div>
                             <div class="col-lg-6">
@@ -63,7 +62,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                 </div>
-                                <input type="datetime-local" name="date_depart" value="{{ $reservation->date_depart }}" class="form-control" displayFormat="dd-MM-yyyy hh:mm">
+                                <input type="datetime-local" name="date_depart" value="{{Carbon\Carbon::parse($reservation->date_depart)->format('Y-m-d\TH:i') }}" class="form-control"  autocomplete="on" required autofocus>
                             </div>
                             </div>
                         </div>

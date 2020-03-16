@@ -135,8 +135,7 @@
 
                     </div>
                     <!-- /.card-footer-->
+        </form>
                 </div>
             </div>
-        </section>
-    </div>
 @endsection

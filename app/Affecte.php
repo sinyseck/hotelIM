@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Affecte extends Model
 {
+    protected $table = "chambre_reservation";
     protected $fillable = ['reservation_id','chambre_id'];
 
     public function reserver(){

@@ -14,13 +14,12 @@ class Produit extends Model
         return $this->hasMany(EntreeStock::class, 'id_produit', 'id');
     }
 
-    public function composes(){
-        return $this->hasMany(Compose::class);
-     }
-
-    /* public function plats(){
+     public function plats(){
         return $this->belongsToMany(Plat::class);
-     }*/
+     }
+    public function  plat_produits(){
+        return $this->hasMany(Compose::class);
+    }
     public function hotels()
     {
         return $this->belongsTo(Hotel::class);

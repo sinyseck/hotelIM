@@ -25,7 +25,7 @@ class PlatController extends Controller
     public function index()
     {
 
-    $plats = Plat::with(['composes','composes.produit'])->get();
+    $plats = Plat::with(['produits'])->get();
       //  dd($plats);
 
     return view('plats.index', compact('plats'));
@@ -127,8 +127,9 @@ class PlatController extends Controller
     {
         //$plat = Plat::find($id);
         //return view('plats.show', compact('plat','clients'));
-        $plats = Plat::where('commande_id','=',$id)->get();
-        return view('tests.new',compact('plats'));
+        //$plats = Plat::where('commande_id','=',$id)->get();
+        $plat = Plat::with(['produits'])->where('id',$id)->first();
+        return view('plats.show',compact('plat'));
     }
 
     /**

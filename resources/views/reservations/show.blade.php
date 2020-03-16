@@ -38,8 +38,8 @@
                                 <li class="list-group-item text-danger">Paiement  : Non payé  <a class="btn btn-success" href="{{ route('paiement.valider',[$reservation->id]) }}">Enregistrer Paiement</a></li>
                             @endif
                         <li class="list-group-item">Chambre occupé :
-                        @foreach($reservation->affectes as $affecte)
-                             chambre N°{{ $affecte->chambre_id }},
+                        @foreach($reservation->chambres as $chambre)
+                             chambre N°{{ $chambre->numero }},
                         @endforeach
                         </li>
                     </ul>

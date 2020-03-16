@@ -82,13 +82,10 @@
                                 </div>
                         </div>
                     </div>
+            {{ Form::close() }}
         </div>
     </div>
-                    </table>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+
                             {{--    <script type="text/javascript">
 
                                     $('.addRow').on('click',function(){
@@ -110,15 +107,8 @@
                                     });
                                 </script>
     --}}
-                        </div>
 
 
-
-                </div>
-
-            {{ Form::close() }}
-        </div>
-    </div>
 
 
 

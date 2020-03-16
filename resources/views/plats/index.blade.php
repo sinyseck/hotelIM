@@ -45,15 +45,15 @@
                             <td>{{ $plat->id }}</td>
                             <td>{{ $plat->nom }}</td>
                             <td>{{ $plat->prix}}</td>
-                            <td> @foreach($plat->composes as $compose)
-                                     {{ $compose->produit->nom }},
+                            <td> @foreach($plat->produits as $produit)
+                                     {{ $produit->nom }},
                             @endforeach
                             </td>
 
 
                             <td>
                                 <a href="{{ route('plats.edit', $plat->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                <a href="{{ route('plats.show', $plat->id) }}" role="button" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                {{--<a href="{{ route('plats.show', $plat->id) }}" role="button" class="btn btn-info"><i class="fas fa-eye"></i></a>--}}
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['plats.destroy', $plat->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}

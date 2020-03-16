@@ -30,10 +30,10 @@ class ReservationController extends Controller
     {
         $events = [];
         //$reservations= Reservation::all();
-        //$reservations = Reservation::has('affectes.chambres')->get();
-        $reservations = Reservation::with(['client','affectes','affectes.chambre'])->orderBy('id','desc')->get();
+        //$reservations = Reservation::has('reservation_chambres.chambres')->get();
+        $reservations = Reservation::with(['client','reservation_chambres','reservation_chambres.chambre'])->orderBy('id','desc')->get();
         /*foreach($reservers as $reserver){
-            foreach($reserver->affectes as $affecte){
+            foreach($reserver->reservation_chambres as $affecte){
                 $events[] = Calendar::event(
 
                     $affecte->chambre->numero,
@@ -93,11 +93,11 @@ class ReservationController extends Controller
         $chambres = $request['chambres'];
         foreach ($chambres as $chambre) {
             $reservations = DB::table('reservations')
-                ->join('affectes', 'reservations.id', '=', 'affectes.reservation_id')
-                ->join('chambres', 'affectes.chambre_id', '=', 'chambres.id')
-                ->select('affectes.*', 'reservations.*', 'chambres.*')
+                ->join('reservation_chambres', 'reservations.id', '=', 'reservation_chambres.reservation_id')
+                ->join('chambres', 'reservation_chambres.chambre_id', '=', 'chambres.id')
+                ->select('reservation_chambres.*', 'reservations.*', 'chambres.*')
                 ->where([['reservations.date_depart', '>', $request['date_arrivee']],
-                    ['affectes.chambre_id', '=',$chambre]])
+                    ['reservation_chambres.chambre_id', '=',$chambre]])
              ->first();
            // dd($reservations);
             if($reservations!=null){
@@ -125,7 +125,8 @@ class ReservationController extends Controller
      */
     public function show($id)
     {
-        $reservation = Reservation::with(['affectes','affectes.chambre','client'])
+        //$reservation = Reservation::with(['reservation_chambres','reservation_chambres.chambre','client'])
+        $reservation = Reservation::with(['chambres','client'])
         ->where('id',$id)
         ->first();
         return view('reservations.show', compact('reservation'));
@@ -185,9 +186,9 @@ class ReservationController extends Controller
     }
     public function caliendrier(){
 
-        $reservations = Reservation::with(['client','affectes','affectes.chambre'])->orderBy('id','desc')->get();
+        $reservations = Reservation::with(['client','reservation_chambres','reservation_chambres.chambre'])->orderBy('id','desc')->get();
         /*foreach($reservers as $reserver){
-            foreach($reserver->affectes as $affecte){
+            foreach($reserver->reservation_chambres as $affecte){
                 $events[] = Calendar::event(
 
                     $affecte->chambre->numero,
@@ -221,7 +222,7 @@ class ReservationController extends Controller
 
     public function facturerReservartion($id){
 
-        $reservation = Reservation::with(['affectes','affectes.chambre','client','tarif'])
+        $reservation = Reservation::with(['chambres','client','tarif'])
             ->where('id',$id)
             ->first();
         // partie Restaurant
@@ -241,7 +242,7 @@ class ReservationController extends Controller
 
         //partie hotel
         $jour = $this->dateDifference($reservation->date_arrivee,$reservation->date_depart);
-        $montantNuite =$reservation->tarif->prix*$jour * count($reservation->affectes);
+        $montantNuite =$reservation->tarif->prix*$jour * count($reservation->chambres);
         $taxeSejour = 1000 * $jour;
         $tvaHotel = ($montantNuite* 10)/100;
        // $montantNuiteTTC = $montantNuite + $taxeSejour +$tvaHotel;

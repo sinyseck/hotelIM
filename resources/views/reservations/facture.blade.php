@@ -80,8 +80,8 @@
                     <tr>
                         <td>{{ $reservation->date_arrivee }}</td>
                         <td>{{ $reservation->date_depart }}</td>
-                        <td>@foreach($reservation->affectes as $affecte)
-                                chambre N°{{ $affecte->chambre_id }},
+                        <td>@foreach($reservation->chambres as $chambre)
+                                chambre N°{{ $chambre->numero }},
                             @endforeach</td>
                         <td>{{ $jour }}</td>
                         <th>{{ $reservation->tarif->prix }}</th>
