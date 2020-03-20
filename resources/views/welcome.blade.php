@@ -182,6 +182,8 @@
                     </li>
                     <li class="nav-header">HOTEL</li>
 
+                            @role('SuperAdmin')
+
                     <li class="nav-item">
                         <a href="" class="nav-link">
                             <i class="nav-icon fas fa-hotel"></i>
@@ -193,7 +195,6 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            @role('SuperAdmin')
                             <li class="nav-item">
                                 <a href="{{route('hotels.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -206,17 +207,33 @@
                                     <p>Liste des hôtels</p>
                                 </a>
                             </li>
+                            </ul>
+                        </li>
                             @endhasrole
                             @role('Administre')
+
+                            <li class="nav-item">
+                                <a href="" class="nav-link">
+                                    <i class="nav-icon fas fa-hotel"></i>
+
+                                    <p>
+                                        Paramètres de l'hôtel
+                                        <i class="fas fa-angle-left right"></i>
+                                        <span class="badge badge-info right"></span>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('mon.hotel') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Mon hôtel</p>
                                 </a>
                             </li>
+                                </ul>
+                            </li>
                             @endhasrole
-                        </ul>
-                    </li>
+
+
                     @role('Caissier')
                     <li class="nav-item">
                         <a href="" class="nav-link">
