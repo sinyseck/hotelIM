@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Plat extends Model
 {
    protected $table = 'plats';
-   protected $fillable = ['nom','prix'];
+   protected $fillable = ['nom','prix','hotel_id'];
 
 
 
@@ -30,5 +30,8 @@ class Plat extends Model
     }
     public function plat_produits(){
         return $this->hasMany(Compose::class);
+    }
+    public function hotel(){
+        return $this->belongsTo(Hotel::class);
     }
 }

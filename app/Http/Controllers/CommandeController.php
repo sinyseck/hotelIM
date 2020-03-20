@@ -26,7 +26,11 @@ class CommandeController extends Controller
      */
     public function index()
     {
-        $commandes = Commande::all();
+        $user = Auth::user();
+        $commandes =  Commande::with(['client','table'])
+            ->where('hotel_id',$user->hotel_id)
+        ->get();
+            //Commande::all();
         return view('commandes.index', compact('commandes'));
     }
 
@@ -37,9 +41,17 @@ class CommandeController extends Controller
      */
     public function create()
     {
-        $clients = Client::all();
-        $tables = Table::all();
-        $plats= Plat::all();
+        $user = Auth::user();
+        $clients =  DB::table('clients')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();//Client::all();
+        $tables = DB::table('tables')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();
+            //Table::all();
+        $plats=DB::table('plats')
+            ->where('hotel_id',$user->hotel_id)
+            ->get(); //Plat::all();
         return view('commandes.create', compact('clients','tables','plats'));
     }
 
@@ -58,10 +70,10 @@ class CommandeController extends Controller
         $arrlength = count($request['plats']);
         for($x = 0; $x < $arrlength; $x++) {
             //$plat = Plat::find($plats[$x]);
-            $plat = Plat::with(['composes','composes','composes.produit'])
+            $plat = Plat::with(['plat_produits','plat_produits.produit'])
                 ->where('id',$plats[$x])
                 ->first();
-            foreach($plat->composes as $compose){
+            foreach($plat->plat_produits as $compose){
                 if($compose->produit->quantite < $quantite[$x] ){
                     return redirect()->route('commandes.create')->with('error',' Stock inssufisant!!!'.$compose->produit->nom);
                 }
@@ -72,10 +84,10 @@ class CommandeController extends Controller
 
         }
         for($x = 0; $x < $arrlength; $x++) {
-            $plat = Plat::with(['composes','composes','composes.produit'])
+            $plat = Plat::with(['plat_produits','plat_produits.produit'])
                 ->where('id',$plats[$x])
                 ->first();
-            foreach($plat->composes as $compose){
+            foreach($plat->plat_produits as $compose){
                 $produit = Produit::findOrFail($compose->produit->id);
                 $produit->quantite =  $produit->quantite - $quantite[$x];
                 $produit->save();
@@ -140,9 +152,17 @@ class CommandeController extends Controller
      */
     public function edit($id)
     {
-        $clients = Client::all();
-        $tables = Table::all();
-        $plats= Plat::all();
+        $user = Auth::user();
+        $clients =  DB::table('clients')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();//Client::all();
+        $tables = DB::table('tables')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();
+        //Table::all();
+        $plats=DB::table('plats')
+            ->where('hotel_id',$user->hotel_id)
+            ->get(); //Plat::all();
         $commande = Commande::with(['detailCommandes','detailCommandes.plat','client'])
         ->where('id',$id)
         ->first();
@@ -164,10 +184,10 @@ class CommandeController extends Controller
         $arrlength = count($request['plats']);
         for($x = 0; $x < $arrlength; $x++) {
             //$plat = Plat::find($plats[$x]);
-            $plat = Plat::with(['composes','composes','composes.produit'])
+            $plat = Plat::with(['plat_produits','plat_produits.produit'])
                 ->where('id',$plats[$x])
                 ->first();
-            foreach($plat->composes as $compose){
+            foreach($plat->plat_produits as $compose){
                 if($compose->produit->quantite < $quantite[$x] ){
                     return redirect()->route('commandes.create')->with('error',' Stock inssufisant!!!'.$compose->produit->nom);
                 }
@@ -178,10 +198,10 @@ class CommandeController extends Controller
 
         }
         for($x = 0; $x < $arrlength; $x++) {
-            $plat = Plat::with(['composes','composes','composes.produit'])
+            $plat = Plat::with(['plat_produits','plat_produits.produit'])
                 ->where('id',$plats[$x])
                 ->first();
-            foreach($plat->composes as $compose){
+            foreach($plat->plat_produits as $compose){
                 $produit = Produit::findOrFail($compose->produit->id);
                 $produit->quantite =  $produit->quantite - $quantite[$x];
                 $produit->save();

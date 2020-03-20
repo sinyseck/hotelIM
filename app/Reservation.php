@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User;
 class Reservation extends Model
 {
     protected $fillable= ['date_arrivee','date_depart','nbre_personne','statut','etat_paiement',
-                'client_id','id_user','tarif_id'];
+                'client_id','id_user','tarif_id','hotel_id'];
 
   /*  public function affectes(){
         return $this->hasMany(Affecte::class);
@@ -30,6 +30,9 @@ class Reservation extends Model
     }
     public function reservation_chambres(){
         return $this->hasMany(Affecte::class);
+    }
+    public function hotel(){
+        return $this->belongsTo(Hotel::class);
     }
 
 

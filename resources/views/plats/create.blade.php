@@ -52,11 +52,11 @@
 
                                 <div class="col-lg-6">
                                     <label>Plat</label>
-                                    <input type="text" name="nom" class="form-control"/>
+                                    <input type="text" name="nom" class="form-control" required/>
                                 </div>
                                 <div class="col-lg-6">
                                     <label>Prix</label>
-                                    <input type="text" name="prix" class="form-control"/>
+                                    <input type="text" name="prix" class="form-control" min="1" required/>
                                 </div>
 
                                 <div class="col-lg-6">

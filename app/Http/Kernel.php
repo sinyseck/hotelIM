@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'clearance' => \App\Http\Middleware\ClearanceMiddleware::class,
         'client' => \App\Http\Middleware\ClientMiddleware::class,
         'caissier' => \App\Http\Middleware\CaissierMiddleware::class,
+        'superAdmin' =>\App\Http\Middleware\SuperAdminMiddleware::class,
     ];
 
     /**

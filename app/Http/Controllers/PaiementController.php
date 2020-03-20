@@ -92,7 +92,9 @@ class PaiementController extends Controller
     }
 
     public function validerPaiement($id){
-        $reservation = Reservation::with(['affectes','affectes.chambre','client','tarif'])
+        $user = Auth::user();
+
+        $reservation = Reservation::with(['reservation_chambres','reservation_chambres.chambre','client','tarif'])
             ->where('id',$id)
             ->first();
         // partie Restaurant
@@ -114,14 +116,15 @@ class PaiementController extends Controller
 
         //partie hotel
         $jour = $this->dateDifference($reservation->date_arrivee,$reservation->date_depart);
-        $montantNuite =$reservation->tarif->prix*$jour * count($reservation->affectes);
+        $montantNuite =$reservation->tarif->prix*$jour * count($reservation->reservation_chambres);
         $taxeSejour = 1000 * $jour;
         $tvaHotel = ($montantNuite* 10)/100;
         // $montantNuiteTTC = $montantNuite + $taxeSejour +$tvaHotel;
         $user = $user = DB::table('users')->find(Auth::id());
-        $hotel = DB::table('hotels')->find($user->id_hotel);
+        $hotel = DB::table('hotels')->find($user->hotel_id);
         $paiement->montant = $montantNuite + $tvaHotel +$totalRestaurant + $totalRestaurant + $taxeSejour;
         $paiement->reservation_id = $id;
+        $paiement->hotel_id = $user->hotel_id;
         $paiement->save();
         $reservation->etat_paiement = true;
         $reservation->save();

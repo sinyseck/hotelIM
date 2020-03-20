@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Table extends Model
 {
     protected $table = 'tables';
-    protected $fillable = ['numero'];
+    protected $fillable = ['numero','hotel_id'];
 
     public function commande()
     {
@@ -17,5 +17,8 @@ class Table extends Model
     public function plat()
     {
         return $this->hasMany(Plat::class, 'table_id', 'id');
+    }
+    public function hotel(){
+        return $this->belongsTo(Hotel::class);
     }
 }

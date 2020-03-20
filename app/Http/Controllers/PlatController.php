@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 use App\Plat;
 use App\Compose;
 use App\Table;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use PDF;
-use DB;
+
 
 class PlatController extends Controller
 {
@@ -24,8 +26,10 @@ class PlatController extends Controller
     }
     public function index()
     {
-
-    $plats = Plat::with(['produits'])->get();
+        $user = Auth::user();
+        $plats = Plat::with(['produits'])
+        ->where('hotel_id',$user->hotel_id
+        )->get();
       //  dd($plats);
 
     return view('plats.index', compact('plats'));
@@ -39,13 +43,13 @@ class PlatController extends Controller
      */
     public function create()
     {
-        $plats = Plat::all();
-        $tables = Table::all();
-        $clients = Client::all();
-        $commandes = Commande::all();
-        $produits = Produit::all();
+
+        $user = Auth::user();
+        $produits = DB::table('produits')
+        ->where('hotel_id' , $user->hotel_id)
+        ->get();
         //'table_id',
-        return view('plats.create', compact('commandes','produits','clients','tables','plats'));
+        return view('plats.create', compact('produits'));
     }
 
     /**
@@ -56,6 +60,17 @@ class PlatController extends Controller
      */
        public function store(Request $request)
        {
+           request()->validate([
+               'nom' => 'required',
+               'prix' => 'required',
+               'produits' => 'required',
+
+           ]);
+            if($request['prix'] < 1){
+                return redirect()->back()->with('error', 'Numéro table négatif');
+            }
+           $user = Auth::user();
+           $request->merge(['hotel_id'=>$user->hotel_id]);
            $produits = $request['produits'];
            $arrlength = count($request['produits']);
 
@@ -140,7 +155,11 @@ class PlatController extends Controller
      */
     public function edit($id)
     {
-        $produits = Produit::all(); //Get all roles
+
+        $user = Auth::user();
+        $produits = DB::table('produits')
+            ->where('hotel_id' , $user->hotel_id)
+            ->get();
 
         $plat = Plat::findOrFail($id);
 
@@ -159,6 +178,11 @@ class PlatController extends Controller
      */
    public function update(Request $request, $id)
     {
+        if($request['prix'] < 1){
+            return redirect()->route('plats.edit',compact('produits','plat'))->with('error', 'prix négatif négatif');
+        }
+        $user = Auth::user();
+        $request->merge(['hotel_id' => $user->hotel_id]);
         $plat = Plat::findOrFail($id);
         request()->validate([
             'nom' => 'required',
@@ -170,7 +194,7 @@ class PlatController extends Controller
         $arrlength = count($request['produits']);
         for($x = 0; $x < $arrlength; $x++) {
            // $compose = Commande::findOrFail();
-            $compose = DB::table('composes')
+            $compose = DB::table('plat_produit')
                 ->where('plat_id',$plat->id);
             $compose->delete();
 
@@ -188,7 +212,7 @@ class PlatController extends Controller
             $compose->save();
         }
 
-        return redirect()->route('plats.index')->with('success','Plat enregistré!!!');
+        return redirect()->route('plats.index')->with('success','Plat Modifié!!!');
 
 
     }

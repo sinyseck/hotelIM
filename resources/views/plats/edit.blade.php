@@ -81,7 +81,9 @@
                                     </center>
                                 </div>
                         </div>
-                    </div>
+                </table>
+
+                </div>
             {{ Form::close() }}
         </div>
     </div>

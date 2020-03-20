@@ -20,8 +20,9 @@ class ClientController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $clients = DB::table('clients')
-            ->where('hotel_id',Auth::id())
+            ->where('hotel_id', $user->hotel_id)
             ->get();//Client::all();
         return view('clients.index', compact('clients'));
     }
@@ -54,7 +55,8 @@ class ClientController extends Controller
            'telephone' => 'required',
            'email' => 'required',
         ]);
-        $request->merge(['hotel_id'=>Auth::id()]);
+        $user = Auth::user();
+        $request->merge(['hotel_id'=>$user->hotel_id]);
         Client::create($request->all());
         return redirect()->route('clients.index')->with('success','Client enregistré avec succès !!!');
     }

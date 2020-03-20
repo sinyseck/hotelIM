@@ -23,5 +23,16 @@ class Hotel extends Model
     public function commandes(){
         return $this->hasMany(Commande::class);
     }
-
+    public function tables(){
+        return $this->hasMany(Table::class);
+    }
+    public function plats(){
+        return $this->hasMany(Plat::class);
+    }
+    public function reservations(){
+        return $this->hasMany(Reservation::class);
+    }
+    public function paiements (){
+        return $this->hasMany(Paiement::class);
+    }
 }

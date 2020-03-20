@@ -62,5 +62,5 @@ Route::resource('panier', 'PanierController');
 
 Route::get('/facturePdf/{id}', 'CommandeController@facturePdf');
 
-
+Route::get('/mon/hotel', 'HotelController@monHotel')->name('mon.hotel');
 

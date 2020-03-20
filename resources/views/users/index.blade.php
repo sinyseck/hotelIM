@@ -15,8 +15,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('users.create') }}" role="button" class="btn btn-primary">AJOUTER UN UTILISATEUR</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('roles.index') }}" role="button" class="btn btn-primary">RÔLES</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('permissions.index') }}" role="button" class="btn btn-primary">PERMISSIONS</a></li>
+                            @role('SuperAdmin')  <li class="breadcrumb-item"><a href="{{ route('roles.index') }}" role="button" class="btn btn-primary">RÔLES</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('permissions.index') }}" role="button" class="btn btn-primary">PERMISSIONS</a></li> @endhasrole
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -26,6 +26,11 @@
 
         <!-- Main content -->
         <div class="col-12">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success">
+                    <p>{{ $message }}</p>
+                </div>
+            @endif
             <div class="card border-danger border-0">
                 <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES UTILISATEURS</div>
                     <div class="card-body">

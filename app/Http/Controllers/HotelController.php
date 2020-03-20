@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Hotel;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
@@ -12,7 +13,7 @@ class HotelController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'isAdmin']);
+        $this->middleware(['auth', 'superAdmin'])->except('monHotel');
     }
     /**
      * Display a listing of the resource.
@@ -127,5 +128,10 @@ class HotelController extends Controller
             return redirect()->route('hotels.index')->with('success','hotel supprimé avec succès');
         }
 
+    }
+    public function monHotel(){
+        $user = Auth::user();
+        $hotel = DB::table('hotels')->where('id',$user->hotel_id)->first();
+        return view('hotels.hotel',compact('hotel'));
     }
 }

@@ -6,9 +6,11 @@ use App\Hotel;
 use Illuminate\Http\Request;
 
 use App\User;
-use Auth;
+//use Auth;
 
 //Importing laravel-permission models
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -28,7 +30,12 @@ class UserController extends Controller {
      */
     public function index() {
         //Get all users and pass it to the view
-        $users = User::all();
+        $user = Auth::user();
+        if($user->hotel_id) {
+            $users = User::where('hotel_id', $user->hotel_id)->get();
+        }else{
+            $users = User::all();
+        }
         return view('users.index')->with('users', $users);
     }
 
@@ -39,9 +46,22 @@ class UserController extends Controller {
      */
     public function create() {
         //Get all roles and pass it to the view
-        $roles = Role::get();
+
         //$hotels = Hotel::all();
-        $hotels = Hotel::pluck('nom', 'id');
+        $user = Auth::user();
+        if($user->hotel_id){
+            $hotels = DB::table('hotels')
+                ->where('id',$user->hotel_id)
+                ->pluck('nom', 'id');
+            $roles = DB::table('roles')
+                ->where('name','!=','SuperAdmin')
+                ->get();
+        }else{
+             $hotels = Hotel::pluck('nom', 'id');
+            $roles = Role::get();
+        }
+        //$hotels =
+        // Hotel::pluck('nom', 'id');
         return view('users.create', ['roles'=>$roles,'hotels'=>$hotels]);
     }
 
@@ -73,8 +93,8 @@ class UserController extends Controller {
         }
         //Redirect to the users.index view and display message
         return redirect()->route('users.index')
-            ->with('flash_message',
-                'User successfully added.');
+            ->with('success',
+                'Utilisateur crée avec succées.');
     }
 
     /**
@@ -95,9 +115,20 @@ class UserController extends Controller {
      */
     public function edit($id) {
         $user = User::findOrFail($id); //Get user with specified id
-        $roles = Role::get(); //Get all roles
-        $hotels = Hotel::pluck('nom', 'id');
-
+        /*$roles = Role::get(); //Get all roles
+        $hotels = Hotel::pluck('nom', 'id');*/
+        $user = Auth::user();
+        if($user->hotel_id){
+            $hotels = DB::table('hotels')
+                ->where('id',$user->hotel_id)
+                ->pluck('nom', 'id');
+            $roles = DB::table('roles')
+                ->where('name','!=','SuperAdmin')
+                ->get();
+        }else{
+            $hotels = Hotel::pluck('nom', 'id');
+            $roles = Role::get();
+        }
         return view('users.edit', compact('user', 'roles','hotels')); //pass user and roles data to view
 
     }
@@ -116,7 +147,7 @@ class UserController extends Controller {
         $this->validate($request, [
             'name'=>'required|max:120',
             'email'=>'required|email|unique:users,email,'.$id,
-            'password'=>'required|min:6|confirmed'
+           'password'=>'required|min:6|confirmed'
         ]);
         $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
         $roles = $request['roles']; //Retreive all roles
@@ -129,8 +160,8 @@ class UserController extends Controller {
             $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
         }
         return redirect()->route('users.index')
-            ->with('flash_message',
-                'User successfully edited.');
+            ->with('success',
+                'Utilisateur modifié.');
     }
 
     /**

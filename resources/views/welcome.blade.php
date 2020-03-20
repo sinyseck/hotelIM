@@ -138,40 +138,9 @@
                     @csrf
                 </form>
 
-                {{-- <a class="nav-link" data-toggle="dropdown" href="#">
-                   <i class="far fa-bell"></i>
-                   <span class="badge badge-warning navbar-badge">15</span>
-                 </a>
-                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                   <span class="dropdown-item dropdown-header">15 Notifications</span>
-                   <div class="dropdown-divider"></div>
-                   <a href="#" class="dropdown-item">
-                     <i class="fas fa-envelope mr-2"></i> 4 new messages
-                     <span class="float-right text-muted text-sm">3 mins</span>
-                   </a>
-                   <div class="dropdown-divider"></div>
-                   <a href="#" class="dropdown-item">
-                     <i class="fas fa-users mr-2"></i> 8 friend requests
-                     <span class="float-right text-muted text-sm">12 hours</span>
-                   </a>
-                   <div class="dropdown-divider"></div>
 
-                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                         @csrf
-                     </form>
-                   <a href="#" class="dropdown-item">
-                     <i class="fas fa-file mr-2"></i> 3 new reports
-                     <span class="float-right text-muted text-sm">2 days</span>
-                   </a>
-                   <div class="dropdown-divider"></div>
-                   <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                 </div>--}}
             </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-                    <i class="fas fa-th-large"></i>
-                </a>
-            </li> --}}
+
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -224,6 +193,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            @role('SuperAdmin')
                             <li class="nav-item">
                                 <a href="{{route('hotels.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -236,8 +206,18 @@
                                     <p>Liste des hôtels</p>
                                 </a>
                             </li>
+                            @endhasrole
+                            @role('Administre')
+                            <li class="nav-item">
+                                <a href="{{ route('mon.hotel') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Mon hôtel</p>
+                                </a>
+                            </li>
+                            @endhasrole
                         </ul>
                     </li>
+                    @role('Caissier')
                     <li class="nav-item">
                         <a href="" class="nav-link">
                             <i class="nav-icon fas fa-bed"></i>
@@ -339,6 +319,8 @@
                             </li>
                         </ul>
                     </li>
+                    @endhasrole
+                    @role('restauratrice')
                     <li class="nav-header">RESTAURANT</li>
 
                   {{--  <li class="nav-item">
@@ -490,6 +472,20 @@
                             </li>
                         </ul>
                     </li>
+                    @endhasrole
+                    @role('Administre')
+                    <li class="nav-header">ADMINISTRATION</li>
+                    <li class="nav-item">
+                        <a href="{{route('users.index')}}" class="nav-link">
+                            <i class="nav-icon far fa-users"></i>
+                            <p>
+                                Gestion des utilisateurs
+                                <span class="badge badge-info right"></span>
+                            </p>
+                        </a>
+                    </li>
+                    @endhasrole
+                    @role('SuperAdmin')
                     <li class="nav-header">ADMINISTRATION</li>
                     <li class="nav-item">
                         <a href="{{route('users.index')}}" class="nav-link">
@@ -518,7 +514,7 @@
                             </p>
                         </a>
                     </li>
-
+                    @endhasrole
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

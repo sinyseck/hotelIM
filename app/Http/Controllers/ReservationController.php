@@ -28,10 +28,22 @@ class ReservationController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $events = [];
         //$reservations= Reservation::all();
         //$reservations = Reservation::has('reservation_chambres.chambres')->get();
-        $reservations = Reservation::with(['client','reservation_chambres','reservation_chambres.chambre'])->orderBy('id','desc')->get();
+       /* $reservations = DB::table('reservations')
+                ->join('clients','reservations.client_id','=','clients.id')
+                ->join('chambre_reservation','reservations.id','=','chambre_reservation.reservation_id')
+                ->join('chambres','chambre_reservation.chambre_id','=','chambres.id')
+                ->where('chambres.hotel_id',$user->hotel_id)
+            ->select('reservations.*','clients.nom','clients.prenom','clients.telephone')
+            ->orderBy('id','desc')
+            ->get();*/
+            $reservations = Reservation::with(['client','reservation_chambres','reservation_chambres.chambre'])
+                ->where('hotel_id',$user->hotel_id)
+            ->orderBy('id','desc')
+            ->get();
         /*foreach($reservers as $reserver){
             foreach($reserver->reservation_chambres as $affecte){
                 $events[] = Calendar::event(
@@ -61,9 +73,19 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        $clients= Client::all();
-        $tarifs= Tarif::all();
-        $chambres = Chambre::all();
+        $user = Auth::user();
+        $clients= DB::table('clients')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();
+            //Client::all();
+        $tarifs=DB::table('tarifs')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();
+        // Tarif::all();
+        $chambres = DB::table('chambres')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();
+        //Chambre::all();
         return view('reservations.add', compact('clients','chambres','tarifs'));
     }
 
@@ -89,15 +111,17 @@ class ReservationController extends Controller
         if( $request['date_arrivee'] >= $request['date_depart']){
             return redirect()->route('reservations.create')->with('error', 'Verifier le date de départ et le date arivée');
         }
-        $request->merge(['id_user'=> Auth::id()]);
+        $user = Auth::user();
+        $request->merge(['hotel_id'=>$user->hotel_id]);
+        $request->merge(['id_user'=> $user->id]);
         $chambres = $request['chambres'];
         foreach ($chambres as $chambre) {
             $reservations = DB::table('reservations')
-                ->join('reservation_chambres', 'reservations.id', '=', 'reservation_chambres.reservation_id')
-                ->join('chambres', 'reservation_chambres.chambre_id', '=', 'chambres.id')
-                ->select('reservation_chambres.*', 'reservations.*', 'chambres.*')
+                ->join('chambre_reservation', 'reservations.id', '=', 'chambre_reservation.reservation_id')
+                ->join('chambres', 'chambre_reservation.chambre_id', '=', 'chambres.id')
+                ->select('chambre_reservation.*', 'reservations.*', 'chambres.*')
                 ->where([['reservations.date_depart', '>', $request['date_arrivee']],
-                    ['reservation_chambres.chambre_id', '=',$chambre]])
+                    ['chambre_reservation.chambre_id', '=',$chambre]])
              ->first();
            // dd($reservations);
             if($reservations!=null){
@@ -140,9 +164,19 @@ class ReservationController extends Controller
      */
     public function edit($id)
     {
-        $clients= Client::all();
-        $tarifs= Tarif::all();
-        $chambres = Chambre::all();
+        $user = Auth::user();
+        $clients= DB::table('clients')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();
+        //Client::all();
+        $tarifs=DB::table('tarifs')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();
+        // Tarif::all();
+        $chambres = DB::table('chambres')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();
+        //Chambre::all();
         $reservation = Reservation::findOrFail($id);
         return view('reservations.edit', compact('reservation','clients','tarifs','chambres'));
     }
@@ -185,8 +219,19 @@ class ReservationController extends Controller
 
     }
     public function caliendrier(){
-
-        $reservations = Reservation::with(['client','reservation_chambres','reservation_chambres.chambre'])->orderBy('id','desc')->get();
+        $user = Auth::user();
+       /* $reservations = DB::table('reservations')
+            ->join('clients','reservations.client_id','=','clients.id')
+            ->join('chambre_reservation','reservations.id','=','chambre_reservation.reservation_id')
+            ->join('chambres','chambre_reservation.chambre_id','=','chambres.id')
+            ->where('chambres.hotel_id',$user->hotel_id)
+            ->select('reservations.*','clients.nom','clients.prenom','clients.telephone')
+            ->orderBy('id','desc')
+            ->get();*/
+        $reservations = Reservation::with(['client','reservation_chambres','reservation_chambres.chambre'])
+            ->orderBy('id','desc')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();
         /*foreach($reservers as $reserver){
             foreach($reserver->reservation_chambres as $affecte){
                 $events[] = Calendar::event(

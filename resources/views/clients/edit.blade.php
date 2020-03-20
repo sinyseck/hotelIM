@@ -37,6 +37,11 @@
                                         </ul>
                                     </div>
                                 @endif
+                                    @if ($message = Session::get('error'))
+                                        <div class="alert alert-danger">
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                    @endif
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Nom</label>

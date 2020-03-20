@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Produit;
 use App\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TableController extends Controller
 {
@@ -18,7 +20,11 @@ class TableController extends Controller
     }
     public function index()
     {
-        $tables = Table::all();
+        $user = Auth::user();
+        $tables = DB::table('tables')
+            ->where('hotel_id',$user->hotel_id)
+            ->get();
+            //Table::all();
         return view ('tables.index', compact('tables'));
     }
 
@@ -41,9 +47,13 @@ class TableController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'numero' => 'required|min:1',
+            'numero' => 'required',
         ]);
-
+        if($request['numero'] < 1){
+            return redirect()->route('tables.create')->with('error', 'Numéro table négatif');
+        }
+        $user = Auth::user();
+        $request->merge(['hotel_id'=>$user->hotel_id]);
         Table::create($request->all());
         return redirect()->route('tables.index')->with('success', 'Table enregistré avec succès');
     }
@@ -84,6 +94,13 @@ class TableController extends Controller
         request()->validate([
             'numero' => 'required',
         ]);
+        if($request['numero'] < 1){
+            $table = Table::find($id);
+           // return view('tables.edit', compact('table'));
+            return redirect()->route('tables.edit', compact('table'))->with('error', 'Numéro table négatif');
+        }
+        $user = Auth::user();
+        $request->merge(['hotel_id'=>$user->hotel_id]);
         Table::find($id)->update($request->all());
         return redirect()->route('tables.index')->with('success', 'Numéro de tables modifié avec succès!!!');
 
