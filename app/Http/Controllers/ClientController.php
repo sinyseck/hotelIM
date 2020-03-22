@@ -53,7 +53,7 @@ class ClientController extends Controller
            'nationalite' => 'required',
            'adresse' => 'required',
            'telephone' => 'required',
-           'email' => 'required',
+           'email' => 'nullable|unique:clients',
         ]);
         $user = Auth::user();
         $request->merge(['hotel_id'=>$user->hotel_id]);

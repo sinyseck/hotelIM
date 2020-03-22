@@ -45,7 +45,7 @@ class ChambreController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'numero'=>'required|max:40|min:1',
+            'numero'=>'required|unique:chambres|max:40|min:1',
         ]);
         $numero = $request['numero'];
         if($numero <0 ){
@@ -57,9 +57,9 @@ class ChambreController extends Controller
         $chambre->numero = $numero;
         $chambre->hotel_id = $user->hotel_id;
         $chambre->save();
-        return redirect()->route('chambres.index')
-            ->with('flash_message',
-                'Chambre '. $chambre->name.' Enregistré!');
+        return redirect()->route('chambres.index')->with('success', 'La chambre numéro '. $chambre->numero.' enregistrée avec succès !');
+                return redirect()->route('chambres.index')->with('success','Chambre modifié avec succès');
+
     }
 
     /**
@@ -102,7 +102,7 @@ class ChambreController extends Controller
             'numero'=>'required|max:40',
         ]);
         Chambre::find($id)->update($request->all());
-        return redirect()->route('chambres.index')->with('success','Chambre modifié avec succès');
+        return redirect()->route('chambres.index')->with('success','Numéro de chambre modifié avec succès');
     }
 
     /**
@@ -114,6 +114,6 @@ class ChambreController extends Controller
     public function destroy($id)
     {
         Chambre::find($id)->delete();
-        return redirect()->route('chambres.index')->with('success','Chambre supprimé avec succès');
+        return redirect()->route('chambres.index')->with('success','Numéro de chambre supprimé avec succès');
     }
 }

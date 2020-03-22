@@ -31,6 +31,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+
+    <script src=https://cdn.datatables.net/plug-ins/1.10.20/i18n/French.json></script>
+
     @yield('calendar')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

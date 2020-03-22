@@ -52,7 +52,7 @@ class CaissierMiddleware
 
         if ($request->isMethod('Delete')) //If user is deleting a post
         {
-            if (!Auth::user()->hasPermissionTo('Supprimer Chambre ')) {
+            if (!Auth::user()->hasPermissionTo('Supprimer Chambre')) {
                 abort('401');
             }
             else
