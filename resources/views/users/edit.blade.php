@@ -2,7 +2,7 @@
 
 @extends('welcome')
 
-@section('title', '| Edit User')
+@section('title', '| Modifier Utilisateur')
 
 @section('content')
 <div class="content-wrapper">

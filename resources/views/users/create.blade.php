@@ -1,7 +1,7 @@
 {{-- \resources\views\users\create.blade.php --}}
 @extends('welcome')
 
-@section('title', '| Add User')
+@section('title', '| Enregistrer Utilisateur')
 
 @section('content')
 <div class="content-wrapper">

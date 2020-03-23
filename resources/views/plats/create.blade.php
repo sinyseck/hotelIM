@@ -1,6 +1,6 @@
 @extends ('welcome')
 
-
+@section('title', '| Enregistrer Plat')
 
 @section('content')
 

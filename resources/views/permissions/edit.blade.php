@@ -1,5 +1,8 @@
 @extends ('welcome')
 
+@section('title', '| Modifier Permission')
+
+
 @section('content')
 
     <div class="content-wrapper">

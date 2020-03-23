@@ -1,5 +1,5 @@
 @extends ('welcome')
-
+@section('title', '| Détails Commande')
 @section('content')
 
     <div class="content-wrapper">

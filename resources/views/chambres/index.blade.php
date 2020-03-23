@@ -1,4 +1,7 @@
 @extends('welcome')
+@section('title', '| Chambres')
+
+
 @section('content')
 
 <div class="content-wrapper">
@@ -52,7 +55,7 @@
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
 
-                    
+
 
                             </td>
 

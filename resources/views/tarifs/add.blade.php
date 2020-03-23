@@ -1,7 +1,7 @@
 {{-- \resources\views\permissions\create.blade.php --}}
 @extends('welcome')
 
-@section('title', '| Créer Tarif')
+@section('title', '| Enregistrer Tarif')
 
 
 @section('content')
