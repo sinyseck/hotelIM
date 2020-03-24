@@ -1,7 +1,7 @@
 {{-- \resources\views\users\index.blade.php --}}
 @extends('welcome')
 
-@section('title', '| Users')
+@section('title', '| Utilisateurs')
 
 @section('content')
     <div class="content-wrapper">

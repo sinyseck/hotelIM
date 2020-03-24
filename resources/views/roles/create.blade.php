@@ -1,6 +1,6 @@
 @extends('welcome')
 
-@section('title', '| Add Role')
+@section('title', '| Enregistrer Rôle')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->

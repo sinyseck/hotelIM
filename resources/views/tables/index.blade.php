@@ -1,5 +1,8 @@
 @extends('welcome')
 
+@section('title', '| Tables')
+
+
 @section('content')
 
 <div class="content-wrapper">
@@ -49,7 +52,7 @@
                             <td>{{ $table->numero }}</td>
                             <td>
                                 <a href="{{ route('tables.edit', $table->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                <a href="{{ route('tables.show', $table->id) }}" role="button" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                               <!-- <a href="{{ route('tables.show', $table->id) }}" role="button" class="btn btn-info"><i class="fas fa-eye"></i></a> -->
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['tables.destroy', $table->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}

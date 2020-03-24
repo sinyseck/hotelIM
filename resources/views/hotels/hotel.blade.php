@@ -1,4 +1,8 @@
 @extends('welcome')
+
+@section('title', '| Mon Hôtel')
+
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

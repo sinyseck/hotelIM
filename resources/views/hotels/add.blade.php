@@ -1,6 +1,6 @@
 @extends('welcome')
 
-@section('title', '| Create New Produit')
+@section('title', '| Enregistrer Hôtel')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->

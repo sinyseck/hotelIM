@@ -1,4 +1,5 @@
 @extends ('welcome')
+@section('title', '| Détails Client')
 
 @section('content')
 

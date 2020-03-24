@@ -1,7 +1,7 @@
 {{-- \resources\views\permissions\create.blade.php --}}
 @extends('welcome')
 
-@section('title', '| Enregistrer chambre')
+@section('title', '| Modifier Réservation')
 
 @section('content')
 <div class="content-wrapper">

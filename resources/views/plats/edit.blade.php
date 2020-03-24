@@ -1,6 +1,6 @@
 @extends ('welcome')
 
-
+@section('title', '| Modifier Plat')
 
 @section('content')
 

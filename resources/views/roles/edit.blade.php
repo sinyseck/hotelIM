@@ -1,6 +1,6 @@
 @extends('welcome')
 
-@section('title', '| Edit Role')
+@section('title', '| Modifier Rôle')
 
 @section('content')
 <div class="content-wrapper">

@@ -1,7 +1,7 @@
 {{-- \resources\views\roles\index.blade.php --}}
 @extends('welcome')
 
-@section('title', '| Roles')
+@section('title', '| Rôles')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->

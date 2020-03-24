@@ -1,5 +1,8 @@
 @extends ('welcome')
 
+@section('title', '| Enregistrer Entrée')
+
+
 @section('content')
 
     <div class="content-wrapper">
