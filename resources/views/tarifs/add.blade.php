@@ -42,7 +42,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Prix</label>
-                                        <input type="number" name="prix" class="form-control" min="1" required>
+                                        <input type="number" name="prix" class="form-control" min="1" value="{{ old('prix') }}" required>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Nombre de personnes</label>

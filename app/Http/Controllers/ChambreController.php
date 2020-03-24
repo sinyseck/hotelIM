@@ -113,7 +113,16 @@ class ChambreController extends Controller
      */
     public function destroy($id)
     {
+        $reservation = DB::table('chambres')
+            ->join('chambre_reservation','chambres.id','=','chambre_reservation.chambre_id')
+            ->where('chambre_reservation.chambre_id',$id)
+            ->select('chambres.id')
+            ->first();
+        if($reservation){
+            return redirect()->route('chambres.index')->with('error','Impossible ce chambre est lié avec des réservations');
+        }
         Chambre::find($id)->delete();
+
         return redirect()->route('chambres.index')->with('success','Numéro de chambre supprimé avec succès');
     }
 }

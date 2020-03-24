@@ -47,17 +47,17 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Nom</label>
-                                        <input type="text" name="nom" class="form-control" required>
+                                        <input type="text" name="nom" class="form-control" value="{{ old('nom') }}" required>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Quantité</label>
-                                        <input type="number" min="1" name="quantite" class="form-control" required>
+                                        <input type="number" min="1" name="quantite" class="form-control" value="{{ old('quantite') }}" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <label>Prix unitaire</label>
-                                        <input type="number" name="pu" min="1" class="form-control" required>
+                                        <input type="number" name="pu" min="1" class="form-control" value="{{ old('pu') }}" required>
                                     </div>
 
                                 </div>

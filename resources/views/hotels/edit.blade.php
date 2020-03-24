@@ -62,12 +62,13 @@
                             {{ Form::text('adresse', null, array('class' => 'form-control','required'=>'true')) }}
                         </div>
                     </div>
-                   {{-- <div class="row">
+                    <div class="row">
                         <div class="col-lg-6">
                             {{ Form::label('logo', 'Logo') }}
-                            {{ Form::file('logo', null, array('class' => 'form-control','required'=>'true')) }}
+                            {{Form::file('image', null, array('class' => 'form-control')) }}
+
                         </div>
-                    </div>--}}
+                    </div>
                     <div>
                         <br>
                         <center>

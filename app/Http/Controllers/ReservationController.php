@@ -214,6 +214,14 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
+        $reservation = DB::table('reservations')
+            ->join('chambre_reservation','reservations.id','=','chambre_reservation.reservation_id')
+            ->where('chambre_reservation.reservation_id',$id)
+            ->select('reservations.id')
+            ->first();
+        if($reservation){
+            return redirect()->route('reservations.index')->with('error','Impossible ce réservation est lié avec d\'autres informations');
+        }
         Reservation::find($id)->delete();
         return redirect()->route('reservations.index')->with('success', 'tarif supprimé avec succès');
 

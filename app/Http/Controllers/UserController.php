@@ -117,10 +117,10 @@ class UserController extends Controller {
         $user = User::findOrFail($id); //Get user with specified id
         /*$roles = Role::get(); //Get all roles
         $hotels = Hotel::pluck('nom', 'id');*/
-        $user = Auth::user();
-        if($user->hotel_id){
+        $users = Auth::user();
+        if($users->hotel_id){
             $hotels = DB::table('hotels')
-                ->where('id',$user->hotel_id)
+                ->where('id',$users->hotel_id)
                 ->pluck('nom', 'id');
             $roles = DB::table('roles')
                 ->where('name','!=','SuperAdmin')
@@ -142,14 +142,23 @@ class UserController extends Controller {
      */
     public function update(Request $request, $id) {
         $user = User::findOrFail($id); //Get role specified by id
+        if($request['password']){
+            $this->validate($request, [
+                'name'=>'required|max:120',
+                'email'=>'required|email|unique:users,email,'.$id,
+                'password'=>'min:6|confirmed'
+            ]);
+            $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
+        }else {
+            $this->validate($request, [
+                'name'=>'required|max:120',
+                'email'=>'required|email|unique:users,email,'.$id,
+            ]);
+            $input = $request->only(['name', 'email']); //Retreive the name, email and password fields
+        }
 
         //Validate name, email and password fields
-        $this->validate($request, [
-            'name'=>'required|max:120',
-            'email'=>'required|email|unique:users,email,'.$id,
-           'password'=>'required|min:6|confirmed'
-        ]);
-        $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
+
         $roles = $request['roles']; //Retreive all roles
         $user->fill($input)->save();
 

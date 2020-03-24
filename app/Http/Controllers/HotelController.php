@@ -13,7 +13,7 @@ class HotelController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'superAdmin'])->except('monHotel');
+        $this->middleware(['auth', 'superAdmin'])->except(['monHotel','edit','update']);
     }
     /**
      * Display a listing of the resource.
@@ -64,7 +64,7 @@ class HotelController extends Controller
         $hotel->email = $request['email'];
         $hotel->telephone = $request['telephone'];
         $hotel->save();
-        return redirect()->back();
+        return redirect()->route('hotels.index')->with('success','Hotel enregistré avec succès!!!');
 
     }
 
@@ -103,12 +103,29 @@ class HotelController extends Controller
     {
         $this->validate($request, [
             'nom'=>'required|max:200',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'adresse' =>'required',
             'email' => 'required',
             'telephone' => 'required'
         ]);
+        if($request->hasFile('image')) {
+            if ($files = $request->file('image')) {
+                $destinationPath = 'public/image/'; // upload path
+                $profileImage =  time(). "." . $files->getClientOriginalExtension();
+                $files->move($destinationPath, $profileImage);
+               $fileName = $profileImage;
+                $request->merge(['logo'=> $fileName]);
+                //$hotel->logo= "$profileImage";
+            }
+        }
         Hotel::find($id)->update($request->all());
-        return redirect()->route('hotels.index')->with('success','hotel modifié avec succès');
+        $user = Auth::user();
+        if($user->hotel_id) {
+            return redirect()->route('mon.hotel')->with('success','hotel modifié avec succès');
+        }else{
+            return redirect()->route('hotels.index')->with('success','hotel modifié avec succès');
+        }
+
     }
 
     /**
@@ -134,4 +151,7 @@ class HotelController extends Controller
         $hotel = DB::table('hotels')->where('id',$user->hotel_id)->first();
         return view('hotels.hotel',compact('hotel'));
     }
+
+
+
 }

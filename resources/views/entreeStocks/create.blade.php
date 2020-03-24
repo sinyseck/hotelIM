@@ -39,7 +39,7 @@
                                 <div class="row">
                                         <div class="col-lg-6">
                                         <label>Quantité</label>
-                                        <input type="number" name="quantite" class="form-control" min="1" required>
+                                        <input type="number" name="quantite" value="{{ old('quantite') }}" class="form-control" min="1" required>
                                     </div>
 
                                     <div class="col-lg-6">

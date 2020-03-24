@@ -57,7 +57,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                 </div>
-                                <input type="datetime-local" name="date_arrivee" class="form-control" displayFormat="dd-MM-yyyy hh:mm">
+                                <input type="datetime-local" name="date_arrivee" value="{{ old('date_arrivee') }}" class="form-control" displayFormat="dd-MM-yyyy hh:mm">
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -66,7 +66,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                 </div>
-                                <input type="datetime-local" name="date_depart" class="form-control" displayFormat="dd-MM-yyyy hh:mm">
+                                <input type="datetime-local" name="date_depart" value="{{ old('date_depart') }}" class="form-control" displayFormat="dd-MM-yyyy hh:mm">
                             </div>
                            {{-- <div class="form-group">
                                 {{ Form::label('date_depart', 'Date Fin') }}

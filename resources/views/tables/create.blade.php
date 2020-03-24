@@ -37,7 +37,7 @@
                                 @endif
                                     <div class="form-group">
                                         <label>Numéro de la table</label>
-                                        <input type="number" name="numero" class="form-control" min="1" required>
+                                        <input type="number" name="numero" class="form-control" min="1" value="{{ old('numero') }}" required>
                                     </div>
 
 
