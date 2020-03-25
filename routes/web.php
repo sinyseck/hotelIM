@@ -65,4 +65,6 @@ Route::get('/facturePdf/{id}', 'CommandeController@facturePdf');
 
 Route::get('/mon/hotel', 'HotelController@monHotel')->name('mon.hotel');
 
+Route::get('/modifier/user/{user}', 'UserController@editSimple')->name('modifier.user');
 
+Route::put('/modifier/user/{user}', 'UserController@updateSimple')->name('modification.user');

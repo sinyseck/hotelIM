@@ -87,11 +87,10 @@
                             </center>
                         </div>
 
-
+                            {{ Form::close() }}
                     </div>
                 </div>
             </div>
-        </section>
     </div>
 @endsection
 

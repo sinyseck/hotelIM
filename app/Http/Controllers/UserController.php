@@ -20,7 +20,7 @@ use Session;
 class UserController extends Controller {
 
     public function __construct() {
-        $this->middleware(['auth', 'isAdmin']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
+        $this->middleware(['auth', 'isAdmin'])->except(['editSimple','updateSimple']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
     }
 
     /**
@@ -187,5 +187,64 @@ class UserController extends Controller {
         return redirect()->route('users.index')
             ->with('flash_message',
                 'User successfully deleted.');
+    }
+
+
+    public function editSimple($id) {
+        $idConnecte = Auth::id();
+        if($id!=$idConnecte){
+            return view("errors.401");
+        }
+        $user = User::findOrFail($id); //Get user with specified id
+        /*$roles = Role::get(); //Get all roles
+        $hotels = Hotel::pluck('nom', 'id');*/
+
+        $users = Auth::user();
+       /* if($users->hotel_id){
+            $hotels = DB::table('hotels')
+                ->where('id',$users->hotel_id)
+                ->pluck('nom', 'id');
+            $roles = DB::table('roles')
+                ->where('name','!=','SuperAdmin')
+                ->get();
+        }else{
+            $hotels = Hotel::pluck('nom', 'id');
+            $roles = Role::get();
+        }*/
+        return view('users.editsimple', compact('user')); //pass user and roles data to view
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateSimple(Request $request, $id) {
+        $user = User::findOrFail($id); //Get role specified by id
+        if($request['password']){
+            $this->validate($request, [
+                'name'=>'required|max:120',
+                'email'=>'required|email|unique:users,email,'.$id,
+                'password'=>'min:6|confirmed'
+            ]);
+            $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
+        }else {
+            $this->validate($request, [
+                'name'=>'required|max:120',
+                'email'=>'required|email|unique:users,email,'.$id,
+            ]);
+            $input = $request->only(['name', 'email']); //Retreive the name, email and password fields
+        }
+
+
+        $user->fill($input)->save();
+
+
+        return redirect()->route('home')
+            ->with('success',
+                'Utilisateur modifié.');
     }
 }

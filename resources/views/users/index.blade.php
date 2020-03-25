@@ -31,6 +31,7 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif
+
             <div class="card border-danger border-0">
                 <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES UTILISATEURS</div>
                     <div class="card-body">

@@ -137,7 +137,7 @@
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                document.getElementById('logout-form').submit();">
-                    {{ __('QUITTER') }}
+                    {{ __('Deconnexion') }}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
@@ -167,7 +167,18 @@
                     <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{ Auth::user()->name}}</a>
+                    @role('restauratrice')
+                    <a href="{{ route('modifier.user', Auth::user()->id) }}" class="d-block">{{ Auth::user()->name}}</a>
+                    @endhasrole
+                    @role('Caissier')
+                    <a href="{{ route('modifier.user', Auth::user()->id) }}" class="d-block">{{ Auth::user()->name}}</a>
+                    @endhasrole
+                    @role('SuperAdmin')
+                    <a href="{{ route('users.edit', Auth::user()->id) }}" class="d-block">{{ Auth::user()->name}}</a>
+                    @endhasrole
+                    @role('Administre')
+                    <a href="{{ route('users.edit', Auth::user()->id) }}" class="d-block">{{ Auth::user()->name}}</a>
+                    @endhasrole
                 </div>
             </div>
 
