@@ -118,6 +118,12 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
+        $reservation = DB::table('reservations')
+            ->where('client_id',$id)
+            ->first();
+        if($reservation){
+            return redirect()->route('clients.index')->with('error','Impossible ce client est lié avec d\'autres informations');
+        }
         Client::find($id)->delete();
         return redirect()->route('clients.index')->with('success','Client supprimé succès');
     }
