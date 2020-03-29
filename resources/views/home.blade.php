@@ -1,4 +1,6 @@
 @extends ('welcome')
+@section('title', '| Tableau de bord')
+
 @section('calendar')
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
 @endsection
@@ -23,7 +25,16 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        @if ($message = Session::get('error'))
+            <div class="alert alert-danger">
+                <p>{{ $message }}</p>
+            </div>
+            @endif
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">

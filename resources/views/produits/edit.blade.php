@@ -1,5 +1,8 @@
 @extends ('welcome')
 
+@section('title', '| Modifier Produit')
+
+
 @section('content')
 
     <div class="content-wrapper">
@@ -37,6 +40,15 @@
                                         </ul>
                                     </div>
                                 @endif
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Nom</label>

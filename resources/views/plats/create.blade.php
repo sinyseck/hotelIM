@@ -1,6 +1,6 @@
 @extends ('welcome')
 
-
+@section('title', '| Enregistrer Plat')
 
 @section('content')
 
@@ -52,11 +52,11 @@
 
                                 <div class="col-lg-6">
                                     <label>Plat</label>
-                                    <input type="text" name="nom" class="form-control" required/>
+                                    <input type="text" name="nom" class="form-control" value="{{ old('nom') }}" required/>
                                 </div>
                                 <div class="col-lg-6">
                                     <label>Prix</label>
-                                    <input type="text" name="prix" class="form-control" min="1" required/>
+                                    <input type="text" name="prix" class="form-control" min="1" value="{{ old('prix') }}" required/>
                                 </div>
 
                                 <div class="col-lg-6">

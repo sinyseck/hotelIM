@@ -15,7 +15,7 @@ class CreateTableChambre extends Migration
     {
         Schema::create('chambres', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('numero');
+            $table->integer('numero')->unique();
             $table->unsignedBigInteger('hotel_id');
             $table->foreign('hotel_id')
             ->references('id')

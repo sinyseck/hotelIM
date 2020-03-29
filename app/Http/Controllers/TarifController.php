@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tarif;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TarifController extends Controller
 {
@@ -104,6 +105,14 @@ class TarifController extends Controller
      */
     public function destroy($id)
     {
+        $reservation = DB::table('tarifs')
+            ->join('reservations','tarifs.id','=','reservations.tarif_id')
+            ->where('reservations.tarif_id',$id)
+            ->select('reservations.id')
+            ->first();
+        if($reservation){
+            return redirect()->route('tarifs.index')->with('error','Impossible ce tarif est lié avec des réservations');
+        }
         Tarif::find($id)->delete();
         return redirect()->route('tarifs.index')->with('success', 'Tarif supprimé avec succès');
 

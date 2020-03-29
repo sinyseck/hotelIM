@@ -22,7 +22,7 @@ class CreateTableClient extends Migration
             $table->bigInteger('numeroPiece')->unique();
             $table->string('adresse');
             $table->string('telephone')->unique();
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->timestamps();
         });
     }

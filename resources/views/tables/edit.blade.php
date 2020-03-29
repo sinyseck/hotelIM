@@ -1,5 +1,7 @@
 @extends ('welcome')
 
+@section('title', '| Modifier Table')
+
 @section('content')
 
     <div class="content-wrapper">

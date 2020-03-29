@@ -1,5 +1,5 @@
 @extends ('welcome')
-
+@section('title', 'Plat')
 @section('content')
 
     <div class="content-wrapper">

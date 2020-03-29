@@ -54,7 +54,7 @@ class ProduitController extends Controller
             $user = Auth::user();
             $request->merge(['hotel_id'=>$user->hotel_id]);
             $produit = Produit::create($request->all());
-            return redirect()->route('produits.index')->with('success','Stock enregistré avec succès!!!');
+            return redirect()->route('produits.index')->with('success','Produit enregistré avec succès!!!');
 
     }
 

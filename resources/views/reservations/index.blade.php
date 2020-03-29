@@ -1,4 +1,5 @@
 @extends('welcome')
+@section('title', '| Réservations')
 
 @section('content')
 

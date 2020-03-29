@@ -2,7 +2,7 @@
 
 @extends('welcome')
 
-@section('title', '| Edit User')
+@section('title', '| Modifier Utilisateur')
 
 @section('content')
 <div class="content-wrapper">
@@ -39,7 +39,15 @@
                                 </div>
                             @endif
 
-
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                         {{ Form::model($user, array('route' => array('users.update', $user->id), 'method' => 'PUT')) }}{{-- Form model binding to automatically populate our fields with user data --}}
                     <div class="row">
                         <div class="col-lg-6">

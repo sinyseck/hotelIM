@@ -1,4 +1,7 @@
 @extends('welcome')
+@section('title', '| Chambres')
+
+
 @section('content')
 
 <div class="content-wrapper">
@@ -51,6 +54,8 @@
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['chambres.destroy', $chambre->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
+
+
 
                             </td>
 

@@ -1,7 +1,7 @@
 {{-- \resources\views\permissions\create.blade.php --}}
 @extends('welcome')
 
-@section('title', '| Créer Tarif')
+@section('title', '| Enregistrer Tarif')
 
 
 @section('content')
@@ -39,10 +39,19 @@
                                         </ul>
                                     </div>
                                 @endif
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Prix</label>
-                                        <input type="number" name="prix" class="form-control" min="1" required>
+                                        <input type="number" name="prix" class="form-control" min="1" value="{{ old('prix') }}" required>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Nombre de personnes</label>

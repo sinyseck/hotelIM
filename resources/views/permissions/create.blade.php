@@ -1,7 +1,7 @@
 {{-- \resources\views\permissions\create.blade.php --}}
 @extends('welcome')
 
-@section('title', '| Create Permission')
+@section('title', '| Enregistrer Permission')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->

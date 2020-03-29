@@ -1,7 +1,7 @@
 {{-- \resources\views\permissions\create.blade.php --}}
 @extends('welcome')
 
-@section('title', '| Enregistrer chambre')
+@section('title', '| Modifier Réservation')
 
 @section('content')
 <div class="content-wrapper">
@@ -39,6 +39,15 @@
                                 </ul>
                             </div>
                         @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
 
                             {!! Form::model($reservation, ['method'=>'PATCH','route'=>['reservations.update', $reservation->id]]) !!}
 

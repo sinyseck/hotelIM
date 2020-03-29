@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login V3</title>
+    <title>IM Hotel | Page de Connexion</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -49,7 +49,7 @@
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
+						IM HOTEL
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate = "Enter username">
@@ -76,25 +76,25 @@
                 <div class="contact100-form-checkbox">
                     <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
                     <label class="label-checkbox100" for="ckb1">
-                        Remember me
+                        Se souvenir de moi
                     </label>
                 </div>
 
                 <div class="container-login100-form-btn">
                     <button type="submit" class="login100-form-btn">
-                        Login
+                        Se Connecter
                     </button>
 
                 </div>
 
                 <div class="text-center p-t-90">
                     <a class="txt1" href="#">
-                        Forgot Password?
+                        Logiciel de gestion hotelière et de restauration
                     </a>
                 </div>
                 <div class="text-center p-t-90">
-                    <a class="txt1" href="{{ route('register') }}">
-                        S'inscrire
+                    <a class="txt1" href="">
+                        IM HOTEL
                     </a>
                 </div>
             </form>

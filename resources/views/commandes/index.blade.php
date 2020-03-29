@@ -1,5 +1,5 @@
 @extends('welcome')
-
+@section('title', '| Commandes')
 @section('content')
 
 <div class="content-wrapper">
@@ -62,7 +62,8 @@
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['commandes.destroy', $commande->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
-                                <a href="{{action('CommandeController@facturePdf', $commande->id)}}">PDF</a>
+                                <a href="{{action('CommandeController@facturePdf', $commande->id)}}"target="_blank" class="btn btn-default"><i class="fas fa-print"></i></a>
+
 
                             </td>
 

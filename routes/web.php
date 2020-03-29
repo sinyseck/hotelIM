@@ -37,7 +37,8 @@ Route::resource('roles', 'RoleController');
 Route::resource('permissions', 'PermissionController');
 
 Route::resource('tarifs', 'TarifController');
-
+Route::get('/hotels/{hotel}/edit', 'HotelController@edit')->name('hotels.edit')->middleware('isAdmin');
+Route::put('/hotels/{hotel}', 'HotelController@update')->name('hotels.update')->middleware('isAdmin');
 Route::resource('hotels', 'HotelController');
 Route::resource('chambres', 'ChambreController');
 Route::resource('clients', 'ClientController');
@@ -64,3 +65,6 @@ Route::get('/facturePdf/{id}', 'CommandeController@facturePdf');
 
 Route::get('/mon/hotel', 'HotelController@monHotel')->name('mon.hotel');
 
+Route::get('/modifier/user/{user}', 'UserController@editSimple')->name('modifier.user');
+
+Route::put('/modifier/user/{user}', 'UserController@updateSimple')->name('modification.user');

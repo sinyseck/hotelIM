@@ -36,7 +36,7 @@
 
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <input type="text" name="nom" class="form-control" placeholder="NOM CLIENT">
+                                        <input type="text" name="nom" value="" class="form-control" placeholder="NOM CLIENT">
                                     </div>
                                     <div class="col-lg-6">
                                         <input type="text" name="nom" class="form-control" placeholder="NOM CLIENT">

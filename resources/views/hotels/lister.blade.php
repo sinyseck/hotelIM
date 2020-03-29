@@ -1,4 +1,8 @@
 @extends('welcome')
+
+@section('title', '| Hôtels')
+
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -12,7 +16,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('hotels.create') }}" role="button" class="btn btn-primary">ENREGISTRER UN NOUVEAU HÔTEL</a></li>
+                            <li class="breadcrumb-item active"><a href="" role="button" class="btn btn-primary">Mon Hôtel</a></li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

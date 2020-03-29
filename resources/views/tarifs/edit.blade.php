@@ -1,7 +1,7 @@
 {{-- \resources\views\permissions\create.blade.php --}}
 @extends('welcome')
 
-@section('title', '| Créer Tarif')
+@section('title', '| Modifier Tarif')
 
 @section('content')
 
@@ -40,7 +40,15 @@
                                         </ul>
                                     </div>
                                 @endif
-
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Prix</label>

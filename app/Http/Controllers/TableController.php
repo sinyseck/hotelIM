@@ -47,7 +47,7 @@ class TableController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'numero' => 'required',
+            'numero' => 'required|unique:tables',
         ]);
         if($request['numero'] < 1){
             return redirect()->route('tables.create')->with('error', 'Numéro table négatif');
