@@ -63,7 +63,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                            {{ Form::label('logo', 'Logo') }}
+                            {{ Form::label('logo', 'Logo') }} <br>
                             {{ Form::file('logo', null, array('class' => 'form-control','required'=>'true')) }}
                             </div>
                         </div>
