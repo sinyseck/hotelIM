@@ -58,10 +58,16 @@
                                         <label>Nationalité</label>
                                         <input type="text" name="nationalite" class="form-control" value="{{$client->nationalite}}">
                                     </div>
+
                                     <div class="col-lg-6">
                                         <label>Type de Pièce</label>
-                                        <input type="text" name="typePiece" class="form-control" value="{{$client->typePiece}}">
+                                        <select class="form-control" name="typePiece">
+                                            <option value="CIN" {{($client->typePiece === 'CIN') ? 'Selected' : ''}}>CNI</option>
+                                            <option value="Passport" {{($client->typePiece === 'Passport') ? 'Selected' : ''}}>Passeport</option>
+                                            <option value="Autre">Autres</option>
+                                        </select>
                                     </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">

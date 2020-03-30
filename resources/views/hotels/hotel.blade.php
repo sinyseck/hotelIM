@@ -71,7 +71,7 @@
 
                                 <td>
                                     <a href="{{ route('hotels.edit', $hotel->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                    <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                    <!-- <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button> -->
                                     {!! Form::close() !!}
 
                                 </td>
