@@ -47,7 +47,11 @@
                                 <label>Client</label>
                                 <select class="form-control" name="client_id" required="">
                                     @foreach ($clients as $client)
-                                        <option value="{{$client->id}}">{{$client->prenom}} {{$client->nom}} {{$client->telephone}}</option>
+                                        <option {{old('client_id', $commande->client_id) == $client->id ? 'selected' : ''}}
+                                            value="{{$client->id}}">{{$client->prenom}} {{$client->nom}} {{$client->telephone}}</option>
+
+
+
                                     @endforeach
 
                                 </select>
@@ -59,7 +63,8 @@
                                 <label>Table</label>
                                 <select class="form-control" name="table_id">
                                     @foreach ($tables as $table)
-                                        <option value="{{$table->id}}">{{$table->numero}}</option>
+                                    <option {{old('table_id', $commande->table_id) == $table->id ? 'selected' : ''}}
+                                        value="{{$table->id}}">{{$table->numero}}</option>
                                     @endforeach
 
                                 </select>

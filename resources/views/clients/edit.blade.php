@@ -63,7 +63,7 @@
                                         <label>Type de Pièce</label>
                                         <select class="form-control" name="typePiece">
                                             <option value="CIN" {{($client->typePiece === 'CIN') ? 'Selected' : ''}}>CNI</option>
-                                            <option value="Passport" {{($client->typePiece === 'Passport') ? 'Selected' : ''}}>Passeport</option>
+                                            <option value="Passeport" {{($client->typePiece === 'Passeport') ? 'Selected' : ''}}>Passeport</option>
                                             <option value="Autre">Autres</option>
                                         </select>
                                     </div>
