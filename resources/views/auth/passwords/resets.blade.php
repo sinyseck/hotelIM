@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{--<!DOCTYPE html>
 <html lang="fr">
 <head>
     <title>IM Hotel | Page de Connexion</title>
@@ -39,16 +39,11 @@
                     </ul>
                 </div>
             @endif
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-                <form method="POST" action="{{ route('password.email') }}">
+                <form method="POST" action="{{ route('password.update') }}">
                     @csrf
 
-                    <span class="login100-form-logo">
+                    <input type="hidden" name="token" value="{{ $token }}">
+                <span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
 
@@ -56,23 +51,51 @@
 						IM HOTEL
 					</span>
 
-                    <div class="wrap-input100 validate-input" data-validate = "Enter username">
-                        <input  type="email" class="input100 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                <div class="wrap-input100 validate-input" data-validate = "Enter username">
+                    <input  type="email" class="input100 @error('email') is-invalid @enderror" name="email"  value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                    <span class="focus-input100" data-placeholder="&#xf207;"></span>
 
-                        @error('email')
-                        <div class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @enderror
+                    @error('email')
+                    <div class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <input  type="password"  class="input100 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                    <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    @error('password')
+                    <div class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @enderror
+                </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input id="password-confirm" type="password" class="input100" name="password_confirmation" required autocomplete="new-password">
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
                     </div>
 
-                    <div class="container-login100-form-btn">
-                        <button type="submit" class="login100-form-btn">
-                                {{ __('Send Password Reset Link') }}
-                            </button>
-                    </div>
-                </form>
+
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Se Connecter
+                    </button>
+
+                </div>
+                <a href="{{ route('password.request') }}">Mot de passe oublié</a>
+
+                <div class="text-center p-t-90">
+                    <a class="txt1" href="#">
+                        Logiciel de gestion hotelière et de restauration
+                    </a>
+                </div>
+                <div class="text-center p-t-90">
+                    <a class="txt1" href="">
+                        IM HOTEL
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -93,8 +116,10 @@
 <script src="{{asset('js/main.js')}}"></script>
 
 </body>
-</html>
-{{--
+</html>--}}
+
+
+
 @extends('layouts.app')
 
 @section('content')
@@ -105,20 +130,16 @@
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" action="{{ route('password.update') }}">
                         @csrf
+
+                        <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -128,10 +149,32 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
+                                    {{ __('Reset Password') }}
                                 </button>
                             </div>
                         </div>
@@ -142,4 +185,3 @@
     </div>
 </div>
 @endsection
---}}
