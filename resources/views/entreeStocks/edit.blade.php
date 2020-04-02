@@ -45,7 +45,7 @@
                                         <label>Date</label>
                                     <input type="text" name="date" class="form-control" value="{{$entreeStock->date}}">
                                     </div>--}}
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <label>Quantité</label>
                                         <input type="text" name="quantite" class="form-control" value="{{$entreeStock->quantite}}"  min="1" required>
                                     </div>
@@ -53,9 +53,11 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <label>Nom Produit</label>
-                                        <select class="form-control" name="id_produit" required="">
+                                        <select class="form-control" name="id_produit" id="id_produit" required="">
                                             @foreach ($produits as $produit)
-                                            <option value="{{$produit->id}}">{{$produit->nom}}</option>
+                                            <option {{old('id_produit', $entreeStock->id_produit) == $produit->id ? 'selected' : ''}}
+                                            value="{{$produit->id}}">{{$produit->nom}}</option>
+
                                             @endforeach
 
                                         </select>

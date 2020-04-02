@@ -44,21 +44,21 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Nom</label>
-                                        <input type="text" name="nom" class="form-control">
+                                        <input type="text" name="nom" class="form-control" value="{{ old('nom') }}">
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Prénom</label>
-                                        <input type="text" name="prenom" class="form-control">
+                                        <input type="text" name="prenom" class="form-control" value="{{ old('prenom') }}">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Nationalité</label>
-                                        <input type="text" name="nationalite" class="form-control">
+                                        <input type="text" name="nationalite" class="form-control" value="{{ old('nationalite') }}">
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Type de Pièce</label>
-                                        <select class="form-control" name="typePiece" required="">
+                                        <select class="form-control" name="typePiece" required="" value="{{ old('typePiece') }}">
                                             <option value="">Choisir</option>
                                             <option value="CNI">CNI</option>
                                             <option value="Passeport">Passeport</option>
@@ -69,21 +69,21 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Numéro Pièce</label>
-                                        <input type="number" name="numeroPiece" class="form-control">
+                                        <input type="number" name="numeroPiece" class="form-control" value="{{ old('numeroPiece') }}">
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Adresse</label>
-                                        <input type="text" name="adresse" class="form-control">
+                                        <input type="text" name="adresse" class="form-control" value="{{ old('adresse') }}">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Téléphone</label>
-                                        <input type="number" name="telephone" class="form-control">
+                                        <input type="number" name="telephone" class="form-control" value="{{ old('telephone') }}">
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Email</label>
-                                        <input type="text" name="email" class="form-control">
+                                        <input type="text" name="email" class="form-control" value="{{ old('email') }}">
                                     </div>
                                 </div>
                                 <div>

@@ -109,7 +109,7 @@ class ReservationController extends Controller
             'chambres' => 'required'
         ]);
         if( $request['date_arrivee'] >= $request['date_depart']){
-            return redirect()->route('reservations.create')->with('error', 'Verifier le date de départ et le date arivée');
+            return redirect()->route('reservations.create')->with('error', 'Verifier la date de départ et la date arivée');
         }
         $user = Auth::user();
         $request->merge(['hotel_id'=>$user->hotel_id]);

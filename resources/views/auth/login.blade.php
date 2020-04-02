@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <title>IM Hotel | Page de Connexion</title>
     <meta charset="UTF-8">
@@ -86,6 +86,7 @@
                     </button>
 
                 </div>
+                <a href="{{ route('password.request') }}">Mot de passe oublié</a>
 
                 <div class="text-center p-t-90">
                     <a class="txt1" href="#">

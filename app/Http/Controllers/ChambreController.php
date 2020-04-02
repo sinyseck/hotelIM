@@ -94,12 +94,13 @@ class ChambreController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $numero = $request['numero'];
         if($numero <0 ){
             return redirect()->back()->with('error','Numéro de chambre négatif');
         }
         $this->validate($request, [
-            'numero'=>'required|max:40',
+            'numero'=>'required|max:40|unique:chambres',
         ]);
         Chambre::find($id)->update($request->all());
         return redirect()->route('chambres.index')->with('success','Numéro de chambre modifié avec succès');

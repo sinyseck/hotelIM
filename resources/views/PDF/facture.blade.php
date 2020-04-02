@@ -111,11 +111,11 @@
                     <table class="table">
                         <tr>
                             <th>Montant Restauration</th>
-                            <td>{{ $totalRestaurant }}</td>
+                            <td>{{ $totalRestaurant }} CFA</td>
                         </tr>
                         <tr>
                             <th>TVA Restaurant (10%)</th>
-                            <td>{{ $tvaRestaurant }}</td>
+                            <td>{{ $tvaRestaurant }} CFA</td>
                         </tr>
                         <tr>
                             <th>Total:</th>

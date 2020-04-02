@@ -93,18 +93,23 @@
                             <div class="col-lg-6">
                                 {!! Form::Label('item', 'Paiement') !!}
                                 <select class="form-control" name="etat_paiement" required="">
-                                    <option value="">Choisir</option>
-                                    <option value="1">payé</option>
-                                    <option value="0"> non payé</option>
+                                    <!--  <option value="1">payé</option> -->
+                                    <!-- <option value="0"> non payé</option> -->
+                                    <option value="1" {{($reservation->etat_paiement == 1) ? 'Selected' : ''}}>payé</option>
+                                    <option value="0" {{($reservation->etat_paiement == 0) ? 'Selected' : ''}}>non payé</option>
+
+
                                 </select>
+
                             </div>
                             <div class="col-lg-6">
                                 {!! Form::Label('item', 'Client') !!}
                                 <select class="form-control" name="client_id">
                                     <option value="">Choisir</option>
                                     @foreach($clients as $client)
-                                        <option value="{{$client->id}}">{{$client->nom}} {{$client->prenom}}</option>
-                                    @endforeach
+                                        <option {{old('client_id', $reservation->client_id) == $client->id ? 'selected' : ''}}
+                                            value="{{$client->id}}">{{$client->nom}} {{$client->prenom}}</option>
+                                            @endforeach
                                 </select>
                             </div>
                         </div>
@@ -113,7 +118,8 @@
                                 <select class="form-control" name="tarif_id">
                                     <option value="">Choisir</option>
                                     @foreach($tarifs as $tarif)
-                                        <option value="{{$tarif->id}}">{{$tarif->nbre_personne}} personnes {{$tarif->prix}} cfa</option>
+                                    <option {{old('tarif_id', $reservation->tarif_id) == $tarif->id ? 'selected' : ''}}
+                                        value="{{$tarif->id}}">{{$tarif->nbre_personne}} personnes {{$tarif->prix}} cfa</option>
                                     @endforeach
                                 </select>
                             </div>
