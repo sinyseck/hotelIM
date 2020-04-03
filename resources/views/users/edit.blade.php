@@ -100,3 +100,11 @@
     </div>
     </div>
 @endsection
+@section("script")
+    <script  type="text/javascript">
+        $(document).ready(function(){
+            $("#hotel_id").prepend("<option value=''></option>");
+            // $(".conteneur").append("<ul><li>Element n°1</li><li>Element n°2</li></ul>")
+        });
+    </script>
+@endsection

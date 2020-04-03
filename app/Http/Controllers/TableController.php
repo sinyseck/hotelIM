@@ -92,7 +92,7 @@ class TableController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-            'numero' => 'required',
+            'numero' => 'required|unique:tables',
         ]);
         if($request['numero'] < 1){
             $table = Table::find($id);

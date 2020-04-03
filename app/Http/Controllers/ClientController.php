@@ -49,10 +49,10 @@ class ClientController extends Controller
            'nom' => 'required',
            'prenom' => 'required',
            'typePiece' => 'required',
-           'numeroPiece' => 'required|max:20',
+           'numeroPiece' => 'required|unique:clients|between:13,13',
            'nationalite' => 'required',
            'adresse' => 'required',
-           'telephone' => 'required',
+           'telephone' => 'required|unique:clients',
            'email' => 'nullable|unique:clients',
         ]);
         $user = Auth::user();
@@ -101,7 +101,7 @@ class ClientController extends Controller
             'prenom' => 'required',
             'nationalite' => 'required',
             'typePiece' => 'required',
-            'numeroPiece' => 'required|max:20',
+            'numeroPiece' => 'required|unique:clients|between:13,13',
             'adresse' => 'required',
             'telephone' => 'required',
             'email' => 'required',
