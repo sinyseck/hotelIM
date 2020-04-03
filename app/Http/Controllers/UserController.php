@@ -73,12 +73,22 @@ class UserController extends Controller {
      */
     public function store(Request $request) {
         //Validate name, email and password fields
-        $this->validate($request, [
-            'name'=>'required|max:120',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:6|confirmed',
-            'hotel_id' =>'required',
-        ]);
+        $users = Auth::user();
+        if($users->hotel_id) {
+            $this->validate($request, [
+                'name' => 'required|max:120',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:6|confirmed',
+                'hotel_id' => 'required',
+            ]);
+        }else{
+            $this->validate($request, [
+                'name' => 'required|max:120',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:6|confirmed',
+
+            ]);
+        }
 
         $user = User::create($request->only('email', 'name', 'password','hotel_id')); //Retrieving only the email and password data
 
